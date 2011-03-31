@@ -15,32 +15,32 @@ class User < ActiveRecord::Base
 
   ####
   
-  def privilege? name
+  def privilege?( name, board_id = nil )
       #(self.privileges.map {|priv| priv.name}).includes name.to_s
-      priv = Privilege.find_by_name!(name)
+      priv = Privilege.find_by_name_and_board!( name, !board_id.nil? )
       return false if priv.nil?
-      not UserPriv.find_by_user_id_and_privilege_id( self.id, priv.id ).nil?
+      not UserPriv.find_by_user_id_and_privilege_id_and_board_id( self.id, priv.id, board_id ).nil?
   end
 
-  def grant name
-      priv = Privilege.find_by_name!(name)
-      g = UserPriv.find_by_user_id_and_privilege_id( self.id, priv.id )
+  def grant( name, board_id = nil )
+      priv = Privilege.find_by_name_and_board!( name, !board_id.nil? )
+      g = UserPriv.find_by_user_id_and_privilege_id_and_board_id( self.id, priv.id, board_id )
       return unless g.nil?
-      UserPriv.create( :user_id => self.id, :privilege_id => priv.id )
+      UserPriv.create( :user_id => self.id, :privilege_id => priv.id, :board_id => board_id )
   end
 
-  def revoke name
-      priv = Privilege.find_by_name!(name)
-      g = UserPriv.find_by_user_id_and_privilege_id( self.id, priv.id )
+  def revoke( name, board_id = nil )
+      priv = Privilege.find_by_name_and_board!( name, !board_id.nil? )
+      g = UserPriv.find_by_user_id_and_privilege_id_and_board_id( self.id, priv.id, board_id )
       return if g.nil?
       g.destroy
   end
 
-  def list_privileges
-    Privilege.all.map do |priv|
-      g = UserPriv.find_by_user_id_and_privilege_id( self.id, priv.id )
-      { :name => priv.name, :description => priv.description, :board => nil, :granted => !g.nil? }
-    end
-  end
+#  def list_privileges
+#    Privilege.all.map do |priv|
+#      g = UserPriv.find_by_user_id_and_privilege_id( self.id, priv.id )
+#      { :name => priv.name, :description => priv.description, :board => nil, :granted => !g.nil? }
+#    end
+#  end
 
 end
