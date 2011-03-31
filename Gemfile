@@ -5,6 +5,7 @@ gem 'rails', '3.0.5'
 # specific gems
 gem 'jquery-rails', '>= 0.2.6'
 gem 'devise'
+gem 'test-unit'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
