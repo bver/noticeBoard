@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20110331190017) do
 
   add_index "privileges", ["name"], :name => "index_privileges_on_name", :unique => true
 
-  create_table "user_privs", :id => false, :force => true do |t|
+  create_table "user_privs", :force => true do |t|
     t.integer "user_id",      :null => false
     t.integer "privilege_id", :null => false
     t.integer "board_id"

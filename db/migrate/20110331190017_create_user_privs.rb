@@ -1,6 +1,6 @@
 class CreateUserPrivs < ActiveRecord::Migration
   def self.up
-    create_table( :user_privs, :id => false ) do |t|
+    create_table :user_privs do |t|
       t.integer :user_id, :null => false
       t.integer :privilege_id, :null => false
       t.integer :board_id, :default => nil
