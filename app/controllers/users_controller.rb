@@ -40,6 +40,10 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
+#    p =params[:user].clone
+#    p.delete(:password) if p[:password].blank?
+#    p.delete(:password_confirmation) if p[:password].blank? and p[:password_confirmation].blank?
+
     @user = User.new(params[:user])
 
     respond_to do |format|

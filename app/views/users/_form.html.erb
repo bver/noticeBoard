@@ -16,9 +16,22 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
     <%= f.label :send_mails %><br />
     <%= f.check_box :send_mails %>
   </div>
+  <div class="field">
+    <%= f.label :password, "New password" %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+     <%= f.label :password_confirmation, "Confirm new password" %><br />
+     <%= f.password_field :password_confirmation %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

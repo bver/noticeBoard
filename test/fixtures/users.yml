@@ -1,9 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: first_user
   send_mails: false
+  email: first@example.com
+  encrypted_password: s0m3_pazzw0rd
 
 two:
-  name: MyString
-  send_mails: false
+  name: second_user
+  send_mails: true
+  email: second@example.com
