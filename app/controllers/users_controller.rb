@@ -40,10 +40,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-#    p =params[:user].clone
-#    p.delete(:password) if p[:password].blank?
-#    p.delete(:password_confirmation) if p[:password].blank? and p[:password_confirmation].blank?
-
     @user = User.new(params[:user])
 
     respond_to do |format|
@@ -60,10 +56,17 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+
+    p =params[:user].clone
+    if p[:password].blank? and p[:password_confirmation].blank?
+      p.delete(:password)
+      p.delete(:password_confirmation)
+    end
+
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(p) #params[:user]
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else

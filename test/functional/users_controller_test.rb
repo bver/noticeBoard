@@ -43,6 +43,14 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to user_path(assigns(:user))
   end
 
+  test "should update user without pwd changed" do
+    pwd = ''
+    attrs = { :name=>'u1', :email=>'u1@example.com',  :send_mails => 1, :password => pwd, :password_confirmation => pwd}
+
+    put :update, :id => @user.to_param, :user => attrs
+    assert_redirected_to user_path(assigns(:user))
+  end
+
   test "should destroy user" do
     assert_difference('User.count', -1) do
       delete :destroy, :id => @user.to_param
