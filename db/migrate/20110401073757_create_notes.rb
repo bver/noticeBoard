@@ -11,6 +11,13 @@ class CreateNotes < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :notes, :board_id
+    add_index :notes, :user_id
+    add_index :notes, :priority
+    add_index :notes, :outcome
+    add_index :notes, :working
+    add_index :notes, :problem
   end
 
   def self.down

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110401073757) do
+ActiveRecord::Schema.define(:version => 20110401195442) do
 
   create_table "boards", :force => true do |t|
     t.string   "title"
@@ -18,6 +18,20 @@ ActiveRecord::Schema.define(:version => 20110401073757) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "changes", :force => true do |t|
+    t.integer  "note_id",    :null => false
+    t.integer  "user_id",    :null => false
+    t.integer  "meaning",    :null => false
+    t.integer  "argument"
+    t.text     "comment"
+    t.datetime "created"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "changes", ["created"], :name => "index_changes_on_created"
+  add_index "changes", ["note_id"], :name => "index_changes_on_note_id"
 
   create_table "notes", :force => true do |t|
     t.integer  "board_id",                      :null => false
