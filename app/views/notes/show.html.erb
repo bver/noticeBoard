@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Board:</b>
+  <%= @note.board_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @note.user_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @note.title %>
+</p>
+
+<p>
+  <b>Priority:</b>
+  <%= @note.priority %>
+</p>
+
+<p>
+  <b>Outcome:</b>
+  <%= @note.outcome %>
+</p>
+
+<p>
+  <b>Working:</b>
+  <%= @note.working %>
+</p>
+
+<p>
+  <b>Problem:</b>
+  <%= @note.problem %>
+</p>
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

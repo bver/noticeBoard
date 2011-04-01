@@ -1,0 +1,28 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  board_id: 1
+#user_id: NULL
+  title: First
+  priority: 1
+#outcome: :NULL
+  working: false
+  problem: false
+
+done:
+  board_id: 1
+  user_id: 1
+  title: Second
+  priority: 1
+  outcome: true
+  working: true
+  problem: false
+
+failed:
+  board_id: 42
+  user_id: 1
+  title: Third
+  priority: 1
+  outcome: false
+  working: true
+  problem: true

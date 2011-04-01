@@ -1,4 +1,6 @@
 UjsTest::Application.routes.draw do
+  resources :notes
+
   resources :boards
 
   devise_for :users
