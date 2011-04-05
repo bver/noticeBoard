@@ -1,0 +1,18 @@
+
+$("body").append("<%= escape_javascript(render('new')) %>");
+
+ $('#dialog').dialog({
+		autoOpen: true,
+		width: 600,
+		buttons: {
+	           "<%= t :create_user %>": function() {
+                          $(this).dialog("close");
+  		   },
+		   "<%= t :cancel %>": function() {
+			   $(this).dialog("close");
+                           $('#dialog').remove();
+  	           }
+		},
+		modal: true
+ });
+

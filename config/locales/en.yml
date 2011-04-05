@@ -13,11 +13,16 @@ en:
      receive_confirm: "Didn't receive confirmation instructions?"
      receive_unlock: "Didn't receive unlock instructions?"
      sign_in_with: "Sign in with"
+     cancel: "cancel"
+     edit: "edit"
+     delete: "delete"
+     are_you_sure: "Are you sure?"
 
      users: "Users"
      add_user: "add new user"
+     create_user: "create user"
+     new_user: "new user"
      user: "user"
      email: "email"
      send_mails: "send mails"
-     edit: "edit"
-     delete: "delete"
+     
