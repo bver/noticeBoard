@@ -4,15 +4,27 @@ $("body").append("<%= escape_javascript(render('new')) %>");
  $('#dialog').dialog({
 		autoOpen: true,
 		width: 600,
-		buttons: {
+
+                buttons: {
 	           "<%= t :create_user %>": function() {
-                          $(this).dialog("close");
+                          $.post('<%= users_path %>', 
+                            $('form').serialize(),
+                            function(data) {
+                               $(this).dialog("close");
+                               $('#accordion').append(data);
+                               //$( '#accordion' ).accordion("resize");
+                               $( '#accordion' ).accordion("destroy");
+                               $( '#accordion' ).accordion({icons: true});
+                               $('#dialog').remove();
+                            }
+                          );
   		   },
 		   "<%= t :cancel %>": function() {
-			   $(this).dialog("close");
-                           $('#dialog').remove();
+			  $(this).dialog("close");
+                          $(this).remove();
   	           }
 		},
+
 		modal: true
  });
 

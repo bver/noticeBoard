@@ -45,11 +45,14 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to( :action => :index, :notice => 'User was successfully created.') }
+        #format.html { redirect_to( :action => :index, :notice => 'User was successfully created.') }
+        format.html { render :partial => 'user', :locals => { :user => @user } }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
+        #format.js { render :partial => 'user', :locals => { :user => @user } }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        #format.js { render 'new'  }
       end
     end
   end

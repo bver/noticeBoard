@@ -1,12 +1,14 @@
 <% content_for :head do %>
   <script type="text/javascript">
      function specificInit() {
-         $( '#accordion' ).accordion({ icons: true });
+         $( '#accordion' ).accordion({ 
+             icons: true
+             //clearStyle: true
+         });
 
          $( '#addButton' ).button({
 	    icons: { primary: 'ui-icon-star'}
          });
-
       }
   </script>
 <% end %>
