@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="nbheader">
-    <%= render "shared/menu" unless current_user.nil? %>
+    <%= render "shared/menu" unless defined? current_user %>
     <%= yield :nbheader %>
   </div>
   <div class="nbcontent">

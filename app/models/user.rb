@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :user_privs
+  has_many :user_privs, :dependent => :destroy
   has_many :privileges, :through => :user_privs
 
   # Include default devise modules. Others available are:
