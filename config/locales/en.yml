@@ -2,7 +2,7 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-    
+     notice_board: "Notice Board"
      sign_in: "Sign in"
      sign_up: "Sign up"
      sign_out: "sign out"

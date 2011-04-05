@@ -1,6 +1,37 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+     function specificInit() {
+         $( '#accordion' ).accordion({ icons: true });
+
+         $( '#addButton' ).button({
+	    icons: { primary: 'ui-icon-star'}
+         });
+
+         $( '#addButton' ).button().click(function(){
+            $('#dialog').dialog('open');
+            return false;
+         });
+
+	  $('#dialog').dialog({
+		autoOpen: false,
+		width: 600,
+		buttons: {
+	           "Ok": function() {
+                          $(this).dialog("close");
+  		   },
+		   "Cancel": function() {
+			   $(this).dialog("close");
+  	           }
+		},
+		modal: true
+           });
+                
+      }
+  </script>
+<% end %>
 <% content_for :nbheader do %>
        <h1><%=t :users%></h1>
-       <span role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="leftIconButton"><span
+       <span role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="addButton"><span
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_user%></span></span>
 <% end %>
 
@@ -25,3 +56,7 @@
 </div>
 
 <%= link_to 'New User', new_user_path %>
+
+<div id="dialog" title="nový lístek">
+  název:<br/><input type="text" size="62"/><br/>popis:<br/><textarea rows="3" cols="60"></textarea>
+</div>

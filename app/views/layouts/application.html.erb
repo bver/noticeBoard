@@ -10,13 +10,20 @@
   <%= javascript_include_tag 'superfish' %>
   <%= javascript_include_tag 'rails' %>
   <%= javascript_include_tag 'application' %>
+  <%= yield :head %>
   <%= csrf_meta_tag %>
 </head>
 <body>
   <div class="nbheader">
-    <%= render "shared/menu" unless defined? current_user %>
+    <%= render "shared/menu" unless Rails.env.test? or current_user.nil? %>
     <%= yield :nbheader %>
   </div>
+  <% unless notice.nil? %>
+    <p class="nbnotice"><%= notice %></p>
+  <% end %>
+  <% unless alert.nil? %>
+    <p class="nbalert"><%= alert %></p>
+  <% end  %>
   <div class="nbcontent">
     <%= yield %>
   </div>
