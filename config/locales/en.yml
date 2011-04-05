@@ -2,4 +2,16 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+     users: "Users"
+     add_user: "add new user"
+     
+     sign_in: "Sign in"
+     sign_up: "Sign up"
+     sign_out: "sign out"
+     name: "Name"
+     password: "Password"
+     remember_me: "Remember me"
+     forgot: "Forgot your password?"
+     receive_confirm: "Didn't receive confirmation instructions?"
+     receive_unlock: "Didn't receive unlock instructions?"
+     sign_in_with: "Sign in with"

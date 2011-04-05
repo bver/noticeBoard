@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>nBoard</title>
-  <%= stylesheet_link_tag :all %>
+  <title>nBoard : <%= t controller_name  %></title>
+  <%= stylesheet_link_tag 'aristo' %>
+  <%= stylesheet_link_tag 'superfish' %>
+  <%= stylesheet_link_tag 'nboard' %>
   <%= javascript_include_tag 'jquery.min' %>
+  <%= javascript_include_tag 'jquery-ui.min' %>
+  <%= javascript_include_tag 'superfish' %>
   <%= javascript_include_tag 'rails' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="nbheader">
+    <%= render "shared/menu" unless current_user.nil? %>
+    <%= yield :nbheader %>
+  </div>
+  <div class="nbcontent">
+    <%= yield %>
+  </div>
+  <div class="nbfooter"><%= render "shared/footer" %></div>
 </body>
 </html>

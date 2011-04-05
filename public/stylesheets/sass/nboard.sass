@@ -1,0 +1,173 @@
+$border_color: #B6B6B6
+$menu_background: #BDD2FF
+$menu_color: black
+$content_background: white
+$outside_background: #f1ede9
+
+// document
+body
+  background-color: $outside_background
+  font:
+    size: 12px
+    family: Verdana, Arial, SunSans-Regular, Sans-Serif
+
+// header
+.nbheader
+  width: 100%
+  clear: both
+  display: inline-block
+  margin-bottom: 10px
+  h1
+    text-align: center
+    display: inline
+    margin:
+      left: 100px
+      right: 100px
+
+.nbdesc
+  display: inline-block
+  margin-left: 20px
+
+// content
+.nbcontent
+  width: 100%
+  display: inline-block
+  clear: both
+
+.nbleft 
+  border: 1px black none
+  display: inline
+  float: left
+  width: 220px
+  padding: 0px
+  margin: 0px
+
+.nbcontrols
+  padding: 10px
+  background-color: $content_background
+  margin:
+    left: 10px
+    right: 10px
+    top: 5px
+    bottom: 5px
+  border: 1px $border_color solid
+ 
+.nbright 
+  margin-right: 20px
+  background-color: $content_background
+  overflow: auto
+
+// footer
+.nbfooter 
+  width: 100%
+  text-align: center
+  clear: both
+  display: inline-block
+  margin: 5px
+
+// note
+.nbicon 
+  -moz-border:
+    bottom-colors: none
+    image: none
+    left-colors: none
+    right-colors: none
+    top-colors: none
+  border:
+    bottom:
+      color: $border_color
+      style: solid
+      width: 1px
+      left-radius: 3px
+      right-radius: 3px
+    top:
+      color: $border_color
+      style: solid
+      width: 1px
+      left-radius: 3px
+      right-radius: 3px
+    left:
+      color:
+        ltr-source: physical
+        rtl-source: physical
+        value: $border_color
+      style:
+        ltr-source: physical
+        rtl-source: physical
+        value: solid
+      width:
+        ltr-source: physical
+        rtl-source: physical
+        value: 1px
+    right:
+      color:
+        ltr-source: physical
+        rtl-source: physical
+        value: $border_color
+      style:
+        ltr-source: physical
+        rtl-source: physical
+        value: solid
+      width:
+        ltr-source: physical
+        rtl-source: physical
+        value: 1px
+  background:
+    color: #EDEDED
+    image: -moz-linear-gradient(center top , #EDEDED, #C4C4C4)
+  height: 16px
+  width: 18px
+  float: left
+  margin: 4px
+
+.nbiconbox
+  list-style-type: none
+  position: relative
+  left: -40px
+  float: left
+
+// priorities
+.nbpriosuper
+  color: red
+  font-weight: bolder
+  background-color: #FFDFDF
+  padding:
+    left: 10px
+    right: 10px     
+    top: 2px     
+    bottom: 2px        
+  border: 1px black dotted   
+
+.nbpriohigh
+  color: red
+  font-weight: bolder
+
+.nbprionormal
+  font-weight: bolder
+
+.nbpriolow
+  font-weight: normal
+
+// note history
+.nbnote 
+  p
+    clear: both
+
+.nbnoteicon 
+  float: left
+  margin-right: 5px
+
+.nbselect 
+  float: left
+  margin: 15px
+
+// superfish menu override:
+.sf-menu
+  font-weight: bolder 
+  a, a:visited
+    color: black
+  li li
+    background-color: $menu_background
+    li
+      background-color: $menu_background
+

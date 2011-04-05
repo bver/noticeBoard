@@ -1,0 +1,28 @@
+    <ul class="sf-menu">
+            <li>
+                <a href="#a">mé lístky</a>
+                <ul>
+                    <li><a href="#">všechny nehotové</a></li>
+                    <li><a href="#">jen důležité</a></li>
+					<li><a href="#">archiv</a></li>
+                </ul>
+            </li>
+            <li>
+		<a href="#">nástěnky</a>
+	        <ul>
+		    <li><a href="#">balírna</a></li>
+		    <li><a href="#">obchod</a></li>
+                    <li><a href="#">spotřební materiál</a></li>
+                    <li><a href="#">různé</a></li>
+                    <li><a href="#"><i>správa nástěnek</i></a></li>
+		</ul>
+	    </li>
+	    <li>
+		<a href="#"><%= current_user.name %></a>
+		<ul>
+	            <li><a href="#">profil</a></li>
+		    <li><a href="#">uživatelé</a></li>
+                    <li><%= link_to t(:sign_out), :controller=>'devise/sessions', :action => 'destroy' %></li>
+		</ul>
+	    </li>
+     </ul>
