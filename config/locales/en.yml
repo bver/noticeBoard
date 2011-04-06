@@ -32,4 +32,5 @@ en:
      send_mails: "send mails"
      user_updated: "User was successfully updated."
 
+     boards: "Boards"
      boards_management: "boards management"

@@ -8,17 +8,16 @@
                 </ul>
             </li>
             <li>
-		<a href="#">nástěnky</a>
+		<%= link_to t(:boards), boards_path %>
 	        <ul>
-		    <li><a href="#">balírna</a></li>
-		    <li><a href="#">obchod</a></li>
-                    <li><a href="#">spotřební materiál</a></li>
-                    <li><a href="#">různé</a></li>
+                    <% @boards.each do |board|  %>
+		      <li><%= link_to board.title, board, :title=>board.description %></li>
+                    <% end %>
                     <li><%= link_to t(:boards_management), boards_path %></li>
 		</ul>
 	    </li>
 	    <li>
-		<a href="#"><%= current_user.name %></a>
+		<%= link_to  current_user.name, user_path(current_user) %>
 		<ul>
 	            <li><%= link_to t(:profile), user_path(current_user) %></li>
 		    <li><%= link_to t(:users), :controller=>'users', :action => 'index' %></li>
