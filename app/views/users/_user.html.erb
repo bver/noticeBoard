@@ -3,7 +3,7 @@
 
     <ul id="icons" class="nbiconbox">
       <li class="nbicon" title="<%= t(:edit) %>"><a href="<%= edit_user_path(user) %>"><span class="ui-icon ui-icon-pencil"></span></a></li>
-      <% unless user.name == current_user.name  %>
+      <% unless Rails.env.test? or user.name == current_user.name  %>
       <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= user_path(user) %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
       <% end  %>
     </ul>
