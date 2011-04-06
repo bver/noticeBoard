@@ -14,13 +14,13 @@
 		    <li><a href="#">obchod</a></li>
                     <li><a href="#">spotřební materiál</a></li>
                     <li><a href="#">různé</a></li>
-                    <li><a href="#"><i>správa nástěnek</i></a></li>
+                    <li><%= link_to t(:boards_management), boards_path %></li>
 		</ul>
 	    </li>
 	    <li>
 		<a href="#"><%= current_user.name %></a>
 		<ul>
-	            <li><a href="#">profil</a></li>
+	            <li><%= link_to t(:profile), user_path(current_user) %></li>
 		    <li><%= link_to t(:users), :controller=>'users', :action => 'index' %></li>
                     <li><%= link_to t(:sign_out), :controller=>'devise/sessions', :action => 'destroy' %></li>
 		</ul>

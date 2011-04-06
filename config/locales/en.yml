@@ -22,6 +22,7 @@ en:
      cannot_save: "cannot save"
 
      users: "Users"
+     profile: "profile"
      add_user: "add new user"
      create_user: "create user"
      new_user: "new user"
@@ -30,4 +31,5 @@ en:
      email: "email"
      send_mails: "send mails"
      user_updated: "User was successfully updated."
-     
+
+     boards_management: "boards management"
