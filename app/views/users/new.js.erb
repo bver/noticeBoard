@@ -1,30 +1,25 @@
 
+$('#dialog').dialog("close");
+$('#dialog').remove();
+
 $("body").append("<%= escape_javascript(render('new')) %>");
 
- $('#dialog').dialog({
+$('#dialog').dialog({
 		autoOpen: true,
-		width: 600,
-
-                buttons: {
-	           "<%= t :create_user %>": function() {
-                          $.post('<%= users_path %>', 
-                            $('form').serialize(),
-                            function(data) {
-                               $(this).dialog("close");
-                               $('#accordion').append(data);
-                               //$( '#accordion' ).accordion("resize");
-                               $( '#accordion' ).accordion("destroy");
-                               $( '#accordion' ).accordion({icons: true});
-                               $('#dialog').remove();
-                            }
-                          );
-  		   },
-		   "<%= t :cancel %>": function() {
-			  $(this).dialog("close");
-                          $(this).remove();
-  	           }
-		},
-
+		width: 400,
+                closeOnEscape: false,              
 		modal: true
- });
+});
 
+$("#cancelButton").button().click(function(){
+	$('#dialog').dialog('close');
+        $('#dialog').remove();
+	return false;
+});
+
+$("#submitButton").button().click(function(){
+        $('form').submit();
+	$('#dialog').dialog('close');
+        $('#dialog').remove();
+	return false;
+});

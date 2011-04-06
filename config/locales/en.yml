@@ -8,6 +8,8 @@ en:
      sign_out: "sign out"
      name: "Name"
      password: "Password"
+     new_password: "New password"
+     confirm_password: "Confirm password"
      remember_me: "Remember me"
      forgot: "Forgot your password?"
      receive_confirm: "Didn't receive confirmation instructions?"
@@ -17,6 +19,7 @@ en:
      edit: "edit"
      delete: "delete"
      are_you_sure: "Are you sure?"
+     cannot_save: "cannot save"
 
      users: "Users"
      add_user: "add new user"

@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   has_many :user_privs, :dependent => :destroy
   has_many :privileges, :through => :user_privs
 
+  validates_length_of :name, :minimum=> 3,  :maximum=>20
+  validates_uniqueness_of :name
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, # :registerable,

@@ -144,3 +144,10 @@ body {
     background-color: #bdd2ff; }
     .sf-menu li li li {
       background-color: #bdd2ff; }
+
+.ui-dialog-titlebar a.ui-dialog-titlebar-close {
+  display: none; }
+
+#submitButton, #cancelButton {
+  margin-left: 10px;
+  margin-top: 15px; }
