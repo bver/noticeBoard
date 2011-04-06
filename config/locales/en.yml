@@ -24,7 +24,7 @@ en:
      users: "Users"
      profile: "profile"
      add_user: "add new user"
-     create_user: "create user"
+     save_user: "save user"
      new_user: "new user"
      edit_user: "edit user"
      user: "user"
