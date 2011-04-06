@@ -1,8 +1,7 @@
 
-$('#dialog').dialog("close");
-$('#dialog').remove();
+$('#dialog').dialog("close").remove();
 
-$("body").append("<%= escape_javascript(render('new')) %>");
+$("body").append("<%= escape_javascript(render(dialog)) %>");
 
 $('#dialog').dialog({
 		autoOpen: true,
@@ -12,14 +11,12 @@ $('#dialog').dialog({
 });
 
 $("#cancelButton").button().click(function(){
-	$('#dialog').dialog('close');
-        $('#dialog').remove();
+	$('#dialog').dialog('close').remove();
 	return false;
 });
 
 $("#submitButton").button().click(function(){
         $('form').submit();
-	$('#dialog').dialog('close');
-        $('#dialog').remove();
+	$('#dialog').dialog('close').remove();
 	return false;
 });

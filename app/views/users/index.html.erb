@@ -2,9 +2,10 @@
   <script type="text/javascript">
      function specificInit() {
          $( '#accordion' ).accordion({ 
-             icons: true
+             icons: true,
+             collapsible: true
              //clearStyle: true
-         });
+         }).accordion( "activate" , <%=  activated %>);
 
          $( '#addButton' ).button({
 	    icons: { primary: 'ui-icon-star'}
@@ -26,7 +27,3 @@
 <% end %>
 
 </div>
-
-<%= link_to 'New User', new_user_path %>
-
-

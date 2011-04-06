@@ -21,7 +21,7 @@
 		<a href="#"><%= current_user.name %></a>
 		<ul>
 	            <li><a href="#">profil</a></li>
-		    <li><a href="#">uživatelé</a></li>
+		    <li><%= link_to t(:users), :controller=>'users', :action => 'index' %></li>
                     <li><%= link_to t(:sign_out), :controller=>'devise/sessions', :action => 'destroy' %></li>
 		</ul>
 	    </li>
