@@ -25,7 +25,9 @@ en:
      add_user: "add new user"
      create_user: "create user"
      new_user: "new user"
+     edit_user: "edit user"
      user: "user"
      email: "email"
      send_mails: "send mails"
+     user_updated: "User was successfully updated."
      
