@@ -34,3 +34,8 @@ en:
 
      boards: "Boards"
      boards_management: "boards management"
+     add_board: "add new board"
+     save_board: "save board"
+     new_board: "new board"
+     title: "Title"
+     description: "Description"

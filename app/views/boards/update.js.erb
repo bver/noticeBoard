@@ -1,0 +1,17 @@
+<%
+content = render :partial => 'board', :locals => { :board => @board }
+h3,div = content.split 'h3>'
+h3 += 'h3>'
+%>
+
+$('#h_<%= @board.id %>').replaceWith("<%=escape_javascript h3 %>");
+$('#d_<%= @board.id %>').replaceWith("<%=escape_javascript div %>");
+
+$('#accordion').accordion("destroy").accordion({icons: true});
+
+var act = false;
+$('#accordion > h3').each(function(index) {
+    if( "h_<%= @board.id %>" == $(this).attr("id") )
+       act = index;
+});
+$('#accordion').accordion("activate", act );

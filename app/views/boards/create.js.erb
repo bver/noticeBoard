@@ -1,0 +1,6 @@
+
+$('#dialog').dialog("close").remove();
+$('#accordion').append("<%= escape_javascript(render( :partial => 'board', :locals => { :board => @board })) %>")
+                         .accordion("destroy")
+                         .accordion({icons: true})
+                         .accordion( "activate", <%=  @activated %>);

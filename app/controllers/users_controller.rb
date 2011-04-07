@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.xml  { render :xml => @user }
-      format.js { render :action => 'dialog', :locals =>{:dialog=>'new'} }
+      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
     end
   end
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      format.js { render :action => 'dialog', :locals =>{:dialog=>'edit'} }
+      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'edit'} }
     end
   end
 
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
         format.js
       else
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        format.js { render :action => 'dialog', :locals =>{:dialog=>'new'} }
+        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
       end
     end
   end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
         format.js
         format.xml  { head :ok }
       else
-        format.js { render :action => 'dialog', :locals =>{:dialog=>'edit'} }
+        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'edit'} }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end

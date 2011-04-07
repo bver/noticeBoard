@@ -1,16 +1,8 @@
 <% content_for :head do %>
   <script type="text/javascript">
      function specificInit() {
-         $( '#accordion' ).accordion({ 
-             icons: true,
-             collapsible: true
-             //clearStyle: true
-         }).accordion( "activate" , <%=  activated %>);
-
-         $( '#addButton' ).button({
-	    icons: { primary: 'ui-icon-star'}
-         });
-      }
+         $( '#accordion' ).accordion( "activate" , <%=  activated %>);
+     }
   </script>
 <% end %>
 <% content_for :nbheader do %>

@@ -1,25 +1,21 @@
-<h1>Listing boards</h1>
+<% content_for :head do %>
+  <script type="text/javascript">
+     function specificInit() {
+         $( '#accordion' ).accordion( "activate" , <%=  activated %>);
+     }
+  </script>
+<% end %>
+<% content_for :nbheader do %>
+       <h1><%=t :boards%></h1>
+       <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+            id="addButton" href="<%= new_board_path :format=>'js' %>" data-remote="true"><span
+           class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_board%></span></a>
+<% end %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
 
 <% @boards.each do |board| %>
-  <tr>
-    <td><%= board.title %></td>
-    <td><%= board.description %></td>
-    <td><%= link_to 'Show', board %></td>
-    <td><%= link_to 'Edit', edit_board_path(board) %></td>
-    <td><%= link_to 'Destroy', board, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<%= render :partial => 'board', :locals => { :board => board } %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Board', new_board_path %>
+</div>
