@@ -1,15 +1,15 @@
-<h3 id="h_<%= user.id %>"><a href="#"><%= user.name %></a></h3>
-<div id="d_<%= user.id %>" class="nbnote">
+<h3 id="h_<%= @user.id %>"><a href="#"><%= @user.name %></a></h3>
+<div id="d_<%= @user.id %>" class="nbnote">
 
     <ul id="icons" class="nbiconbox">
-      <li class="nbicon" title="<%= t(:edit) %>"><a href="<%= edit_user_path user,  :format=>'js' %>" data-remote="true"><span class="ui-icon ui-icon-pencil"></span></a></li>
-      <% unless Rails.env.test? or user.name == current_user.name  %>
-      <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= user_path user  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
+      <li class="nbicon" title="<%= t(:edit) %>"><a href="<%= edit_user_path @user,  :format=>'js' %>" data-remote="true"><span class="ui-icon ui-icon-pencil"></span></a></li>
+      <% unless Rails.env.test? or @user.name == current_user.name  %>
+      <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= user_path @user  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
       <% end  %>
     </ul>
 
-    <%= t :user %>: <%= user.name %><br/>
-    <%= t :email %>: <%= user.email %><br/>
-    <span class="ui-icon ui-icon-<%= user.send_mails ? 'check' : 'close' %> nbnoteicon"></span> <%= t :send_mails %><br/>
+    <%= t :user %>: <%= @user.name %><br/>
+    <%= t :email %>: <%= @user.email %><br/>
+    <span class="ui-icon ui-icon-<%= @user.send_mails ? 'check' : 'close' %> nbnoteicon"></span> <%= t :send_mails %><br/>
 
  </div>

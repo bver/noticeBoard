@@ -49,7 +49,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
-        format.js
+        format.js { render :template => 'shared/create', :locals =>{:templ=>'board'} }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
         format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
@@ -65,7 +65,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.update_attributes(params[:board])
-        format.js
+        format.js { render :template => 'shared/update', :locals =>{:templ=>'board', :item=>@board} }
         format.xml  { head :ok }
       else
         format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'edit'} }

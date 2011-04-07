@@ -15,7 +15,8 @@
  <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
 
 <% @users.each do |user| %>
-<%= render :partial => 'user', :locals => { :user => user } %>
+   <% @user = user %>
+   <%= render :partial => 'user' %>
 <% end %>
 
 </div>

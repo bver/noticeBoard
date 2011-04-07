@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.xml  { render :xml => @user, :status => :created, :location => @user }
-        format.js
+        format.js { render :template => 'shared/create', :locals =>{:templ=>'user'} }
       else
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(p) #params[:user]
-        format.js
+        format.js { render :template => 'shared/update', :locals =>{:templ=>'user', :item=>@user} }
         format.xml  { head :ok }
       else
         format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'edit'} }

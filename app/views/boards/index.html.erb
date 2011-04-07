@@ -15,7 +15,8 @@
  <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
 
 <% @boards.each do |board| %>
-<%= render :partial => 'board', :locals => { :board => board } %>
+   <% @board = board %>
+   <%= render :partial => 'board' %>
 <% end %>
 
 </div>
