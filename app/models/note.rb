@@ -1,5 +1,6 @@
 class Note < ActiveRecord::Base
   belongs_to :board
+  belongs_to :user
   has_many :changes, :dependent => :destroy
 
   validates_length_of :title, :minimum=> 3,  :maximum=>40
