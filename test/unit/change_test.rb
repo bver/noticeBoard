@@ -24,6 +24,10 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal :set_priority, c.sense
     c.meaning = 8
     assert_equal :set_status, c.sense
+    c.meaning = 9
+    assert_equal :start_work, c.sense
+    c.meaning = 10
+    assert_equal :stop_work, c.sense
   end
 
   test "sense helper bw" do
@@ -48,5 +52,9 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal 7, c.meaning
     c.sense = :set_status
     assert_equal 8, c.meaning
+    c.sense = :start_work
+    assert_equal 9, c.meaning
+    c.sense = :stop_work
+    assert_equal 10, c.meaning
   end
 end
