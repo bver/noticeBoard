@@ -15,4 +15,19 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal false, three.outcome
     assert_equal :cancelled, three.status
   end
+
+  test "status2outcome helper" do
+    assert_equal nil, Note.status2outcome( :active )
+    assert_equal true, Note.status2outcome( :finished )
+    assert_equal false, Note.status2outcome( :cancelled )
+    assert_raise( ArgumentError ) { Note.status2outcome( :unknown ) }
+  end
+
+  test "status2outcome textual helper" do
+    assert_equal nil, Note.status2outcome( 'A' )
+    assert_equal true, Note.status2outcome( 'finished' )
+    assert_equal false, Note.status2outcome( 'c' )
+    assert_raise( ArgumentError ) { Note.status2outcome( 'unk' ) }
+  end
+
 end
