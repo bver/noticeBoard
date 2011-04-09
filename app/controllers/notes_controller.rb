@@ -26,9 +26,14 @@ class NotesController < ApplicationController
   # GET /notes/new.xml
   def new
     @note = Note.new
+    if params.key? :parent
+      @note.board = Board.find(params[:parent])
+    else
+      @board_options = Board.all( :order => :title ).map { |t| [t.title, t.id] }
+    end
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
       format.xml  { render :xml => @note }
     end
   end

@@ -43,5 +43,7 @@ en:
 
      notes: "Notes"
      add_note: "add new note"
+     save_note: "save note"
+     new_note: "new note"
      no_note: "No note available."
      
