@@ -69,3 +69,7 @@ en:
      prio_normal: "normal"
      prio_high: "high"
      prio_super: "urgent"
+     add_comment: "add new comment"
+     label_comment: "Write your comment"
+     create_comment: "create comment"
+     

@@ -4,7 +4,7 @@
 <div id="d_<%= @note.id %>" class="nbnote">
 
     <ul id="icons" class="nbiconbox">
-        <li class="nbicon" title="<%= t(:ch_comment) %>"><a href="#"><span class="ui-icon ui-icon-comment"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_comment) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'comment' %>" data-remote="true"><span class="ui-icon ui-icon-comment"></span></a></li>
     <% if @note.status == :active %>
         <% if ! @note.working && (@note.user.nil? || current_user == @note.user)  %>
         <li class="nbicon" title="<%= t(:ch_going) %>"><a href="#"><span class="ui-icon ui-icon-play"></span></a></li>

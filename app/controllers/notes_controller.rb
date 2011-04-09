@@ -41,6 +41,15 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
+
+    respond_to do |format|
+      format.js do
+        @title = t :add_comment
+        @label = t :label_comment
+        @button = t :create_comment
+        render :template => 'shared/dialog', :locals =>{:dialog=>'comment'}
+      end
+    end
   end
 
   # POST /notes
