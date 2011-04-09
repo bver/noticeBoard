@@ -47,7 +47,6 @@ class NotesController < ApplicationController
   # POST /notes.xml
   def create
     @note = Note.new(params[:note])
-    @activated = Note.count
 
     respond_to do |format|
       if @note.save

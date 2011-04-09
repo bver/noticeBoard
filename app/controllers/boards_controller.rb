@@ -46,7 +46,6 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
-    @activated = Board.count
 
     respond_to do |format|
       if @board.save

@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
-    @activated = User.count
 
     respond_to do |format|
       if @user.save
