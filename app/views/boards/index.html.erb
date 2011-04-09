@@ -12,11 +12,14 @@
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_board%></span></a>
 <% end %>
 
- <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
+ <% if @boards.empty? %>
+       <p><%=t :no_board %></p>
+ <% else %>
+     <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
 
-<% @boards.each do |board| %>
-   <% @board = board %>
-   <%= render :partial => 'board' %>
+    <% @boards.each do |board| %>
+       <% @board = board %>
+       <%= render :partial => 'board' %>
+    <% end %>
 <% end %>
-
 </div>

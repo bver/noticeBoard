@@ -39,3 +39,4 @@ en:
      new_board: "new board"
      title: "Title"
      description: "Description"
+     no_board: "No board available."
