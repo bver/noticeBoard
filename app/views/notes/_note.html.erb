@@ -1,4 +1,6 @@
-<h3 id="h_<%= @note.id %>"><a href="#"><span class="ui-icon ui-icon-<%= note_icon(@note) %>"></span><%= @note.board.nil? ? '' : @note.board.title %> : <%= @note.title %></a></h3>
+<h3 id="h_<%= @note.id %>"><a href="#"><span 
+      class="ui-icon ui-icon-<%= note_icon @note %>"></span><%=  note_problem @note %><span
+      class="<%= note_prio @note  %>"><%= note_title @note %></span><%= note_user @note %></a></h3>
 <div id="d_<%= @note.id %>" class="nbnote">
 
     <ul id="icons" class="nbiconbox">    
