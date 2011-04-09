@@ -1,0 +1,37 @@
+<div id="dialog" title="<%= t :new_note %>">
+<%= form_for( @note, :remote=>true ) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> - <%= t :cannot_save %>:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if defined? @board_options %>
+    <div class="field">
+      <%= f.label :board %><br />
+       <%= f.select  :board_id, options_for_select( @board_options ) %>
+    </div>
+  <% else  %>
+     <%= f.hidden_field :board_id %>
+  <% end %>
+
+  <div class="field">
+    <%= f.label t( :title ) %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="actions">
+    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
+        class="ui-button-text"><%= t :save_note %></span></a>
+    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
+        class="ui-button-text"><%= t :cancel %></span></a>
+  </div>
+<% end %>
+
+</div>

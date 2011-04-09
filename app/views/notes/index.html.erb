@@ -20,6 +20,6 @@
  <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
     <% @notes.each do |note| %>
        <% @note = note %>
-       <%= render :partial => 'note' %>
+       <%= render :partial => 'notes/note' %>
     <% end %>
  </div>

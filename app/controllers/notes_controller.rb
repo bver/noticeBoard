@@ -47,13 +47,14 @@ class NotesController < ApplicationController
   # POST /notes.xml
   def create
     @note = Note.new(params[:note])
+    @activated = Note.count
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
+        format.js { render :template => 'shared/create', :locals =>{:templ=>'note'} }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
-        format.html { render :action => "new" }
+        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
       end
     end

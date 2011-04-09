@@ -1,0 +1,8 @@
+<h3 id="h_<%= @note.id %>"><a href="#"><%= @note.board.title %> : <%= @note.title %></a></h3>
+<div id="d_<%= @note.id %>" class="nbnote">
+
+    <ul id="icons" class="nbiconbox">    
+      <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= note_path @note  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
+    </ul>
+
+ </div>
