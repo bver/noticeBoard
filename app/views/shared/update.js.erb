@@ -7,7 +7,7 @@ h3 += 'h3>'
 $('#h_<%=item.id %>').replaceWith("<%=escape_javascript h3 %>");
 $('#d_<%= item.id %>').replaceWith("<%=escape_javascript div %>");
 
-$('#accordion').accordion("destroy").accordion({icons: true});
+$('#accordion').accordion("destroy").accordion({icons: false});
 
 var act = false;
 $('#accordion > h3').each(function(index) {

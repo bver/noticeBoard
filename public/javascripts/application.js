@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('ul.sf-menu').superfish();
 
     $( '#accordion' ).accordion({
-             icons: true,
+             icons: false,
              collapsible: true
              //clearStyle: true
     });

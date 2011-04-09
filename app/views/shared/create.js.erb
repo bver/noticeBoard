@@ -3,5 +3,5 @@ $('#dialog').dialog("close").remove();
 
 $('#accordion').append("<%= escape_javascript(render( :partial => templ )) %>")
                          .accordion("destroy")
-                         .accordion({icons: true})
+                         .accordion({icons: false})
                          .accordion( "activate", $('#accordion > h3').size()-1);
