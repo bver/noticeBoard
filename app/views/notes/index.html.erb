@@ -1,35 +1,25 @@
-<h1>Listing notes</h1>
-
-<table>
-  <tr>
-    <th>Board</th>
-    <th>User</th>
-    <th>Title</th>
-    <th>Priority</th>
-    <th>Outcome</th>
-    <th>Working</th>
-    <th>Problem</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @notes.each do |note| %>
-  <tr>
-    <td><%= note.board_id %></td>
-    <td><%= note.user_id %></td>
-    <td><%= note.title %></td>
-    <td><%= note.priority %></td>
-    <td><%= note.outcome %></td>
-    <td><%= note.working %></td>
-    <td><%= note.problem %></td>
-    <td><%= link_to 'Show', note %></td>
-    <td><%= link_to 'Edit', edit_note_path(note) %></td>
-    <td><%= link_to 'Destroy', note, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :head do %>
+  <script type="text/javascript">
+     function specificInit() {
+         $( '#accordion' ).accordion( "activate" , <%=  activated %>);
+     }
+  </script>
 <% end %>
-</table>
+<% content_for :nbheader do %>
+       <h1><%= @parent.nil? ?  t( :notes ) : @parent.title %></h1>
 
-<br />
+       <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+            id="addButton" href="<%= @parent.nil? ? new_note_path( :format=>'js' ) : new_note_path( :format=>'js', :parent=>@parent ) %>" data-remote="true"><span
+           class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_note%></span></a>
+<% end %>
 
-<%= link_to 'New Note', new_note_path %>
+ <% if @notes.empty? %>
+       <p><%=t :no_note %></p>
+ <% end %>
+
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
+    <% @notes.each do |note| %>
+       <% @note = note %>
+       <%= render :partial => 'note' %>
+    <% end %>
+ </div>

@@ -40,3 +40,8 @@ en:
      title: "Title"
      description: "Description"
      no_board: "No board available."
+
+     notes: "Notes"
+     add_note: "add new note"
+     no_note: "No note available."
+     

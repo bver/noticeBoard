@@ -13,10 +13,11 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.xml
   def show
-    @board = Board.find(params[:id])
+    @parent = Board.find(params[:id])
+    @notes = @parent.notes
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :template => 'notes/index', :locals =>{:activated=>false} } # show.html.erb
       format.xml  { render :xml => @board }
     end
   end

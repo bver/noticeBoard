@@ -3,9 +3,10 @@ class NotesController < ApplicationController
   # GET /notes.xml
   def index
     @notes = Note.all
+    @parent = nil
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => 'index', :locals =>{:activated=>false} } # index.html.erb
       format.xml  { render :xml => @notes }
     end
   end
