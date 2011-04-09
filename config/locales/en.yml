@@ -46,4 +46,13 @@ en:
      save_note: "save note"
      new_note: "new note"
      no_note: "No note available."
+     ch_going: "I am going onto that!"
+     ch_later: "I'll do it later."
+     ch_pause: "Pause it."
+     ch_done: "It's done!"
+     ch_giveup: "I am giving up."
+     ch_prob: "It's a problem"
+     ch_noprob: "No problem."
+     ch_comment: "Add a comment."
+     ch_cancel: "Cancel and archive."
      
