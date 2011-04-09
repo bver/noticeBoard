@@ -10,7 +10,7 @@
             <li>
 		<%= link_to t(:boards), boards_path %>
 	        <ul>
-                    <% @boards.each do |board|  %>
+                    <% @menu_boards.each do |board|  %>
 		      <li><%= link_to board.title, board, :title=>board.description %></li>
                     <% end %>
                     <li><%= link_to t(:boards_management), boards_path %></li>

@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def boards
-     @boards = Board.all( :order => :title)
+     @menu_boards = Board.all( :order => :title)
   end
 end
