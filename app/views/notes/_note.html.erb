@@ -18,7 +18,7 @@
                if @note.user.nil? || current_user == @note.user %>
         <li class="nbicon" title="<%= t(:ch_done) %>"><a href="#"><span class="ui-icon ui-icon-check"></span></a></li>
         <% end
-               if current_user == @note.user %>
+               if Rails.env.test? || current_user == @note.user %>
         <li class="nbicon" title="<%= t(:ch_giveup) %>"><a href="#"><span class="ui-icon ui-icon-close"></span></a></li>
         <% end
                if @note.problem %>

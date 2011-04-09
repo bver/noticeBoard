@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
     @boards = Board.all( :order => :title)
 
     respond_to do |format|
-      format.html { render :action => 'index', :locals =>{:activated=>false} } # index.html.erb
+      format.html { render :action => 'index' } # index.html.erb
       format.xml  { render :xml => @boards }
     end
   end
@@ -17,7 +17,7 @@ class BoardsController < ApplicationController
     @notes = @parent.notes
 
     respond_to do |format|
-      format.html { render :template => 'notes/index', :locals =>{:activated=>false} } # show.html.erb
+      format.html { render :template => 'notes/index' } # show.html.erb
       format.xml  { render :xml => @board }
     end
   end

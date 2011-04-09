@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NotesControllerTest < ActionController::TestCase
   setup do
-    @note = notes(:one)
+    @note = notes(:done)
   end
 
   test "should get index" do
