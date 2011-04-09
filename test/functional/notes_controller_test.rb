@@ -13,7 +13,7 @@ class NotesControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_response :success
+    assert_response 406 # :success
   end
 
   test "should create note" do
@@ -21,7 +21,8 @@ class NotesControllerTest < ActionController::TestCase
       post :create, :note => @note.attributes
     end
 
-    assert_redirected_to note_path(assigns(:note))
+    #assert_redirected_to note_path(assigns(:note))
+    assert_response 406
   end
 
   test "should show note" do

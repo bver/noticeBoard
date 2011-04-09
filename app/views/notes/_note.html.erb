@@ -1,4 +1,4 @@
-<h3 id="h_<%= @note.id %>"><a href="#"><%= @note.board.title %> : <%= @note.title %></a></h3>
+<h3 id="h_<%= @note.id %>"><a href="#"><%= @note.board.nil? ? '' : @note.board.title %> : <%= @note.title %></a></h3>
 <div id="d_<%= @note.id %>" class="nbnote">
 
     <ul id="icons" class="nbiconbox">    
