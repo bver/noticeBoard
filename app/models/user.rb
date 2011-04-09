@@ -46,4 +46,8 @@ class User < ActiveRecord::Base
 #    end
 #  end
 
+  def User.guess_name_by_id id
+     user = User.first(id)
+     user.nil? ? '' : user.name
+  end
 end

@@ -31,4 +31,11 @@
         <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= note_path @note  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
     </ul>
 
+  <% @note.changes.each do |change| %>
+      <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span 
+            class="nbchangeauto"><%= change.user.name %>, <%= time_ago_in_words change.created   %>:</span>
+       <%= change_comment change %>
+     </p>
+  <% end %>
+
  </div>

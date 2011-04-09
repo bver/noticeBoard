@@ -22,8 +22,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label t( :title ) %><br />
+    <%= f.label t( :title ) %>:<br />
     <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= label_tag  t( :comment ) %>:<br />
+    <%= text_area_tag 'comment', nil, :rows=>3, :cols => 42 %>
   </div>
 
   <div class="actions">

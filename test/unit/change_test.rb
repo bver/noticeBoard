@@ -21,9 +21,9 @@ class ChangeTest < ActiveSupport::TestCase
     c.meaning = 6
     assert_equal :commented, c.sense
     c.meaning = 7
-    assert_equal :set_priority, c.sense
+    assert_equal :raise_priority, c.sense
     c.meaning = 8
-    assert_equal :set_status, c.sense
+    assert_equal :lower_priority, c.sense
     c.meaning = 9
     assert_equal :start_work, c.sense
     c.meaning = 10
@@ -48,9 +48,9 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal 5, c.meaning
     c.sense = :commented
     assert_equal 6, c.meaning
-    c.sense = :set_priority
+    c.sense = :raise_priority
     assert_equal 7, c.meaning
-    c.sense = :set_status
+    c.sense = :lower_priority
     assert_equal 8, c.meaning
     c.sense = :start_work
     assert_equal 9, c.meaning

@@ -50,6 +50,13 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
+        change = Change.new( :created=>Time.now )
+        change.comment =params['comment'] if params.key? 'comment'
+        change.sense = :created
+        change.user = current_user
+        change.note = @note
+        change.save
+
         format.js { render :template => 'shared/create', :locals =>{:templ=>'note'} }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else

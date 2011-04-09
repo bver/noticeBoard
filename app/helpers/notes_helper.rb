@@ -14,7 +14,6 @@ module NotesHelper
   end
 
   @@priority_class = [ 'nbpriolow', 'nbprionormal', 'nbpriohigh', 'nbpriosuper' ]
-
   def note_prio note
      @@priority_class[ note.priority ]
   end
@@ -31,5 +30,54 @@ module NotesHelper
   def note_problem note
     note.problem ? '<span class="nbpriosuper">?</span>' : ''
   end
-  
+
+  def change_comment change
+     case change.sense
+     when :created, :commented
+       change.comment
+     when :finished
+       t( :c_finished )
+     when :cancelled
+       "#{ t :c_cancelled } : #{change.comment}"
+     when :accepted
+       t( :c_accepted )
+     when :rejected
+       "#{ t :c_rejected } : #{change.comment}"
+     when :assigned
+       "#{ t :c_assigned } #{User.guess_name_by_id(change.argument)}"
+     when :raise_priority
+       "#{ t :c_raised } #{change_priority change.argument}"
+     when :lower_priority
+       "#{ t :c_lowered } #{change_priority change.argument}"
+     when :start_work
+       t( :c_started )
+     when :stop_work
+       "#{ t :c_stopped } : #{change.comment}"
+     else
+       '!!!'
+     end
+  end
+
+  @@change_priorities = [ :prio_low, :prio_normal, :prio_high, :prio_super ]
+  def change_priority prio
+     t @@change_priorities[ prio ]
+  end
+
+  @@change_icons = {
+    :created => 'star',
+    :finished => 'check',
+    :cancelled => 'circle-close',
+    :accepted => 'person',
+    :rejected => 'close',
+    :assigned => 'arrowreturnthick-1-e',
+    :commented => 'comment',
+    :raise_priority => 'arrowthick-1-n',
+    :lower_priority => 'arrowthick-1-s',
+    :start_work => 'play',
+    :stop_work => 'pause'
+  }
+  def change_icon change
+     @@change_icons[ change.sense ]
+  end
+
 end

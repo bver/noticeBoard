@@ -7,8 +7,6 @@ class CreateChanges < ActiveRecord::Migration
       t.integer :argument, :null => true
       t.text :comment, :null => true
       t.timestamp :created
-
-      t.timestamps
     end
 
     add_index :changes, :note_id
