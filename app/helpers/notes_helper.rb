@@ -27,6 +27,10 @@ module NotesHelper
      note.board.title + ' : ' + note.title
   end
 
+  def nsp icon
+    raw %Q'<span class="ui-icon ui-icon-#{icon}"></span>'
+  end
+
   def note_problem note
     raw note.problem ? '<span class="nbpriosuper">?</span>' : ''
   end
