@@ -3,8 +3,9 @@ $(document).ready(function() {
 
     $( '#accordion' ).accordion({
              icons: false,
-             collapsible: true
-             //clearStyle: true
+             collapsible: true,
+             fillSpace:  false,
+             clearStyle: true
     });
 
     $( '#addButton' ).button({

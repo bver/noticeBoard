@@ -1,7 +1,11 @@
 
 $('#dialog').dialog("close").remove();
 
-$('#accordion').append("<%= escape_javascript(render( :partial => templ )) %>")
-                         .accordion("destroy")
-                         .accordion({icons: false})
+$('#accordion').accordion("destroy")
+                         .append("<%= escape_javascript(render( :partial => templ )) %>")
+                         .accordion( { 
+                            icons: false,
+                            collapsible: true,
+                            fillSpace:  false,
+                            clearStyle: true } )
                          .accordion( "activate", $('#accordion > h3').size()-1);

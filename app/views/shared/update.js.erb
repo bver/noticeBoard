@@ -4,10 +4,16 @@ h3,div = content.split 'h3>'
 h3 += 'h3>'
 %>
 
+$('#accordion').accordion("destroy");
+
 $('#h_<%=item.id %>').replaceWith("<%=escape_javascript h3 %>");
 $('#d_<%= item.id %>').replaceWith("<%=escape_javascript div %>");
 
-$('#accordion').accordion("destroy").accordion({icons: false});
+$('#accordion').accordion({
+                            icons: false,
+                            collapsible: true,
+                            fillSpace:  false,
+                            clearStyle: true });
 
 var act = false;
 $('#accordion > h3').each(function(index) {
