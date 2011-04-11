@@ -38,7 +38,8 @@ class NotesControllerTest < ActionController::TestCase
 
   test "should update note" do
     put :update, :id => @note.to_param, :note => @note.attributes
-    assert_redirected_to note_path(assigns(:note))
+    #assert_redirected_to note_path(assigns(:note))
+    assert_response 406
   end
 
   test "should destroy note" do
