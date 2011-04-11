@@ -1,5 +1,17 @@
+
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user! unless Rails.env.test?
+
+  ### testing (UGLY)
+  unless Rails.env.test?
+    before_filter :authenticate_user!
+  else
+    CUser = Struct.new( 'CUser', :id, :name )
+    @@cuser = CUser.new(  42, 'name' )
+    def current_user
+      @@cuser
+    end
+  end
+
   before_filter :boards
 
   protect_from_forgery

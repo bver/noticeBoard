@@ -62,11 +62,7 @@ class NotesController < ApplicationController
         change = Change.new( :created=>Time.now )
         change.comment =params['comment'] if params.key? 'comment'
         change.sense = :created
-        if Rails.env.test?
-          change.user_id = -1  #UGLY
-        else
-           change.user = current_user
-        end
+        change.user_id = current_user.id
         change.note = @note
         change.save
 

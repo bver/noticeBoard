@@ -6,19 +6,19 @@
     <ul id="icons" class="nbiconbox">
         <li class="nbicon" title="<%= t(:ch_comment) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'comment' %>" data-remote="true"><span class="ui-icon ui-icon-comment"></span></a></li>
     <% if @note.status == :active %>
-        <% if ! @note.working && (@note.user.nil? || current_user == @note.user)  %>
+        <% if @note.user.nil? || (current_user.id == @note.user.id && ! @note.working)  %>
         <li class="nbicon" title="<%= t(:ch_going) %>"><a href="#"><span class="ui-icon ui-icon-play"></span></a></li>
         <% end
-               if ! @note.working && @note.user.nil? %>
+               if @note.user.nil? %>
         <li class="nbicon" title="<%= t(:ch_later) %>"><a href="#"><span class="ui-icon ui-icon-person"></span></a></li>
         <% end
-               if @note.working && current_user == @note.user %>
+               if ! @note.user.nil? && current_user.id == @note.user.id && @note.working %>
         <li class="nbicon" title="<%= t(:ch_pause) %>"><a href="#"><span class="ui-icon ui-icon-pause"></span></a></li>
         <% end
-               if @note.user.nil? || current_user == @note.user %>
+               if @note.user.nil? || current_user.id == @note.user.id %>
         <li class="nbicon" title="<%= t(:ch_done) %>"><a href="#"><span class="ui-icon ui-icon-check"></span></a></li>
         <% end
-               if Rails.env.test? || current_user == @note.user %>
+               if ! @note.user.nil? && current_user.id == @note.user.id %>
         <li class="nbicon" title="<%= t(:ch_giveup) %>"><a href="#"><span class="ui-icon ui-icon-close"></span></a></li>
         <% end
                if @note.problem %>

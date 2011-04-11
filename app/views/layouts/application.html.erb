@@ -15,7 +15,7 @@
 </head>
 <body>
   <div class="nbheader">
-    <%= render "shared/menu" unless Rails.env.test? or current_user.nil? %>
+    <%= render "shared/menu" unless current_user.nil? %>
     <%= yield :nbheader %>
   </div>
   <% unless notice.nil? %>

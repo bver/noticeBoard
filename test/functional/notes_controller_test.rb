@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class NotesControllerTest < ActionController::TestCase
+
   setup do
     @note = notes(:done)
   end
@@ -32,7 +33,7 @@ class NotesControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @note.to_param
-    assert_response :success
+    assert_response 406 # :success
   end
 
   test "should update note" do
