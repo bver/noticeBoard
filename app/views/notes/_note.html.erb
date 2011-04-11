@@ -33,7 +33,7 @@
 
   <% @note.changes.each do |change| %>
       <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span 
-            class="nbchangeauto"><%= change.user.name %>, <%= time_ago_in_words change.created   %>:</span>
+            class="nbchangeauto"><%= change.user.name %>, <%=change.created.to_formatted_s :short  %>:</span>
        <%= change_comment change %>
      </p>
   <% end %>
