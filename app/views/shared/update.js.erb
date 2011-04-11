@@ -15,6 +15,8 @@ $('#accordion').accordion({
                             fillSpace:  false,
                             clearStyle: true });
 
+$('#accordion > h3 > a').css( 'padding-left', '26px' );
+
 var act = false;
 $('#accordion > h3').each(function(index) {
     if( "h_<%= item.id %>" == $(this).attr("id") )
