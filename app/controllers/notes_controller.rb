@@ -41,12 +41,10 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
-
+    dry_edit_create params[:add]
+  
     respond_to do |format|
       format.js do
-        @title = t :add_comment
-        @label = t :label_comment
-        @button = t :create_comment
         render :template => 'shared/dialog', :locals =>{:dialog=>'comment'}
       end
     end
@@ -79,13 +77,27 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
+    dry_edit_create params[:add]
+
+    change = Change.new( :created=>Time.now )
+    change.user_id = current_user.id
+    change.note = @note
+    change.comment =params['comment']
+    case params[:add].to_s
+    when 'cancel'
+       change.sense = :cancelled
+       @note.outcome = Note.status2outcome :cancelled
+    else #when 'comment'
+       change.sense = :commented
+    end
+    change.save
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
+        format.js { render :template => 'shared/update', :locals =>{:templ=>'note', :item=>@note} }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'comment'} }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
       end
     end
@@ -102,4 +114,18 @@ class NotesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+
+  def dry_edit_create add
+    @hidden = add.to_s
+    @title, @label, @button = case @hidden
+    when 'cancel'
+       [t(:add_cancel), t(:label_cancel), t(:create_cancel)]
+    else  # when 'comment'
+       @hidden = 'comment'
+       [t(:add_comment), t(:label_comment), t(:create_comment)]       
+    end
+  end
+
 end

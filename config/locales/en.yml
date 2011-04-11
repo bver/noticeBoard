@@ -50,7 +50,7 @@ en:
      ch_going: "I am going onto that!"
      ch_later: "I'll do it later."
      ch_pause: "Pause it."
-     ch_done: "It's done!"
+     ch_done: "Done!"
      ch_giveup: "I am giving up."
      ch_prob: "It's a problem"
      ch_noprob: "No problem."
@@ -72,4 +72,6 @@ en:
      add_comment: "add new comment"
      label_comment: "Write your comment"
      create_comment: "create comment"
-     
+     add_cancel: "the note will be discarded & archived"
+     label_cancel: "Write the reason"
+     create_cancel: "ok, archive"

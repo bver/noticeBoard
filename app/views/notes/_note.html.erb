@@ -26,7 +26,7 @@
         <% else %>
         <li class="nbicon" title="<%= t(:ch_prob) %>"><a href="#"><span class="ui-icon ui-icon-help"></span></a></li>
         <% end %>
-        <li class="nbicon" title="<%= t(:ch_cancel) %>"><a href="#"><span class="ui-icon ui-icon-circle-close"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_cancel) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'cancel' %>" data-remote="true"><span class="ui-icon ui-icon-circle-close"></span></a></li>
     <% end %>        
         <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= note_path @note  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
     </ul>
