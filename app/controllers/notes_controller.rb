@@ -84,9 +84,16 @@ class NotesController < ApplicationController
     change.note = @note
     change.comment =params['comment']
     case params[:add].to_s
+    when 'accept'
+       change.sense = :accepted
+       @note.user_id = current_user.id
+       @note.working = false
+    when 'done'
+       change.sense = :finished
+       @note.status = :finished
     when 'cancel'
        change.sense = :cancelled
-       @note.outcome = Note.status2outcome :cancelled
+       @note.status = :cancelled
     when 'start'
        change.sense = :start_work
        @note.user_id = current_user.id
@@ -94,6 +101,16 @@ class NotesController < ApplicationController
     when 'stop'
        change.sense = :stop_work
        @note.working = false
+    when 'reject'
+       change.sense = :rejected
+       @note.user_id = nil
+       @note.working = false
+    when 'prob'
+       change.sense = :set_problem
+       @note.problem = true
+    when 'noprob'
+       change.sense = :reset_problem
+       @note.problem = false
     else #when 'comment'
        change.sense = :commented
     end
@@ -131,6 +148,10 @@ class NotesController < ApplicationController
        [t(:add_cancel), t(:label_cancel), t(:create_cancel)]
     when 'stop'
        [t(:add_stop), t(:label_stop), t(:create_stop)]
+    when 'reject'
+       [t(:add_reject), t(:label_reject), t(:create_reject)]
+    when 'prob'
+       [t(:add_problem), t(:label_problem), t(:create_problem)]
     else  # when 'comment'
        @hidden = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       

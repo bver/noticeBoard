@@ -10,28 +10,28 @@
         <li class="nbicon" title="<%= t(:ch_going) %>"><a href="<%= note_path @note,  :format=>'js', :add => 'start' %>" data-remote="true" data-method="put"><span class="ui-icon ui-icon-play"></span></a></li>
         <% end
                if @note.user.nil? %>
-        <li class="nbicon" title="<%= t(:ch_later) %>"><a href="#"><span class="ui-icon ui-icon-person"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_later) %>"><a href="<%= note_path @note,  :format=>'js', :add => 'accept' %>" data-remote="true" data-method="put"><span class="ui-icon ui-icon-person"></span></a></li>
         <% end
                if ! @note.user.nil? && current_user.id == @note.user.id && @note.working %>
         <li class="nbicon" title="<%= t(:ch_pause) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'stop' %>" data-remote="true"><span class="ui-icon ui-icon-pause"></span></a></li>
         <% end
                if @note.user.nil? || current_user.id == @note.user.id %>
-        <li class="nbicon" title="<%= t(:ch_done) %>"><a href="#"><span class="ui-icon ui-icon-check"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_done) %>"><a href="<%= note_path @note,  :format=>'js', :add => 'done' %>" data-remote="true" data-method="put"><span class="ui-icon ui-icon-check"></span></a></li>
         <% end
                if ! @note.user.nil? && current_user.id == @note.user.id %>
-        <li class="nbicon" title="<%= t(:ch_giveup) %>"><a href="#"><span class="ui-icon ui-icon-close"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_giveup) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'reject' %>" data-remote="true"><span class="ui-icon ui-icon-close"></span></a></li>
         <% end
                if @note.problem %>
-        <li class="nbicon" title="<%= t(:ch_noprob) %>"><a href="#"><span class="ui-icon ui-icon-help"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_noprob) %>"><a href="<%= note_path @note,  :format=>'js', :add => 'noprob' %>" data-remote="true" data-method="put"><span class="ui-icon ui-icon-help"></span></a></li>
         <% else %>
-        <li class="nbicon" title="<%= t(:ch_prob) %>"><a href="#"><span class="ui-icon ui-icon-help"></span></a></li>
+        <li class="nbicon" title="<%= t(:ch_prob) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'prob' %>" data-remote="true"><span class="ui-icon ui-icon-help"></span></a></li>
         <% end %>
         <li class="nbicon" title="<%= t(:ch_cancel) %>"><a href="<%= edit_note_path @note,  :format=>'js', :add => 'cancel' %>" data-remote="true"><span class="ui-icon ui-icon-circle-close"></span></a></li>
     <% end %>        
         <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= note_path @note  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
     </ul>
 
-  <% @note.changes.each do |change| %>
+  <% @note.changes.reverse.each do |change| %>
       <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span 
             class="nbchangeauto"><%= change.user.name %>, <%=change.created.to_formatted_s :short  %>:</span>
        <%= change_comment change %>

@@ -10,6 +10,10 @@ class Note < ActiveRecord::Base
     self.outcome ? :finished : :cancelled
   end
 
+  def status=sym
+    self.outcome = Note.status2outcome sym
+  end
+
   def Note.status2outcome sym
     case sym.to_s[0].upcase
     when 'A'

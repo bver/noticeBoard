@@ -28,7 +28,7 @@ module NotesHelper
   end
 
   def note_problem note
-    note.problem ? '<span class="nbpriosuper">?</span>' : ''
+    raw note.problem ? '<span class="nbpriosuper">?</span>' : ''
   end
 
   def change_comment change
@@ -53,6 +53,10 @@ module NotesHelper
        t( :c_started )
      when :stop_work
        "#{ t :c_paused } : #{change.comment}"
+     when :set_problem
+       "#{ t :c_problem } : #{change.comment}"
+     when :reset_problem
+       t( :c_noproblem )
      else
        '!!!'
      end
@@ -74,8 +78,11 @@ module NotesHelper
     :raise_priority => 'arrowthick-1-n',
     :lower_priority => 'arrowthick-1-s',
     :start_work => 'play',
-    :stop_work => 'pause'
+    :stop_work => 'pause',
+    :set_problem => 'help',
+    :reset_problem => 'help'
   }
+  @@change_icons.default ='alert'
   def change_icon change
      @@change_icons[ change.sense ]
   end

@@ -28,6 +28,10 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal :start_work, c.sense
     c.meaning = 10
     assert_equal :stop_work, c.sense
+    c.meaning = 11
+    assert_equal :set_problem, c.sense
+    c.meaning = 12
+    assert_equal :reset_problem, c.sense
   end
 
   test "sense helper bw" do
@@ -56,5 +60,9 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal 9, c.meaning
     c.sense = :stop_work
     assert_equal 10, c.meaning
+    c.sense = :set_problem
+    assert_equal 11, c.meaning
+    c.sense = :reset_problem
+    assert_equal 12, c.meaning
   end
 end

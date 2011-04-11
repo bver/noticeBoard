@@ -30,4 +30,17 @@ class NoteTest < ActiveSupport::TestCase
     assert_raise( ArgumentError ) { Note.status2outcome( 'unk' ) }
   end
 
+  test "status assign" do
+    one =notes(:one)
+
+    one.status = :active
+    assert_equal nil, one.outcome
+    one.status = :finished
+    assert_equal true, one.outcome
+    one.status = :cancelled
+    assert_equal false, one.outcome
+
+    assert_raise( ArgumentError ) { one.status = :unknown }
+  end
+
 end
