@@ -41,11 +41,11 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
-    dry_edit_create params[:add]
-  
+    dry_edit_create params[:add].to_s
+
     respond_to do |format|
       format.js do
-        render :template => 'shared/dialog', :locals =>{:dialog=>'comment'}
+          render :template => 'shared/dialog', :locals =>{:dialog=>'comment'}
       end
     end
   end
@@ -87,6 +87,13 @@ class NotesController < ApplicationController
     when 'cancel'
        change.sense = :cancelled
        @note.outcome = Note.status2outcome :cancelled
+    when 'start'
+       change.sense = :start_work
+       @note.user_id = current_user.id
+       @note.working = true
+    when 'stop'
+       change.sense = :stop_work
+       @note.working = false
     else #when 'comment'
        change.sense = :commented
     end
@@ -122,6 +129,8 @@ class NotesController < ApplicationController
     @title, @label, @button = case @hidden
     when 'cancel'
        [t(:add_cancel), t(:label_cancel), t(:create_cancel)]
+    when 'stop'
+       [t(:add_stop), t(:label_stop), t(:create_stop)]
     else  # when 'comment'
        @hidden = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       

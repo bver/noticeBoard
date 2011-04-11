@@ -75,3 +75,6 @@ en:
      add_cancel: "the note will be discarded & archived"
      label_cancel: "Write the reason"
      create_cancel: "ok, archive"
+     add_stop: "the processing of the note will paused"
+     label_stop: "Write the reason"
+     create_stop: "ok, pause"

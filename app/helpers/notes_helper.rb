@@ -52,7 +52,7 @@ module NotesHelper
      when :start_work
        t( :c_started )
      when :stop_work
-       "#{ t :c_stopped } : #{change.comment}"
+       "#{ t :c_paused } : #{change.comment}"
      else
        '!!!'
      end
