@@ -49,6 +49,8 @@ module NotesHelper
        "#{ t :c_rejected } : #{change.comment}"
      when :assigned
        "#{ t :c_assigned } #{User.guess_name_by_id(change.argument)}"
+     when :unassigned
+       "#{ t :c_unassigned } #{User.guess_name_by_id(change.argument)}"
      when :raise_priority
        "#{ t :c_raised } #{change_priority change.argument}"
      when :lower_priority
@@ -78,6 +80,7 @@ module NotesHelper
     :accepted => 'person',
     :rejected => 'close',
     :assigned => 'arrowreturnthick-1-e',
+    :unassigned => 'arrowreturnthick-1-n',
     :commented => 'comment',
     :raise_priority => 'arrowthick-1-n',
     :lower_priority => 'arrowthick-1-s',

@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
       [ t(:prio_normal), 1 ],
       [ t(:prio_low), 0 ]
     ]
+
+    @user_options = User.all.map { |u| [ u.name, u.id ] }
+    @user_options.unshift [ "[#{ t :unassigned }]", -1 ]
   end
 
 end

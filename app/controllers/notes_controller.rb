@@ -115,6 +115,17 @@ class NotesController < ApplicationController
        end
        change.argument = prio
        @note.priority = prio
+    when 'user'
+      user_id = params[:value].to_i
+      if user_id == -1
+        @note.user_id = nil
+        change.sense = :unassigned
+        change.argument = @note.user_id
+      else
+        @note.user_id = user_id
+        change.sense = :assigned
+        change.argument = user_id
+      end
     when 'reject'
        change.sense = :rejected
        @note.user_id = nil

@@ -33,6 +33,8 @@
 
     <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id  %>
 
+    <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user.nil? ? -1 : @note.user_id ), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id  %>
+
     <% @note.changes.reverse.each do |change| %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span
             class="nbchangeauto"><%= change.user.name %>, <%=change.created.to_formatted_s :short  %>:</span>
