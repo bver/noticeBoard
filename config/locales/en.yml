@@ -67,6 +67,7 @@ en:
      c_paused: "paused processing of the note"
      c_problem: "reported the problem"
      c_noproblem: "solved the problem"
+     priority: "priority"
      prio_low: "low"
      prio_normal: "normal"
      prio_high: "high"

@@ -15,7 +15,8 @@ class BoardsController < ApplicationController
   def show
     @parent = Board.find(params[:id])
     @notes = @parent.notes
-
+    dry_options
+    
     respond_to do |format|
       format.html { render :template => 'notes/index' } # show.html.erb
       format.xml  { render :xml => @board }

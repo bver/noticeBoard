@@ -4,6 +4,7 @@ class NotesController < ApplicationController
   def index
     @notes = Note.all
     @parent = nil
+    dry_options
 
     respond_to do |format|
       format.html { render :action => 'index' } # index.html.erb
@@ -54,6 +55,7 @@ class NotesController < ApplicationController
   # POST /notes.xml
   def create
     @note = Note.new(params[:note])
+    dry_options
 
     respond_to do |format|
       if @note.save
@@ -78,6 +80,7 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
     dry_edit_create params[:add]
+    dry_options
 
     change = Change.new( :created=>Time.now )
     change.user_id = current_user.id
@@ -101,6 +104,17 @@ class NotesController < ApplicationController
     when 'stop'
        change.sense = :stop_work
        @note.working = false
+    when 'priority'
+       prio = params[:value].to_i
+       if prio > @note.priority
+         change.sense = :raise_priority
+       elsif prio < @note.priority
+         change.sense = :lower_priority
+       else
+         change = nil
+       end
+       change.argument = prio
+       @note.priority = prio
     when 'reject'
        change.sense = :rejected
        @note.user_id = nil
@@ -114,7 +128,7 @@ class NotesController < ApplicationController
     else #when 'comment'
        change.sense = :commented
     end
-    change.save
+    change.save unless change.nil?
 
     respond_to do |format|
       if @note.update_attributes(params[:note])

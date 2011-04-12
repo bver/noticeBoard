@@ -31,11 +31,13 @@
         <li class="nbicon" title="<%= t(:delete) %>"><%= link_to nsp('trash'), note_path( @note ), :method=>:delete, :confirm=> t(:are_you_sure) %></li>
     </ul>
 
-  <% @note.changes.reverse.each do |change| %>
-      <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span 
+    <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id  %>
+
+    <% @note.changes.reverse.each do |change| %>
+       <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span
             class="nbchangeauto"><%= change.user.name %>, <%=change.created.to_formatted_s :short  %>:</span>
-       <%= change_comment change %>
-     </p>
-  <% end %>
+        <%= change_comment change %>
+      </p>
+    <% end %>
 
  </div>

@@ -15,3 +15,16 @@ $(document).ready(function() {
     if( typeof specificInit == 'function'  )
        specificInit();
 });
+
+function bindSelects() {
+   $('.nbselect').unbind('change')
+   .change(function() {
+      $.post("/notes/" + $(this).attr('data-id') + '.js',
+         {
+             _method: 'put',
+             add: $(this).attr('data-add'),
+             value:  $(this).attr('value')
+         }
+      );
+   });
+}

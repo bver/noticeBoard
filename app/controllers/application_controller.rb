@@ -21,4 +21,14 @@ class ApplicationController < ActionController::Base
   def boards
      @menu_boards = Board.all( :order => :title)
   end
+
+  def dry_options
+    @prio_options = [
+      [ t(:prio_super), 3 ],
+      [ t(:prio_high), 2 ],
+      [ t(:prio_normal), 1 ],
+      [ t(:prio_low), 0 ]
+    ]
+  end
+
 end
