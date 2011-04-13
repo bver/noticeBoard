@@ -4,36 +4,36 @@
 <div id="d_<%= @note.id %>" class="nbnote">
 
     <ul id="icons" class="nbiconbox">
-        <li class="nbicon" title="<%= t(:ch_comment) %>"><%= link_to nsp('comment'), edit_note_path( @note,  :format=>'js', :add => 'comment' ), :remote=>true %></li>
+        <li class="nbicon" title="<%= t(:ch_comment) %>"><%= link_to nsp('comment'), edit_note_path( @note, :add => 'comment' ), :remote=>true %></li>
     <% if @note.status == :active %>
         <% if @note.user.nil? || (current_user.id == @note.user.id && ! @note.working)  %>
-        <li class="nbicon" title="<%= t(:ch_going) %>"><%= link_to nsp('play'), note_path( @note,  :format=>'js', :add => 'start' ), :remote=>true, :method=>:put %></li>
+        <li class="nbicon" title="<%= t(:ch_going) %>"><%= link_to nsp('play'), note_path( @note,  :add => 'start' ), :remote=>true, :method=>:put %></li>
         <% end
                if @note.user.nil? %>
-        <li class="nbicon" title="<%= t(:ch_later) %>"><%= link_to nsp('person'), note_path( @note,  :format=>'js', :add => 'accept' ), :remote=>true, :method=>:put %></li>
+        <li class="nbicon" title="<%= t(:ch_later) %>"><%= link_to nsp('person'), note_path( @note, :add => 'accept' ), :remote=>true, :method=>:put %></li>
         <% end
                if ! @note.user.nil? && current_user.id == @note.user.id && @note.working %>
-        <li class="nbicon" title="<%= t(:ch_pause) %>"><%= link_to nsp('pause'), edit_note_path( @note,  :format=>'js', :add => 'stop' ), :remote=>true %></li>
+        <li class="nbicon" title="<%= t(:ch_pause) %>"><%= link_to nsp('pause'), edit_note_path( @note,  :add => 'stop' ), :remote=>true %></li>
         <% end
                if @note.user.nil? || current_user.id == @note.user.id %>
-        <li class="nbicon" title="<%= t(:ch_done) %>"><%= link_to nsp('check'), note_path( @note,  :format=>'js', :add => 'done' ), :remote=>true, :method=>:put %></li>
+        <li class="nbicon" title="<%= t(:ch_done) %>"><%= link_to nsp('check'), note_path( @note,  :add => 'done' ), :remote=>true, :method=>:put %></li>
         <% end
                if ! @note.user.nil? && current_user.id == @note.user.id %>
-        <li class="nbicon" title="<%= t(:ch_giveup) %>"><%= link_to nsp('close'), edit_note_path( @note,  :format=>'js', :add => 'reject' ), :remote=>true %></li>
+        <li class="nbicon" title="<%= t(:ch_giveup) %>"><%= link_to nsp('close'), edit_note_path( @note,  :add => 'reject' ), :remote=>true %></li>
         <% end
                if @note.problem %>
-        <li class="nbicon" title="<%= t(:ch_noprob) %>"><%= link_to nsp('help'), note_path( @note,  :format=>'js', :add => 'noprob' ), :remote=>true, :method=>:put %></li>
+        <li class="nbicon" title="<%= t(:ch_noprob) %>"><%= link_to nsp('help'), note_path( @note,  :add => 'noprob' ), :remote=>true, :method=>:put %></li>
         <% else %>
-        <li class="nbicon" title="<%= t(:ch_prob) %>"><%= link_to nsp('help'), edit_note_path( @note,  :format=>'js', :add => 'prob' ), :remote=>true %></li>
+        <li class="nbicon" title="<%= t(:ch_prob) %>"><%= link_to nsp('help'), edit_note_path( @note,  :add => 'prob' ), :remote=>true %></li>
         <% end %>
-        <li class="nbicon" title="<%= t(:ch_cancel) %>"><%= link_to nsp('circle-close'), edit_note_path( @note,  :format=>'js', :add => 'cancel' ), :remote=>true %></li>
+        <li class="nbicon" title="<%= t(:ch_cancel) %>"><%= link_to nsp('circle-close'), edit_note_path( @note,  :add => 'cancel' ), :remote=>true %></li>
     <% end %>        
         <li class="nbicon" title="<%= t(:delete) %>"><%= link_to nsp('trash'), note_path( @note ), :method=>:delete, :confirm=> t(:are_you_sure) %></li>
     </ul>
 
     <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id  %>
 
-    <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user.nil? ? -1 : @note.user_id ), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id  %>
+    <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user_id ), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id  %>
 
     <% @note.changes.reverse.each do |change| %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span

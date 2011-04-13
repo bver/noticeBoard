@@ -14,19 +14,25 @@ class BoardsController < ApplicationController
   # GET /boards/1.xml
   def show
     @parent = Board.find(params[:id])
-    @notes = @parent.notes
+
+    conditions = dry_filter params
 
     @by_user_sel = {}
     if params.key?(:users)
       @by_user_sel.default = false
-      params[:users].split('_').each { |id| @by_user_sel[id.to_i] = true }
+      conditions[ :user_id ] = []
+      params[:users].split('_').each do |part|
+        id = part.to_i
+        @by_user_sel[id] = true
+        conditions[ :user_id ] << id
+      end
     else
       @by_user_sel.default = true
     end
-
-    @by_prio_sel = params.key?(:prio) ? params[:prio] : '0_1_2_3'
-    @by_proc_sel = params.key?(:proc) ? params[:proc] : '0_1'
-    @by_prob_sel = (params.key?(:prob) && params[:prob] == 'P')
+    
+    #@notes = @parent.notes
+    conditions[:board_id] = @parent.id
+    @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
     
     dry_options
     

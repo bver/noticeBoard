@@ -2,8 +2,29 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
   def index
-    @notes = Note.all
     @parent = nil
+
+    conditions = dry_filter params
+
+    @by_board_sel = {}
+    if params.key?(:boards)
+      @by_board_sel.default = false
+      conditions[ :board_id ] = []
+      params[:boards].split('_').each do |part|
+        id = part.to_i
+        @by_board_sel[id] = true
+        conditions[ :board_id ] << id
+      end
+    else
+      @by_board_sel.default = true
+    end
+
+    @boards_options = Board.all
+
+    #@notes = Note.all
+    conditions[:user_id] = [ current_user.id, -1 ]
+    @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
+
     dry_options
 
     respond_to do |format|
@@ -117,18 +138,17 @@ class NotesController < ApplicationController
        @note.priority = prio
     when 'user'
       user_id = params[:value].to_i
+      @note.user_id =user_id
       if user_id == -1
-        @note.user_id = nil
         change.sense = :unassigned
         change.argument = @note.user_id
       else
-        @note.user_id = user_id
         change.sense = :assigned
         change.argument = user_id
       end
     when 'reject'
        change.sense = :rejected
-       @note.user_id = nil
+       @note.user_id = -1
        @note.working = false
     when 'prob'
        change.sense = :set_problem

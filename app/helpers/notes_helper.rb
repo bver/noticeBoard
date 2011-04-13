@@ -19,7 +19,7 @@ module NotesHelper
   end
 
   def note_user note
-     note.user.nil? ? '' : " [#{User.guess_name_by_id(note.user_id)}]"
+     (note.user_id==-1) ? '' : " [#{User.guess_name_by_id(note.user_id)}]"
   end
 
   def note_title( note, parent )

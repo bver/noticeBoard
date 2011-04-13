@@ -33,6 +33,7 @@ en:
      user_updated: "User was successfully updated."
 
      boards: "Boards"
+     board: "board"
      boards_management: "boards management"
      add_board: "add new board"
      save_board: "save board"
@@ -96,7 +97,7 @@ en:
      by_status: "by status"
      by_proc_all_uncompleted: "all uncompleted"
      by_proc_in_process: "only in process"
-     by_proc_paused: "only paused"
+     by_proc_paused: "only waiting"
      by_proc_archived_done: "archive: done"
      by_proc_archived_cancelled: "archive: cancelled"
      by_prob_only: "only problematic"

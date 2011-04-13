@@ -8,22 +8,22 @@
          $("#selButton").button().click(function(){
              $('#selform > div > input[name="utf8"]').remove();
              var ausers = new Array();
-             $('#userselectbox').children('input').each(function() {
+             $('#selbox').children('input').each(function() {
                   if(this.checked)
                       ausers.push( this.value );
              });
-             $('form > #users').attr( 'value', ausers.join('_') );
-             $('form').submit();
+             $('#selform > #users, #selform  > #boards').attr( 'value', ausers.join('_') );
+             $('#selform').submit();
 	     return false;
          });
 
-          $('#userselectall').click(function() {
-              $('#userselectbox').children('input').each(function() {
+          $('#selectall').click(function() {
+              $('#selbox').children('input').each(function() {
                   this.checked = true;
                 });
           });
-          $('#userdeselectall').click(function() {
-              $('#userselectbox').children('input').each(function() {
+          $('#deselectall').click(function() {
+              $('#selbox').children('input').each(function() {
                   this.checked = false;
                 });
          });
@@ -32,7 +32,7 @@
   </script>
 <% end %>
 <% content_for :nbheader do %>
-       <h1><%= @parent.nil? ?  t( :notes ) : @parent.title %></h1>
+       <h1><%= @parent.nil? ?  "#{t( :notes )} - #{current_user.name}" : "#{t( :board )} - #{@parent.title}" %></h1>
 
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
             id="addButton" href="<%= @parent.nil? ? new_note_path( :format=>'js' ) : new_note_path( :format=>'js', :parent=>@parent ) %>" data-remote="true"><span
@@ -43,20 +43,32 @@
 <% end %>
 
 <div class="nbleft">
-    
-   <div class="nbcontrols" id="userselectbox">
+
+<% if @parent.nil? %>
+   <div class="nbcontrols" id="selbox">
+     <h3>dle nástěnek:</h3>
+     <% @boards_options.each do |board|  %>
+        <%= check_box_tag  "bname_#{board.title}", board.id, @by_board_sel[board.id] %><%= board.title %><br/>
+     <% end %>
+    <br/>
+    <a href="#" id="selectall">vyber</a> /
+     <a href="#" id="deselectall">zruš</a> všechny
+   </div>
+<% else %>
+   <div class="nbcontrols" id="selbox">
      <h3>dle uživatelů:</h3>
      <% @user_options.each do |user|  %>
         <%= check_box_tag  "uname_#{user.first}", user.last, @by_user_sel[user.last] %><%= user.first %><br/>
      <% end %>
     <br/>
-    <a href="#" id="userselectall">vyber</a> /
-    <a href="#" id="userdeselectall">zruš</a> všechny 
+    <a href="#" id="selectall">vyber</a> /
+     <a href="#" id="deselectall">zruš</a> všechny
    </div>
+ <% end %>
 
-   <%= form_tag board_path(@parent), :id=>'selform', :method => :get do |f| %>
-   <%= hidden_field_tag 'users', '' %>
-
+ <%= form_tag @parent.nil? ? notes_path : board_path(@parent), :id=>'selform', :method => :get do |f| %>
+   <%= hidden_field_tag @parent.nil? ? 'boards' : 'users', '' %>
+  
    <div class="nbcontrols">
      <h3>dle vlastností:</h3>
      <%= select_tag  'prio', options_for_select( @by_prio_options, @by_prio_sel ), :title => t( :by_priorities ) %>

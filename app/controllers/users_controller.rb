@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     @user.notes.each do |note|
-      note.user_id = nil
+      note.user_id = -1
       note.working = false
       note.save
     end

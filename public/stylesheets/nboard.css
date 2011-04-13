@@ -30,6 +30,7 @@ body {
   clear: both; }
 
 .nbmiddle {
+  width: 50%;
   text-align: center;
   font-size: large;
   background-color: white;
@@ -67,7 +68,6 @@ body {
 
 .nbright {
   margin-right: 20px;
-  background-color: white;
   overflow: auto; }
 
 .nbfooter {

@@ -49,4 +49,36 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def dry_filter params
+    conditions = {}
+
+    if params.key? :prio
+       @by_prio_sel =  params[:prio]
+       conditions[ :priority ] = @by_prio_sel.split('_').map { |p| p.to_i }
+    else
+       @by_prio_sel =  '0_1_2_3'
+    end
+
+    @by_prob_sel = (params.key?(:prob) && params[:prob] == 'P')
+    conditions[ :problem ] = true if @by_prob_sel
+
+    @by_proc_sel = params.key?(:proc) ? params[:proc] : '0_1'
+    case @by_proc_sel
+    when '0_1'
+      conditions[ :outcome ] = nil
+    when '0'
+      conditions[ :outcome ] = nil
+      conditions[ :working ] = false
+    when '1'
+      conditions[ :outcome ] = nil
+      conditions[ :working ] = true
+    when 'D'
+      conditions[ :outcome ] = true
+    when 'C'
+      conditions[ :outcome ] = false
+    end
+
+    conditions
+  end
+
 end

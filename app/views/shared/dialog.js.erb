@@ -16,7 +16,7 @@ $("#cancelButton").button().click(function(){
 });
 
 $("#submitButton").button().click(function(){
-        $('form').submit();
+        $('#dialog > form').submit();
 	$('#dialog').dialog('close').remove();
 	return false;
 });
