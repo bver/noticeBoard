@@ -1,14 +1,14 @@
 <% content_for :head do %>
   <script type="text/javascript">
      function specificInit() {
-         $( '#accordion' ).accordion( "activate" , <%=  activated %>);
+         $( '#accordion' ).accordion( "activate" , <%=  activated %> );
      }
   </script>
 <% end %>
 <% content_for :nbheader do %>
        <h1><%=t :users%></h1>
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-            id="addButton" href="<%= new_user_path :format=>'js' %>" data-remote="true"><span
+            id="addButton" href="<%= new_user_path %>" data-remote="true"><span
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_user%></span></a>
 <% end %>
 

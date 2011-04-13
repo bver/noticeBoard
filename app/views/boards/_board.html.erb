@@ -2,7 +2,7 @@
 <div id="d_<%= @board.id %>" class="nbnote">
 
     <ul id="icons" class="nbiconbox">
-      <li class="nbicon" title="<%= t(:edit) %>"><a href="<%= edit_board_path @board,  :format=>'js' %>" data-remote="true"><span class="ui-icon ui-icon-pencil"></span></a></li>
+      <li class="nbicon" title="<%= t(:edit) %>"><a href="<%= edit_board_path @board %>" data-remote="true"><span class="ui-icon ui-icon-pencil"></span></a></li>
       <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= board_path @board  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
     </ul>
 

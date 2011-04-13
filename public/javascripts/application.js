@@ -6,6 +6,7 @@ $(document).ready(function() {
              collapsible: true,
              fillSpace:  false,
              clearStyle: true
+             //active: false
     });
 
     $( '#addButton' ).button({
