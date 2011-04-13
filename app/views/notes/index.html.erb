@@ -3,7 +3,31 @@
      function specificInit() {
          $( '#accordion' ).accordion( "activate" , false );
 
-         bindSelects();
+       bindSelects();
+
+         $("#selButton").button().click(function(){
+             $('#selform > div > input[name="utf8"]').remove();
+             var ausers = new Array();
+             $('#userselectbox').children('input').each(function() {
+                  if(this.checked)
+                      ausers.push( this.value );
+             });
+             $('form > #users').attr( 'value', ausers.join('_') );
+             $('form').submit();
+	     return false;
+         });
+
+          $('#userselectall').click(function() {
+              $('#userselectbox').children('input').each(function() {
+                  this.checked = true;
+                });
+          });
+          $('#userdeselectall').click(function() {
+              $('#userselectbox').children('input').each(function() {
+                  this.checked = false;
+                });
+         });
+         
      }
   </script>
 <% end %>
@@ -18,6 +42,34 @@
         <% end %>
 <% end %>
 
+<div class="nbleft">
+    
+   <div class="nbcontrols" id="userselectbox">
+     <h3>dle uživatelů:</h3>
+     <% @user_options.each do |user|  %>
+        <%= check_box_tag  "uname_#{user.first}", user.last, @by_user_sel[user.last] %><%= user.first %><br/>
+     <% end %>
+    <br/>
+    <a href="#" id="userselectall">vyber</a> /
+    <a href="#" id="userdeselectall">zruš</a> všechny 
+   </div>
+
+   <%= form_tag board_path(@parent), :id=>'selform', :method => :get do |f| %>
+   <%= hidden_field_tag 'users', '' %>
+
+   <div class="nbcontrols">
+     <h3>dle vlastností:</h3>
+     <%= select_tag  'prio', options_for_select( @by_prio_options, @by_prio_sel ), :title => t( :by_priorities ) %>
+     <%= select_tag  'proc', options_for_select( @by_proc_options, @by_proc_sel ), :title => t( :by_status ) %>
+     <%= check_box_tag  'prob', 'P', @by_prob_sel %><%= t :by_prob_only %> [?]<br/>
+  </div>
+
+  <div class="nbctrlbtn"><div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span class="ui-button-text">aktualizuj výběr</span></div></div>
+  <% end %>
+
+</div>
+<div class="nbright">
+
  <% if @notes.empty? %>
        <p class="nbmiddle"><%=t :no_note %></p>
  <% end %>
@@ -28,3 +80,5 @@
        <%= render :partial => 'notes/note' %>
     <% end %>
  </div>
+
+</div>

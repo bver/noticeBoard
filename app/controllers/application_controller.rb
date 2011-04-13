@@ -32,6 +32,21 @@ class ApplicationController < ActionController::Base
 
     @user_options = User.all.map { |u| [ u.name, u.id ] }
     @user_options.unshift [ "[#{ t :unassigned }]", -1 ]
+
+    @by_prio_options = [
+      [ t( :by_prio_all ), '0_1_2_3'],
+      [ t( :by_prio_important_normal ), '1_2_3'],
+      [ t( :by_prio_only_important ), '2_3']
+    ]
+
+    @by_proc_options = [
+      [ t( :by_proc_all_uncompleted ), '0_1'],
+      [ t( :by_proc_in_process ), '1'],
+      [ t( :by_proc_paused ), '0'],
+      [ t( :by_proc_archived_done ), 'D'],
+      [ t( :by_proc_archived_cancelled ), 'C']
+    ]
+
   end
 
 end

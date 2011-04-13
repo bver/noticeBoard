@@ -15,6 +15,19 @@ class BoardsController < ApplicationController
   def show
     @parent = Board.find(params[:id])
     @notes = @parent.notes
+
+    @by_user_sel = {}
+    if params.key?(:users)
+      @by_user_sel.default = false
+      params[:users].split('_').each { |id| @by_user_sel[id.to_i] = true }
+    else
+      @by_user_sel.default = true
+    end
+
+    @by_prio_sel = params.key?(:prio) ? params[:prio] : '0_1_2_3'
+    @by_proc_sel = params.key?(:proc) ? params[:proc] : '0_1'
+    @by_prob_sel = (params.key?(:prob) && params[:prob] == 'P')
+    
     dry_options
     
     respond_to do |format|
