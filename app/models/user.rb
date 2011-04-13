@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :user_privs, :dependent => :destroy
   has_many :privileges, :through => :user_privs
+  has_many :notes
 
   validates_length_of :name, :minimum=> 3,  :maximum=>20
   validates_uniqueness_of :name
@@ -47,7 +48,7 @@ class User < ActiveRecord::Base
 #  end
 
   def User.guess_name_by_id id
-     user = User.find(:first, id)
+     user = User.first( :conditions => {:id => id} )
      user.nil? ? '???' : user.name
   end
 end
