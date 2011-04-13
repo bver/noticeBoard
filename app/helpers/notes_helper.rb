@@ -19,12 +19,16 @@ module NotesHelper
   end
 
   def note_user note
-     note.user.nil? ? '' : " [#{note.user.name}]"
+     note.user.nil? ? '' : " [#{User.guess_name_by_id(note.user_id)}]"
   end
 
-  def note_title note
+  def note_title( note, parent )
      return '' if note.board.nil?
-     note.board.title + ' : ' + note.title
+     if parent.nil?
+       note.board.title + ' : ' + note.title
+     else
+       note.title
+     end
   end
 
   def nsp icon
