@@ -46,7 +46,7 @@
 
 <% if @parent.nil? %>
    <div class="nbcontrols" id="selbox">
-     <h3>dle nástěnek:</h3>
+     <h3><%= t :by_boards  %>:</h3>
      <% @boards_options.each do |board|  %>
         <%= check_box_tag  "bname_#{board.title}", board.id, @by_board_sel[board.id] %><%= board.title %><br/>
      <% end %>
@@ -56,7 +56,7 @@
    </div>
 <% else %>
    <div class="nbcontrols" id="selbox">
-     <h3>dle uživatelů:</h3>
+     <h3><%= t :by_users  %>:</h3>
      <% @user_options.each do |user|  %>
         <%= check_box_tag  "uname_#{user.first}", user.last, @by_user_sel[user.last] %><%= user.first %><br/>
      <% end %>
@@ -70,13 +70,13 @@
    <%= hidden_field_tag @parent.nil? ? 'boards' : 'users', '' %>
   
    <div class="nbcontrols">
-     <h3>dle vlastností:</h3>
-     <%= select_tag  'prio', options_for_select( @by_prio_options, @by_prio_sel ), :title => t( :by_priorities ) %>
-     <%= select_tag  'proc', options_for_select( @by_proc_options, @by_proc_sel ), :title => t( :by_status ) %>
+     <h3><%= t :by_properties  %>:</h3>
+     <%= select_tag  'prio', options_for_select( @by_prio_options, @by_prio_sel ), :title => t( :by_priorities ) %><br/>
+     <%= select_tag  'proc', options_for_select( @by_proc_options, @by_proc_sel ), :title => t( :by_status ) %><br/>
      <%= check_box_tag  'prob', 'P', @by_prob_sel %><%= t :by_prob_only %> [?]<br/>
   </div>
 
-  <div class="nbctrlbtn"><div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span class="ui-button-text">aktualizuj výběr</span></div></div>
+  <div class="nbctrlbtn"><div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span class="ui-button-text"><%= t :refresh_selection %></span></div></div>
   <% end %>
 
 </div>

@@ -101,4 +101,8 @@ en:
      by_proc_archived_done: "archive: done"
      by_proc_archived_cancelled: "archive: cancelled"
      by_prob_only: "only problematic"
+     by_boards: "by boards"
+     by_users: "by users"
+     by_properties: "by properties"
+     refresh_selection: "refresh selection"
      
