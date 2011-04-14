@@ -13,21 +13,23 @@
 ActiveRecord::Schema.define(:version => 20110401195442) do
 
   create_table "boards", :force => true do |t|
-    t.string   "title"
+    t.integer  "user_id"
+    t.string   "title",                         :null => false
     t.text     "description"
+    t.boolean  "active",      :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "boards", ["active"], :name => "index_boards_on_active"
+
   create_table "changes", :force => true do |t|
-    t.integer  "note_id",    :null => false
-    t.integer  "user_id",    :null => false
-    t.integer  "meaning",    :null => false
+    t.integer  "note_id",  :null => false
+    t.integer  "user_id",  :null => false
+    t.integer  "meaning",  :null => false
     t.integer  "argument"
     t.text     "comment"
     t.datetime "created"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "changes", ["created"], :name => "index_changes_on_created"
@@ -35,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20110401195442) do
 
   create_table "notes", :force => true do |t|
     t.integer  "board_id",                      :null => false
-    t.integer  "user_id"
+    t.integer  "user_id",    :default => -1,    :null => false
     t.string   "title",                         :null => false
     t.integer  "priority",   :default => 1,     :null => false
     t.boolean  "outcome"
@@ -45,10 +47,17 @@ ActiveRecord::Schema.define(:version => 20110401195442) do
     t.datetime "updated_at"
   end
 
+  add_index "notes", ["board_id"], :name => "index_notes_on_board_id"
+  add_index "notes", ["outcome"], :name => "index_notes_on_outcome"
+  add_index "notes", ["priority"], :name => "index_notes_on_priority"
+  add_index "notes", ["problem"], :name => "index_notes_on_problem"
+  add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
+  add_index "notes", ["working"], :name => "index_notes_on_working"
+
   create_table "privileges", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "board"
+    t.boolean "board",       :default => false, :null => false
   end
 
   add_index "privileges", ["name"], :name => "index_privileges_on_name", :unique => true
@@ -64,10 +73,11 @@ ActiveRecord::Schema.define(:version => 20110401195442) do
   add_index "user_privs", ["user_id"], :name => "index_user_privs_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.boolean  "send_mails"
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "name",                                                  :null => false
+    t.boolean  "send_mails",                          :default => true, :null => false
+    t.boolean  "active",                              :default => true, :null => false
+    t.string   "email",                               :default => "",   :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                       :default => 0
@@ -79,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20110401195442) do
     t.datetime "updated_at"
   end
 
+  add_index "users", ["active"], :name => "index_users_on_active"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

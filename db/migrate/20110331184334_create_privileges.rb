@@ -3,7 +3,7 @@ class CreatePrivileges < ActiveRecord::Migration
     create_table :privileges do |t|
       t.string :name
       t.text :description
-      t.boolean :board
+      t.boolean :board, :null=>false, :default=>false
     end
 
     add_index :privileges, :name,                :unique => true

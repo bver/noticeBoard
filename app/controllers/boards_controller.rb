@@ -66,6 +66,7 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
+    @board.user_id = current_user.id
 
     respond_to do |format|
       if @board.save

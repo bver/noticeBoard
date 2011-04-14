@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+<div  class="nbleftcol">
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -20,9 +21,9 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :send_mails %><br />
-    <%= f.check_box :send_mails %>
+    <%= f.label :send_mails %>  <%= f.check_box :send_mails %>
   </div>
+  <br/>
   <div class="field">
     <%= f.label :password, t(:new_password) %><br />
     <%= f.password_field :password %>
@@ -31,6 +32,16 @@
      <%= f.label :password_confirmation, t(:confirm_password) %><br />
      <%= f.password_field :password_confirmation %>
   </div>
+</div>
+
+<div  class="nbrightcol">
+    <%= f.check_box  :active %><%= t :user_active %><br/>
+    <br/>
+    <% @privs.each do |p|  %>
+       <%= check_box_tag  "priv_#{p.name}", 1, @user.privilege?( p.name ) %><%= p.description %><br/>
+    <% end %>
+    <br/>
+</div>
 
   <div class="actions">
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span

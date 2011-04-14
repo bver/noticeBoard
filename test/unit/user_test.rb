@@ -14,6 +14,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, @user.privilege?(:basic_right)
     @user.grant(:basic_right)
     assert_equal true, @user.privilege?(:basic_right)
+    assert_equal true, @user.privilege?('basic_right')
     @user.grant(:basic_right) # can be granted more times
     assert_equal true, @user.privilege?(:basic_right)
     @user.revoke(:basic_right)
@@ -26,6 +27,7 @@ class UserTest < ActiveSupport::TestCase
     Privilege.create :name => 'board_right', :board => true
 
     assert_equal false, @user.privilege?(:board_right,42)
+    assert_equal false, @user.privilege?('board_right',42)
     assert_equal false, @user.privilege?(:board_right,100)
 
     @user.grant(:board_right,42)

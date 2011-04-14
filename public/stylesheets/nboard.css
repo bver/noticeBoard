@@ -161,6 +161,15 @@ body {
   float: left;
   margin: 15px; }
 
+.nbleftcol {
+  width: 40%;
+  margin: 10px;
+  display: inline;
+  float: left; }
+
+.nbrightcol {
+  margin: 10px; }
+
 .sf-menu {
   font-weight: bolder; }
   .sf-menu a, .sf-menu a:visited {

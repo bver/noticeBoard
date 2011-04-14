@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :dry_privs
+
   # GET /users
   # GET /users.xml
   def index
@@ -49,6 +51,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        dry_update_privs params
         format.xml  { render :xml => @user, :status => :created, :location => @user }
         format.js { render :template => 'shared/create', :locals =>{:templ=>'user'} }
       else
@@ -72,6 +75,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(p) #params[:user]
+        dry_update_privs params
         format.js { render :template => 'shared/update', :locals =>{:templ=>'user', :item=>@user} }
         format.xml  { head :ok }
       else
@@ -99,4 +103,21 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+
+  def dry_update_privs params
+     @privs.each do |p|
+       if params.key? "priv_#{p.name}"
+         @user.grant( p.name )
+       else
+         @user.revoke( p.name )
+       end
+     end
+  end
+
+  def dry_privs
+      @privs = Privilege.where(:board=>false)
+  end
+  
 end
