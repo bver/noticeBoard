@@ -44,6 +44,9 @@
 
 <div class="nbleft">
 
+   <div class="nbcontrols">
+      <h2><%= "#{ t :showing}: #{@notes.size}/#{@all_size}" %></h2>
+   </div>
 <% if @parent.nil? %>
    <div class="nbcontrols" id="selbox">
      <h3><%= t :by_boards  %>:</h3>
@@ -51,8 +54,8 @@
         <%= check_box_tag  "bname_#{board.title}", board.id, @by_board_sel[board.id] %><%= board.title %><br/>
      <% end %>
     <br/>
-    <a href="#" id="selectall">vyber</a> /
-     <a href="#" id="deselectall">zruš</a> všechny
+    <a href="#" id="selectall"><%= t :sel_select %></a> |
+    <a href="#" id="deselectall"><%= t :sel_deselect %></a>
    </div>
 <% else %>
    <div class="nbcontrols" id="selbox">
@@ -61,8 +64,8 @@
         <%= check_box_tag  "uname_#{user.first}", user.last, @by_user_sel[user.last] %><%= user.first %><br/>
      <% end %>
     <br/>
-    <a href="#" id="selectall">vyber</a> /
-     <a href="#" id="deselectall">zruš</a> všechny
+    <a href="#" id="selectall"><%= t :sel_select %></a> |
+    <a href="#" id="deselectall"><%= t :sel_deselect %></a>
    </div>
  <% end %>
 

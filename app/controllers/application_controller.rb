@@ -40,9 +40,11 @@ class ApplicationController < ActionController::Base
     ]
 
     @by_proc_options = [
+      [ t( :by_proc_all ), '0_1_D_C'],
       [ t( :by_proc_all_uncompleted ), '0_1'],
       [ t( :by_proc_in_process ), '1'],
       [ t( :by_proc_paused ), '0'],
+      [ t( :by_proc_archived ), 'D_C'],
       [ t( :by_proc_archived_done ), 'D'],
       [ t( :by_proc_archived_cancelled ), 'C']
     ]
@@ -62,7 +64,7 @@ class ApplicationController < ActionController::Base
     @by_prob_sel = (params.key?(:prob) && params[:prob] == 'P')
     conditions[ :problem ] = true if @by_prob_sel
 
-    @by_proc_sel = params.key?(:proc) ? params[:proc] : '0_1'
+    @by_proc_sel = params.key?(:proc) ? params[:proc] : '0_1_D_C'
     case @by_proc_sel
     when '0_1'
       conditions[ :outcome ] = nil
@@ -76,6 +78,9 @@ class ApplicationController < ActionController::Base
       conditions[ :outcome ] = true
     when 'C'
       conditions[ :outcome ] = false
+    when 'D_C'
+      conditions[ :outcome ] = [ true, false ]
+    else # '0_1_D_C'
     end
 
     conditions

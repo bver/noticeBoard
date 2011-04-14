@@ -1,11 +1,10 @@
     <ul class="sf-menu">
             <li>
-                <a href="#a">mé lístky</a>
+                <%= link_to t(:my_notes), notes_path %>
                 <ul>
-                    <li><a href="#">všechny nehotové</a></li>
-                    <li><a href="#">jen důležité</a></li>
-                    <li><a href="#">jen nepřiřazené</a></li>
-                    <li><a href="#">archiv</a></li>
+                    <li><%= link_to t(:my_uncompleted), notes_path( :proc => '0_1' ) %></li>
+                    <li><%= link_to t(:my_important), notes_path( :prio => '2_3' ) %></li>
+                    <li><%= link_to t(:my_archive), notes_path( :proc => 'D_C' ) %></li>
                 </ul>
             </li>
             <li>

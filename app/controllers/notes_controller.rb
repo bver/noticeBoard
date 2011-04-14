@@ -24,7 +24,7 @@ class NotesController < ApplicationController
     #@notes = Note.all
     conditions[:user_id] = [ current_user.id, -1 ]
     @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
-
+    @all_size = Note.count( :conditions => {:user_id =>  [ current_user.id, -1 ] })
     dry_options
 
     respond_to do |format|
