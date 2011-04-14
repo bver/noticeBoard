@@ -39,7 +39,7 @@
 
     <% @note.changes.reverse.each do |change| %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span
-            class="nbchangeauto"><%=change.created.to_formatted_s :short  %>: <%= User.guess_name_by_id change.user_id %> </span>
+            class="nbchangeauto"><%=change.created.to_formatted_s :short  %>: <%= change.user.name %> </span>
         <%= change_comment change %>
       </p>
     <% end %>

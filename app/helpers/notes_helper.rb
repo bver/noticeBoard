@@ -19,7 +19,7 @@ module NotesHelper
   end
 
   def note_user note
-     (note.user_id==-1) ? '' : " [#{User.guess_name_by_id(note.user_id)}]"
+     (note.user_id==-1) ? '' : " [#{note.user.name}]"
   end
 
   def note_title( note, parent )
@@ -54,9 +54,9 @@ module NotesHelper
      when :rejected
        "#{ t :c_rejected } : #{change.comment}"
      when :assigned
-       "#{ t :c_assigned } #{User.guess_name_by_id(change.argument)}"
+       "#{ t :c_assigned } #{User.find(change.argument).name}"
      when :unassigned
-       "#{ t :c_unassigned } #{User.guess_name_by_id(change.argument)}"
+       "#{ t :c_unassigned } #{User.find(change.argument).name}"
      when :raise_priority
        "#{ t :c_raised } #{change_priority change.argument}"
      when :lower_priority

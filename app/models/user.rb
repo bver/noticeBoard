@@ -40,15 +40,4 @@ class User < ActiveRecord::Base
       g.destroy
   end
 
-#  def list_privileges
-#    Privilege.all.map do |priv|
-#      g = UserPriv.find_by_user_id_and_privilege_id( self.id, priv.id )
-#      { :name => priv.name, :description => priv.description, :board => nil, :granted => !g.nil? }
-#    end
-#  end
-
-  def User.guess_name_by_id id
-     user = User.first( :conditions => {:id => id} )
-     user.nil? ? '???' : user.name
-  end
 end

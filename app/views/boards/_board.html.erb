@@ -8,6 +8,8 @@
 
     <%= t :title %>: <%= link_to @board.title, @board %><br/>
     <%= t :description %>: <%= @board.description %><br/>
+    <% unless @board.user.nil? %>
     <%= t :owner %>: <%= @board.user.name %><br/>
+    <% end %>
 
  </div>
