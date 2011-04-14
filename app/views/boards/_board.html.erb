@@ -8,5 +8,6 @@
 
     <%= t :title %>: <%= link_to @board.title, @board %><br/>
     <%= t :description %>: <%= @board.description %><br/>
+    <%= t :owner %>: <%= @board.user.name %><br/>
 
  </div>

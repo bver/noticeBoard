@@ -37,6 +37,7 @@ en:
      user_active: "user account active"
      user_grants: "Privileges"
      user_account: "Account"
+     deactivated_account: "This account was deactivated. Contact your admin."
 
      boards: "Boards"
      board: "board"
@@ -44,8 +45,10 @@ en:
      add_board: "add new board"
      save_board: "save board"
      new_board: "new board"
+     edit_board: "edit board"
      title: "Title"
      description: "Description"
+     owner: "Board owner"
      no_board: "No board available."
 
      notes: "Notes"

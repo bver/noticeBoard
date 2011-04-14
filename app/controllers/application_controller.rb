@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   ### testing (UGLY)
   unless Rails.env.test?
     before_filter :authenticate_user!
+    before_filter :deactivated_account
   else
     CUser = Struct.new( 'CUser', :id, :name )
     @@cuser = CUser.new(  42, 'name' )
@@ -18,6 +19,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def deactivated_account
+    return if current_user.nil? or current_user.active
+    sign_out current_user
+    redirect_to new_user_session_path, :alert => t( :deactivated_account )
+  end
+
   def boards
      @menu_boards = Board.all( :order => :title)
   end
@@ -30,7 +37,7 @@ class ApplicationController < ActionController::Base
       [ t(:prio_low), 0 ]
     ]
 
-    @user_options = User.all.map { |u| [ u.name, u.id ] }
+    @user_options = User.where( :active => true ).map { |u| [ u.name, u.id ] }
     @user_options.unshift [ "[#{ t :unassigned }]", -1 ]
 
     @by_prio_options = [
