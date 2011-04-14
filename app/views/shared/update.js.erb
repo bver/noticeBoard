@@ -22,7 +22,9 @@ $('#accordion > h3').each(function(index) {
     if( "h_<%= item.id %>" == $(this).attr("id") )
        act = index;
 });
-$('#accordion').accordion("activate", act );
+
+if(act > 0)
+   $('#accordion').accordion("activate", act );
 
 bindSelects();
 

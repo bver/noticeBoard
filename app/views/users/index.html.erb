@@ -1,7 +1,8 @@
 <% content_for :head do %>
   <script type="text/javascript">
      function specificInit() {
-         $( '#accordion' ).accordion( "activate" , <%=  activated %> );
+        if( ! ( <%=  activated %> === 0 ) )
+           $( '#accordion' ).accordion( "activate" , <%=  activated %> );
      }
   </script>
 <% end %>

@@ -41,8 +41,10 @@ module NotesHelper
 
   def change_comment change
      case change.sense
-     when :created, :commented
-       change.comment
+     when :created
+       raw('<b>')  + "#{change.comment}" + raw('</b>')
+     when :commented
+       ": #{change.comment}"
      when :finished
        t( :c_finished )
      when :cancelled

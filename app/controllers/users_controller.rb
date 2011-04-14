@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all( :order => :name)
+    @users = User.all( :order => :name )
 
     respond_to do |format|
       format.html { render :action => 'index', :locals =>{:activated=>false} } # index.html.erb
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-    @users = User.all( :order => :name)
+    @users = User.all( :order => :name )
 
     respond_to do |format|
       format.html  { render :action => 'index', :locals =>{ :activated=>@users.index(@user) } } # show.html.erb
