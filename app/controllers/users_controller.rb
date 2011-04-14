@@ -117,7 +117,7 @@ class UsersController < ApplicationController
   end
 
   def dry_privs
-      @privs = Privilege.where(:board=>false)
+      @privs = Privilege.all
   end
   
 end

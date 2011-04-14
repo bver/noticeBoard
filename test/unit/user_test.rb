@@ -56,41 +56,56 @@ class UserTest < ActiveSupport::TestCase
     assert_raise( ActiveRecord::RecordNotFound  ) { @user.revoke(:unknown_right,42) }
   end
 
-  test "cannot mix basic rights with board ones" do
-    Privilege.create :name => 'basic_right', :board => false
+  test "can mix basic rights with board ones" do
     Privilege.create :name => 'board_right', :board => true
 
-    assert_raise( ActiveRecord::RecordNotFound  ) { @user.privilege?(:board_right) }
-    assert_raise( ActiveRecord::RecordNotFound  ) { @user.grant(:board_right) }
-    assert_raise( ActiveRecord::RecordNotFound  ) { @user.revoke(:board_right) }
-    assert_raise( ActiveRecord::RecordNotFound  ) { @user.privilege?(:basic_right,44) }
-    assert_raise( ActiveRecord::RecordNotFound  ) { @user.grant(:basic_right,43) }
-    assert_raise( ActiveRecord::RecordNotFound  ) { @user.revoke(:basic_right,42) }    
-  end
+    assert_equal false, @user.privilege?(:board_right,42)
+    assert_equal false, @user.privilege?('board_right',42)
+    assert_equal false, @user.privilege?(:board_right,4)
+    assert_equal false, @user.privilege?('board_right',4)
+    assert_equal false, @user.privilege?(:board_right)
+    assert_equal false, @user.privilege?('board_right')
 
-#  test "list privileges" do
-#    Privilege.delete_all
-#    Privilege.create :name => 'first_right', :description => 'descr.1', :board => false
-#    Privilege.create :name => 'second_right', :description => 'descr.2', :board => false
-#    Privilege.create :name => 'third_right', :description => 'descr.3', :board => true
-#    u = users(:one)
-#
-#    list = u.list_privileges
-#    assert_equal 3, list.size
-#    assert list.include?( { :name => 'first_right', :description => 'descr.1', :board => nil, :granted => false } )
-#    assert list.include?( { :name => 'second_right', :description => 'descr.2', :board => nil, :granted => false } )
-#    assert list.include?( { :name => 'third_right', :description => 'descr.3', :board => nil, :granted => false } )
-#
-#    u.grant(:third_right,15)
-#    u.grant(:first_right)
-#    u.grant(:third_right,25)
-#
-#    list = u.list_privileges
-#    assert_equal 4, list.size
-#    assert list.include?( { :name => 'first_right', :description => 'descr.1', :board => nil, :granted => true } )
-#    assert list.include?( { :name => 'second_right', :description => 'descr.2', :board => nil, :granted => false } )
-#    assert list.include?( { :name => 'third_right', :description => 'descr.3', :board => 15, :granted => true } )
-#    assert list.include?( { :name => 'third_right', :description => 'descr.3', :board => 25, :granted => true } )
-#  end
+    @user.grant(:board_right,42)
+    assert_equal true, @user.privilege?('board_right',42)
+    assert_equal false, @user.privilege?('board_right',4)
+    assert_equal false, @user.privilege?('board_right',2)
+    assert_equal false, @user.privilege?('board_right')
+    @user.grant('board_right',42)
+    assert_equal true, @user.privilege?(:board_right,42)
+    assert_equal false, @user.privilege?(:board_right,4)
+    assert_equal false, @user.privilege?(:board_right,2)
+    assert_equal false, @user.privilege?(:board_right)
+    @user.grant(:board_right)
+    assert_equal true, @user.privilege?(:board_right,42)
+    assert_equal true, @user.privilege?(:board_right,4)
+    assert_equal true, @user.privilege?(:board_right,2)
+    assert_equal true, @user.privilege?(:board_right)
+    @user.grant('board_right',4)
+    assert_equal true, @user.privilege?(:board_right,42)
+    assert_equal true, @user.privilege?(:board_right,4)
+    assert_equal true, @user.privilege?(:board_right,2)
+    assert_equal true, @user.privilege?(:board_right)
+    @user.revoke(:board_right,42)
+    assert_equal false, @user.privilege?(:board_right,42)
+    assert_equal true, @user.privilege?(:board_right,4)
+    assert_equal true, @user.privilege?(:board_right,2)
+    assert_equal true, @user.privilege?(:board_right)
+    @user.revoke(:board_right,2)
+    assert_equal false, @user.privilege?(:board_right,42)
+    assert_equal true, @user.privilege?(:board_right,4)
+    assert_equal false, @user.privilege?(:board_right,2)
+    assert_equal true, @user.privilege?(:board_right)
+    @user.revoke('board_right')
+    assert_equal false, @user.privilege?('board_right',42)
+    assert_equal false, @user.privilege?('board_right',4)
+    assert_equal false, @user.privilege?('board_right',2)
+    assert_equal false, @user.privilege?('board_right')
+    @user.grant('board_right',4)
+    assert_equal false, @user.privilege?('board_right',42)
+    assert_equal true, @user.privilege?('board_right',4)
+    assert_equal false, @user.privilege?('board_right',2)
+    assert_equal false, @user.privilege?('board_right')
+  end
 
 end

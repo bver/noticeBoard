@@ -9,6 +9,8 @@
     <br/>
     <%= t :current_sign_in %>: <%= @user.current_sign_in_at.nil? ? t(:never) : @user.current_sign_in_at.to_formatted_s(:long) %><br/>
     <%= t :last_sign_in %>: <%= @user.last_sign_in_at.nil? ? t(:never) : @user.last_sign_in_at.to_formatted_s(:long) %><br/>
+    <br/><br/>
+    <%= link_to t(:edit_user), edit_user_path( @user ), :remote=> true %>
   </div>
   
   <div  class="nbrightcol">
@@ -16,10 +18,9 @@
     <span class="ui-icon ui-icon-<%= @user.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :user_active %><br/>
     <br/>
     <% @privs.each do |p|  %>
-    <span class="ui-icon ui-icon-<%= @user.privilege?( p.name ) ? 'check' : 'close' %> nbnoteicon"></span> <%= p.description %><br/>
+    <span class="ui-icon ui-icon-<%= @user.privilege?( p.name ) ? 'check' : 'close' %> nbnoteicon"></span> <%= p.description %> <%= p.board ? "(#{t :board_specific})" : '' %><br/>
     <% end %>
     <br/>
-    <%= link_to t(:edit_user), edit_user_path( @user ), :remote=> true %>
   </div>
-
+  
  </div>

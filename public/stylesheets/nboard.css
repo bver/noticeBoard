@@ -165,10 +165,13 @@ body {
   width: 40%;
   margin: 10px;
   display: inline;
-  float: left; }
+  float: left;
+  clear: all; }
 
 .nbrightcol {
-  margin: 10px; }
+  margin: 10px;
+  float: left;
+  clear: all; }
 
 .sf-menu {
   font-weight: bolder; }
