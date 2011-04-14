@@ -117,4 +117,4 @@ en:
      my_uncompleted: "only uncompleted"
      my_archive: "only archived"
      my_important: "only important"
-     
+     note_modified_by_other: "Warning: This note was probably modified by another user. Refresh and try again."

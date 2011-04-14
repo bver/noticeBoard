@@ -63,6 +63,7 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
+    return if dry_modified_by_others
     dry_edit_create params[:add].to_s
 
     respond_to do |format|
@@ -100,6 +101,9 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
+    if params[:add].to_s != 'comment'
+      return if dry_modified_by_others
+    end
     dry_edit_create params[:add]
     dry_options
 
@@ -159,7 +163,11 @@ class NotesController < ApplicationController
     else #when 'comment'
        change.sense = :commented
     end
-    change.save unless change.nil?
+
+    unless change.nil?
+      change.save
+      @note.updated_at = Time.now
+    end
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
@@ -201,6 +209,18 @@ class NotesController < ApplicationController
        @hidden = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       
     end
+  end
+
+  def dry_modified_by_others
+     @last = @note.updated_at.to_i
+      return false if params.key?(:last) and params[:last].to_i == @last
+
+      respond_to do |format|
+          format.js { render 'alert' }
+          format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
+      end
+      
+      true
   end
 
 end

@@ -24,6 +24,7 @@ function bindSelects() {
          {
              _method: 'put',
              add: $(this).attr('data-add'),
+             last: $(this).attr('data-last'),
              value:  $(this).attr('value')
          }
       );
