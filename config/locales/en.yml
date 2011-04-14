@@ -31,6 +31,9 @@ en:
      email: "email"
      send_mails: "send mails"
      user_updated: "User was successfully updated."
+     current_sign_in: "current sign in"
+     last_sign_in: "last sign in"
+     never: "never signed in"
 
      boards: "Boards"
      board: "board"

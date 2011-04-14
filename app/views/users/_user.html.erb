@@ -8,8 +8,12 @@
       <% end  %>
     </ul>
 
+  <p>
     <%= t :user %>: <%= @user.name %><br/>
     <%= t :email %>: <%= @user.email %><br/>
     <span class="ui-icon ui-icon-<%= @user.send_mails ? 'check' : 'close' %> nbnoteicon"></span> <%= t :send_mails %><br/>
 
+    <%= t :current_sign_in %>: <%= @user.current_sign_in_at.nil? ? t(:never) : @user.current_sign_in_at.to_formatted_s(:long) %><br/>
+    <%= t :last_sign_in %>: <%= @user.last_sign_in_at.nil? ? t(:never) : @user.last_sign_in_at.to_formatted_s(:long) %><br/>
+  </p>
  </div>
