@@ -31,9 +31,9 @@
         <li class="nbicon" title="<%= t(:delete) %>"><%= link_to nsp('trash'), note_path( @note ), :method=>:delete, :confirm=> t(:are_you_sure) %></li>
     </ul>
 
-    <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id  %>
+    <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), :title => t(:change_priority), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id  %>
 
-    <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user_id ), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id  %>
+    <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user_id ), :title => t(:assign_user), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id  %>
 
     <% @note.changes.reverse.each do |change| %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span

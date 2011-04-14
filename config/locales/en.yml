@@ -57,6 +57,8 @@ en:
      ch_noprob: "No problem."
      ch_comment: "Add a comment."
      ch_cancel: "Cancel and archive."
+     change_priority: "Change priority."
+     assign_user: "Assign a user."
      c_finished: "finished the note."
      c_cancelled: "cancelled and archived the note."
      c_accepted: "accepted the note for later."
