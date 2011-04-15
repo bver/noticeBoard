@@ -43,6 +43,7 @@ en:
      boards: "Boards"
      board: "board"
      boards_management: "boards management"
+     board_grants: "board privileges"
      add_board: "add new board"
      save_board: "save board"
      new_board: "new board"

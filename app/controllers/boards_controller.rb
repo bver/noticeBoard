@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  before_filter :dry_privs
+
   # GET /boards
   # GET /boards.xml
   def index
@@ -70,6 +72,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
+        dry_update_privs params
         format.js { render :template => 'shared/create', :locals =>{:templ=>'board'} }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
@@ -86,6 +89,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.update_attributes(params[:board])
+        dry_update_privs params
         format.js { render :template => 'shared/update', :locals =>{:templ=>'board', :item=>@board} }
         format.xml  { head :ok }
       else
@@ -106,4 +110,24 @@ class BoardsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+
+  def dry_privs
+      @privs = Privilege.where( :board => true )
+      @users = User.where( :active => true )
+  end
+
+  def dry_update_privs params
+    @users.each do |u|
+       @privs.each do |p|
+         if params.key?  "priv_#{p.id}_#{u.id}"
+           u.grant( p.name, @board.id )
+         else
+           u.revoke( p.name, @board.id )
+         end
+       end
+    end
+ end
+
 end

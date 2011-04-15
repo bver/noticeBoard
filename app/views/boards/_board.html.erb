@@ -1,18 +1,38 @@
 <h3 id="h_<%= @board.id %>"><a href="#"><%= @board.title %></a></h3>
 <div id="d_<%= @board.id %>" class="nbnote">
 
-    <ul id="icons" class="nbiconbox">
-      <li class="nbicon" title="<%= t(:edit) %>"><a href="<%= edit_board_path @board %>" data-remote="true"><span class="ui-icon ui-icon-pencil"></span></a></li>
-      <li class="nbicon" title="<%= t(:delete) %>"><a href="<%= board_path @board  %>"  data-confirm="<%= t :are_you_sure %>"  data-method="delete"><span class="ui-icon ui-icon-trash"></span></a></li>
-    </ul>
-
+<div class="nbleftcol">
+  <h2><%= t :board %></h2>
     <%= t :title %>: <%= link_to @board.title, @board %><br/>
     <%= t :description %>: <%= @board.description %><br/>
     <% unless @board.user.nil? %>
     <%= t :owner %>: <%= @board.user.name %><br/>
+    <% end %>
     <span class="ui-icon ui-icon-<%= @board.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :board_active %><br/>
     <br/>
+    <br/>
+    <%= link_to t(:edit_board), edit_board_path( @board ), :remote=> true %>
+    <br/>
+</div>
 
-    <% end %>
+  <div  class="nbrightcol">
+   <h2><%= t :board_grants %></h2>
+   <table>
+     <tr>
+       <th></th>
+       <% @privs.each do |priv| %>
+       <th  title="<%= priv.description %>"><%= raw priv.name.sub('_', '<br/>') %></th>
+       <% end %>
+     </tr>
+     <% @users.each do |user| %>
+     <tr>
+       <th><%= user.name %></th>
+       <% @privs.each do |priv| %>
+       <td><span class="ui-icon ui-icon-<%= user.privilege?( priv.name, @board.id ) ? 'check' : 'close' %> nbnoteicon" title="<%= priv.description %>"></span></td>
+       <% end %>
+     </tr>
+     <% end  %>
+   </table>
+  </div>
 
- </div>
+</div>
