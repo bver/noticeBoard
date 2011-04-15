@@ -50,7 +50,7 @@
 <% if @parent.nil? %>
    <div class="nbcontrols" id="selbox">
      <h3><%= t :by_boards  %>:</h3>
-     <% @boards_options.each do |board|  %>
+     <% @menu_boards.each do |board|  %>
         <%= check_box_tag  "bname_#{board.title}", board.id, @by_board_sel[board.id] %><%= board.title %><br/>
      <% end %>
     <br/>

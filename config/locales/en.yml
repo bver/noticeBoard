@@ -47,6 +47,7 @@ en:
      save_board: "save board"
      new_board: "new board"
      edit_board: "edit board"
+     board_active: "Board is active"
      title: "Title"
      description: "Description"
      owner: "Board owner"

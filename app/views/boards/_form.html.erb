@@ -19,6 +19,9 @@
     <%= f.label :description %><br />
     <%= f.text_area :description, :rows=>3 %>
   </div>
+
+  <%= f.check_box  :active %><%= t :board_active %><br/>
+
   <div class="actions">
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
         class="ui-button-text"><%= t :save_board %></span></a>

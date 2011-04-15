@@ -10,6 +10,9 @@
     <%= t :description %>: <%= @board.description %><br/>
     <% unless @board.user.nil? %>
     <%= t :owner %>: <%= @board.user.name %><br/>
+    <span class="ui-icon ui-icon-<%= @board.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :board_active %><br/>
+    <br/>
+
     <% end %>
 
  </div>

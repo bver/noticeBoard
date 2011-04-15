@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def boards
-     @menu_boards = Board.all( :order => :title)
+     @menu_boards = Board.all( :conditions => {:active=>true},  :order => :title)
   end
 
   def dry_options

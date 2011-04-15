@@ -19,8 +19,6 @@ class NotesController < ApplicationController
       @by_board_sel.default = true
     end
 
-    @boards_options = Board.all
-
     #@notes = Note.all
     conditions[:user_id] = [ current_user.id, -1 ]
     @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
