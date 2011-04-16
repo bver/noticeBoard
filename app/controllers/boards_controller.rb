@@ -89,7 +89,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.update_attributes(params[:board])
-        dry_update_privs params
+        dry_update_privs params if current_user.privilege?('manage_users')
         format.js { render :template => 'shared/update', :locals =>{:templ=>'board', :item=>@board} }
         format.xml  { head :ok }
       else

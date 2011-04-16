@@ -47,6 +47,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
+    unless current_user.privilege?('manage_users')
+      head :forbidden
+      return
+    end
+
     @user = User.new(params[:user])
 
     respond_to do |format|
@@ -71,11 +76,13 @@ class UsersController < ApplicationController
       p.delete(:password_confirmation)
     end
 
+    p.delete(:active) unless current_user.privilege?('manage_users')
+
     @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(p) #params[:user]
-        dry_update_privs( params ) if @user.id != current_user.id
+        dry_update_privs( params ) if @user.id != current_user.id and current_user.privilege?('manage_users')
         format.js { render :template => 'shared/update', :locals =>{:templ=>'user', :item=>@user} }
         format.xml  { head :ok }
       else
