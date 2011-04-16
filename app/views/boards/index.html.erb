@@ -7,9 +7,11 @@
 <% end %>
 <% content_for :nbheader do %>
        <h1><%=t :boards%></h1>
+       <% if current_user.privilege?(:add_boards)  %>
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
             id="addButton" href="<%= new_board_path %>" data-remote="true"><span
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_board%></span></a>
+       <% end %>
 <% end %>
 
  <% if @boards.empty? %>

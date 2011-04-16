@@ -3,7 +3,7 @@
 
 <div class="nbleftcol">
   <h2><%= t :board %></h2>
-    <%= t :title %>: <%= link_to @board.title, @board %><br/>
+    <%= t :title %>: <%= current_user.privilege?( :view_board, @board.id ) && @board.active ? link_to( @board.title, @board ) : @board.title %><br/>
     <%= t :description %>: <%= @board.description %><br/>
     <% unless @board.user.nil? %>
     <%= t :owner %>: <%= @board.user.name %><br/>
@@ -11,7 +11,7 @@
     <span class="ui-icon ui-icon-<%= @board.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :board_active %><br/>
     <br/>
     <br/>
-    <%= link_to t(:edit_board), edit_board_path( @board ), :remote=> true %>
+    <%= link_to( t(:edit_board), edit_board_path( @board ), :remote=> true )  if current_user.id == @board.user_id || current_user.privilege?( :manage_boards ) %>
     <br/>
 </div>
 

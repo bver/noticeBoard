@@ -26,16 +26,19 @@ class ApplicationController < ActionController::Base
   end
 
   def boards
-     @menu_boards = Board.all( :conditions => {:active=>true},  :order => :title)
+     @menu_boards = []
+     Board.all( :conditions => {:active=>true},  :order => :title ).each do |b|
+       @menu_boards << b if current_user.privilege?( :view_board, b.id )
+     end
   end
 
   def dry_options
     @prio_options = [
-      [ t(:prio_super), 3 ],
       [ t(:prio_high), 2 ],
       [ t(:prio_normal), 1 ],
       [ t(:prio_low), 0 ]
     ]
+    @prio_options.unshift [ t(:prio_super), 3 ] if current_user.privilege?( :urgent_prio )
 
     @user_options = User.where( :active => true ).map { |u| [ u.name, u.id ] }
     @user_options.unshift [ "[#{ t :unassigned }]", -1 ]

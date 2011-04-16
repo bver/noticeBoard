@@ -13,7 +13,7 @@
                     <% @menu_boards.each do |board|  %>
 		      <li><%= link_to board.title, board, :title=>board.description %></li>
                     <% end %>
-                    <li><%= link_to t(:boards_management), boards_path %></li>
+                    <li><%= link_to t(:boards_management), boards_path if current_user.privilege?( :manage_boards ) or current_user.privilege?( :add_boards )%></li>
 		</ul>
 	    </li>
 	    <li>

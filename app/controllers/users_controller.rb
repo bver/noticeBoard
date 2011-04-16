@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-    unless current_user.privilege?('manage_users')
+    unless current_user.privilege?(:manage_users)
       head :forbidden
       return
     end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
       p.delete(:password_confirmation)
     end
 
-    p.delete(:active) unless current_user.privilege?('manage_users')
+    p.delete(:active) unless current_user.privilege?(:manage_users)
 
     @user = User.find(params[:id])
 

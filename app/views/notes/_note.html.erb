@@ -3,6 +3,7 @@
       class="<%= note_prio @note  %>"><%= note_title @note, @parent %></span><%= note_user @note %></a></h3>
 <div id="d_<%= @note.id %>" class="nbnote">
 
+  <% if current_user.privilege?( :edit_notes, @note.board_id ) %>
     <ul id="icons" class="nbiconbox">
         <li class="nbicon" title="<%= t(:ch_comment) %>"><%= link_to nsp('comment'), edit_note_path( @note, :add => 'comment', :last => @note.updated_at.to_i ), :remote=>true %></li>
     <% if @note.status == :active %>
@@ -26,16 +27,23 @@
         <% else %>
         <li class="nbicon" title="<%= t(:ch_prob) %>"><%= link_to nsp('help'), edit_note_path( @note,  :add => 'prob', :last => @note.updated_at.to_i ), :remote=>true %></li>
         <% end %>
+        <% if current_user.privilege?( :cancel_notes, @note.board_id )  %>
         <li class="nbicon" title="<%= t(:ch_cancel) %>"><%= link_to nsp('circle-close'), edit_note_path( @note,  :add => 'cancel', :last => @note.updated_at.to_i ), :remote=>true %></li>
+        <% end %>
     <% end %>        
-        <li class="nbicon" title="<%= t(:delete) %>"><%= link_to nsp('trash'), note_path( @note ), :method=>:delete, :confirm=> t(:are_you_sure) %></li>
     </ul>
 
+    <% if @note.status == :active and current_user.privilege?( :change_prio, @note.board_id )  and ( @note.priority != 3  or current_user.privilege?( :urgent_prio, @note.board_id ) ) %>
     <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), 
               :title => t(:change_priority), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id, 'data-last' => @note.updated_at.to_i  %>
+    <% end %>
 
+    <% if @note.status == :active and current_user.privilege?( :assign_notes, @note.board_id ) %>
     <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user_id ), 
               :title => t(:assign_user), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id, 'data-last' => @note.updated_at.to_i  %>
+    <% end %>
+  
+  <% end %>
 
     <% @note.changes.reverse.each do |change| %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span

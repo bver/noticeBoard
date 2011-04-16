@@ -24,7 +24,7 @@
   <%= f.check_box  :active %><%= t :board_active %><br/>
  </div>
 
- <% if current_user.privilege?('manage_users') %>
+ <% if current_user.privilege?(:manage_users) %>
  <div  class="nbrightcol">
    <h2><%= t :board_grants %></h2>
    <table>

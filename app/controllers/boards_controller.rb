@@ -17,6 +17,11 @@ class BoardsController < ApplicationController
   def show
     @parent = Board.find(params[:id])
 
+    unless @parent.active and current_user.privilege?( :view_board, @parent.id )
+      head :forbidden
+      return
+    end
+
     conditions = dry_filter params
 
     @by_user_sel = {}
@@ -67,6 +72,11 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
+    unless current_user.privilege?(:add_boards)
+      head :forbidden
+      return
+    end
+
     @board = Board.new(params[:board])
     @board.user_id = current_user.id
 
@@ -87,9 +97,14 @@ class BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
 
+    unless current_user.id == @board.user_id or current_user.privilege?( :manage_boards )
+      head :forbidden
+      return
+    end
+
     respond_to do |format|
       if @board.update_attributes(params[:board])
-        dry_update_privs params if current_user.privilege?('manage_users')
+        dry_update_privs params if current_user.privilege?(:manage_users)
         format.js { render :template => 'shared/update', :locals =>{:templ=>'board', :item=>@board} }
         format.xml  { head :ok }
       else

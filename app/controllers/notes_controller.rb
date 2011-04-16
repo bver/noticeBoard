@@ -75,6 +75,12 @@ class NotesController < ApplicationController
   # POST /notes.xml
   def create
     @note = Note.new(params[:note])
+
+    unless current_user.privilege?( :edit_notes, @note.board_id )
+      head :forbidden
+      return
+    end
+
     dry_options
 
     respond_to do |format|
@@ -99,6 +105,12 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
+
+    unless current_user.privilege?( :edit_notes, @note.board_id )
+      head :forbidden
+      return
+    end
+
     if params[:add].to_s != 'comment'
       return if dry_modified_by_others
     end
@@ -118,6 +130,10 @@ class NotesController < ApplicationController
        change.sense = :finished
        @note.status = :finished
     when 'cancel'
+       unless current_user.privilege?( :cancel_notes, @note.board_id )
+          head :forbidden
+          return
+       end
        change.sense = :cancelled
        @note.status = :cancelled
     when 'start'
@@ -128,7 +144,15 @@ class NotesController < ApplicationController
        change.sense = :stop_work
        @note.working = false
     when 'priority'
+       unless current_user.privilege?( :change_prio, @note.board_id )
+          head :forbidden
+          return
+       end
        prio = params[:value].to_i
+       if (prio == 3 or @note.priority == 3) and ! current_user.privilege?( :urgent_prio, @note.board_id )
+          head :forbidden
+          return
+       end
        if prio > @note.priority
          change.sense = :raise_priority
        elsif prio < @note.priority
@@ -139,6 +163,10 @@ class NotesController < ApplicationController
        change.argument = prio
        @note.priority = prio
     when 'user'
+      unless current_user.privilege?( :assign_notes, @note.board_id )
+          head :forbidden
+          return
+      end
       user_id = params[:value].to_i
       @note.user_id =user_id
       if user_id == -1
