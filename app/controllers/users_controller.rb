@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(p) #params[:user]
-        dry_update_privs params
+        dry_update_privs( params ) if @user.id != current_user.id
         format.js { render :template => 'shared/update', :locals =>{:templ=>'user', :item=>@user} }
         format.xml  { head :ok }
       else

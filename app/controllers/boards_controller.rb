@@ -120,6 +120,7 @@ class BoardsController < ApplicationController
 
   def dry_update_privs params
     @users.each do |u|
+      next if u.id == current_user.id
        @privs.each do |p|
          if params.key?  "priv_#{p.id}_#{u.id}"
            u.grant( p.name, @board.id )

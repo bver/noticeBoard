@@ -34,6 +34,7 @@
   </div>
 </div>
 
+<%  if @user.id != current_user.id  %>
 <div  class="nbrightcol">
     <%= f.check_box  :active %><%= t :user_active %><br/>
     <br/>
@@ -42,6 +43,7 @@
     <% end %>
     <br/>
 </div>
+<% end %>
 
   <div class="actions">
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
