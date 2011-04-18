@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_filter :dry_privs
+  before_filter :dry_users
 
   # GET /boards
   # GET /boards.xml
@@ -82,6 +82,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
+        User.includes(:permissions).each { |u| u.ensure_permissions( @board.id ) }
         dry_update_privs params
         format.js { render :template => 'shared/create', :locals =>{:templ=>'board'} }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
@@ -128,19 +129,18 @@ class BoardsController < ApplicationController
 
   protected
 
-  def dry_privs
-      @privs = Privilege.where( :board => true )
-      @users = User.where( :active => true )
+  def dry_users
+      @users = User.includes(:permissions).where( :active => true )
   end
 
   def dry_update_privs params
     @users.each do |u|
       next if u.id == current_user.id
-       @privs.each do |p|
-         if params.key?  "priv_#{p.id}_#{u.id}"
-           u.grant( p.name, @board.id )
+       Permission.privs_board.each do |p|
+         if params.key?  "priv_#{p}_#{u.id}"
+           u.grant( p, @board.id )
          else
-           u.revoke( p.name, @board.id )
+           u.revoke( p, @board.id )
          end
        end
     end

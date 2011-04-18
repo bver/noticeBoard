@@ -6,18 +6,6 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-rights = []
-rights << Privilege.create( :name=>'manage_users', :description=>'create/edit/disable accounts, grant/revoke privileges' )
-rights << Privilege.create( :name=>'add_boards', :description=>'create new boards, edit/disable created boards' )
-rights << Privilege.create( :name=>'manage_boards', :description=>'edit/disable all boards' )
-rights << Privilege.create( :name=>'urgent_prio', :description=>'change priorities, including urgent level' )
-
-rights << Privilege.create( :name=>'view_board', :description=>'see notes on board', :board=>true )
-rights << Privilege.create( :name=>'edit_notes', :description=>'create/edit notes on board', :board=>true )
-rights << Privilege.create( :name=>'cancel_notes', :description=>'cancel notes', :board=>true )
-rights << Privilege.create( :name=>'assign_notes', :description=>'assign/unassign notes to/from users', :board=>true )
-rights << Privilege.create( :name=>'change_prio', :description=>'change priorities, except urgent level', :board=>true )
-
 admin =User.find_or_create_by_email(
     :name => 'admin',
     :email => 'admin@example.com',
@@ -26,4 +14,5 @@ admin =User.find_or_create_by_email(
     :password_confirmation => 'password')
 admin.save
 
-rights.each {|privilege| UserPriv.create( :user_id=>admin.id, :privilege_id=>privilege.id ) }
+admin.ensure_permissions
+Permission.privs.each { |p| admin.grant p }

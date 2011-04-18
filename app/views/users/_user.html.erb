@@ -10,15 +10,16 @@
     <%= t :current_sign_in %>: <%= @user.current_sign_in_at.nil? ? t(:never) : @user.current_sign_in_at.to_formatted_s(:long) %><br/>
     <%= t :last_sign_in %>: <%= @user.last_sign_in_at.nil? ? t(:never) : @user.last_sign_in_at.to_formatted_s(:long) %><br/>
     <br/><br/>
-    <%= link_to t(:edit_user), edit_user_path( @user ), :remote=> true %>
+    <%= link_to raw('<div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span  class="ui-button-text">' +
+                               t( :edit_user ) + '</span></div>'), edit_user_path( @user ), :remote=> true %>
   </div>
   
   <div  class="nbrightcol">
     <h2><%= t :user_grants %></h2>
     <span class="ui-icon ui-icon-<%= @user.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :user_active %><br/>
     <br/>
-    <% @privs.each do |p|  %>
-    <span class="ui-icon ui-icon-<%= @user.privilege?( p.name ) ? 'check' : 'close' %> nbnoteicon"></span> <%= p.description %> <%= p.board ? "(#{t :board_specific})" : '' %><br/>
+    <% Permission.privs.each do |p|  %>
+    <span class="ui-icon ui-icon-<%= @user.privilege?( p ) ? 'check' : 'close' %> nbnoteicon"></span> <%=  t Permission.description(p) %> <%= Permission.privs_board.include?(p) ? "(#{t :board_specific})" : '' %><br/>
     <% end %>
     <br/>
   </div>

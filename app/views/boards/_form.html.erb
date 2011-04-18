@@ -30,18 +30,18 @@
    <table>
      <tr>
        <th></th>
-       <% @privs.each do |priv| %>
-       <th  title="<%= priv.description %>"><%= raw priv.name.sub('_', '<br/>')  %></th>
+       <% Permission.privs_board.each do |priv| %>
+       <th  title="<%= t Permission.description(priv) %>"><%= raw t(priv).sub(' ', '<br/>') %></th>
        <% end %>
      </tr>
      <% @users.each do |user| %>
      <tr>
        <th><%= user.name %></th>
-       <% @privs.each do |priv| %>
+       <% Permission.privs_board.each do |priv| %>
        <% if user.id == current_user.id %>
-       <td><span class="ui-icon ui-icon-<%= user.privilege?( priv.name, @board.id ) ? 'check' : 'close' %> nbnoteicon" title="<%= priv.description %>"></span></td>
+       <td><span class="ui-icon ui-icon-<%= user.privilege?( priv, @board.id ) ? 'check' : 'close' %> nbnoteicon" title="<%= t Permission.description(priv) %>"></span></td>
        <% else %>
-       <td><%= check_box_tag  "priv_#{priv.id}_#{user.id}", 1, user.privilege?( priv.name,  @board.id ),  :title => priv.description %></td>
+       <td><%= check_box_tag  "priv_#{priv}_#{user.id}", 1, user.privilege?( priv,  @board.id ),  :title => t( Permission.description(priv) ) %></td>
        <% end %>
        <% end %>
      </tr>

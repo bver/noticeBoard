@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110401195442) do
+ActiveRecord::Schema.define(:version => 20110418063204) do
 
   create_table "boards", :force => true do |t|
     t.integer  "user_id"
@@ -54,23 +54,16 @@ ActiveRecord::Schema.define(:version => 20110401195442) do
   add_index "notes", ["user_id"], :name => "index_notes_on_user_id"
   add_index "notes", ["working"], :name => "index_notes_on_working"
 
-  create_table "privileges", :force => true do |t|
-    t.string  "name"
-    t.text    "description"
-    t.boolean "board",       :default => false, :null => false
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "board_id"
+    t.string   "values"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "privileges", ["name"], :name => "index_privileges_on_name", :unique => true
-
-  create_table "user_privs", :force => true do |t|
-    t.integer "user_id",      :null => false
-    t.integer "privilege_id", :null => false
-    t.integer "board_id"
-  end
-
-  add_index "user_privs", ["board_id"], :name => "index_user_privs_on_board_id"
-  add_index "user_privs", ["privilege_id"], :name => "index_user_privs_on_privilege_id"
-  add_index "user_privs", ["user_id"], :name => "index_user_privs_on_user_id"
+  add_index "permissions", ["board_id"], :name => "index_permissions_on_board_id"
+  add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                                                  :null => false

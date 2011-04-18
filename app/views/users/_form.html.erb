@@ -38,8 +38,8 @@
 <div  class="nbrightcol">
     <%= f.check_box  :active %><%= t :user_active %><br/>
     <br/>
-    <% @privs.each do |p|  %>
-       <%= check_box_tag  "priv_#{p.name}", 1, @user.privilege?( p.name ) %><%= p.description %><br/>
+    <% Permission.privs.each do |p|  %>
+       <%= check_box_tag  "priv_#{p}", 1, @user.privilege?( p ) %><%=  t Permission.description(p) %><br/>
     <% end %>
     <br/>
 </div>
