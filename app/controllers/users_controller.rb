@@ -69,6 +69,12 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+    @user = User.find(params[:id])
+
+    if @user.id != current_user.id and ! current_user.privilege?(:manage_users)
+      head :forbidden
+      return
+    end
 
     p =params[:user].clone
     if p[:password].blank? and p[:password_confirmation].blank?
@@ -77,8 +83,6 @@ class UsersController < ApplicationController
     end
 
     p.delete(:active) unless current_user.privilege?(:manage_users)
-
-    @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(p) #params[:user]

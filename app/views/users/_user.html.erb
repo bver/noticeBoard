@@ -10,8 +10,8 @@
     <%= t :current_sign_in %>: <%= @user.current_sign_in_at.nil? ? t(:never) : @user.current_sign_in_at.to_formatted_s(:long) %><br/>
     <%= t :last_sign_in %>: <%= @user.last_sign_in_at.nil? ? t(:never) : @user.last_sign_in_at.to_formatted_s(:long) %><br/>
     <br/><br/>
-    <%= link_to raw('<div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span  class="ui-button-text">' +
-                               t( :edit_user ) + '</span></div>'), edit_user_path( @user ), :remote=> true %>
+    <%= link_to( raw('<div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span  class="ui-button-text">' +
+                               t( :edit_user ) + '</span></div>'), edit_user_path( @user ), :remote=> true ) if @user.id == current_user.id or current_user.privilege?(:manage_users) %>
   </div>
   
   <div  class="nbrightcol">
