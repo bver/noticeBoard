@@ -33,7 +33,7 @@ cz:
      user_updated: "Uživatel byl úspěšně aktualizován."
      current_sign_in: "Současné přihlášení"
      last_sign_in: "Minulé přihlášení"
-     never: "Nikdy dr nepřihlásil."
+     never: "Nikdy se nepřihlásil."
      user_active: "Uživatelský účet aktivní"
      user_grants: "Práva"
      user_account: "Účet"

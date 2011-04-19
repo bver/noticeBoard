@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
   end
 
   def ensure_permissions board_id=nil
-     perm = self.permissions.detect { |p| p.board_id == board_id } # Permission.find_by_user_id_and_board_id( self.id, board_id )
+     perm = self.permissions.detect { |p| p.board_id == board_id }
+     perm = Permission.find_by_user_id_and_board_id( self.id, board_id ) if perm.nil?
      return unless perm.nil?
 
      perm = Permission.new :user_id => self.id, :board_id => board_id
@@ -46,6 +47,7 @@ class User < ActiveRecord::Base
           perm.reset # user default - zeroes
      else 
           src = self.permissions.detect { |p| p.board_id.nil? }
+          src = Permission.find_by_user_id_and_board_id( self.id, nil ) if src.nil?
           perm.values = src.values.clone  # board-specific default
      end
      perm.save

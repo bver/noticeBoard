@@ -130,7 +130,7 @@ class BoardsController < ApplicationController
   protected
 
   def dry_users
-      @users = User.includes(:permissions).where( :active => true )
+      @users = User.includes(:permissions)
   end
 
   def dry_update_privs params

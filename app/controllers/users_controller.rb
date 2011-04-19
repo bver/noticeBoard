@@ -57,6 +57,7 @@ class UsersController < ApplicationController
       if @user.save
         @user.ensure_permissions
         dry_update_privs params
+        Board.all.each {|b| @user.ensure_permissions b.id }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
         format.js { render :template => 'shared/create', :locals =>{:templ=>'user'} }
       else
