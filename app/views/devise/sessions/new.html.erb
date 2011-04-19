@@ -1,8 +1,6 @@
-<% content_for :nbheader do %>
-       <h1><%=t :notice_board%></h1>
-<% end %>
 
-<h2><%= t(:sign_in) %></h2>
+<div class="nbsignin">
+<h1><%=t :notice_board%> - <%= t :sign_in %></h1>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
    <p><%=  f.label t(:name) %><br />
@@ -19,3 +17,4 @@
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
+</div>

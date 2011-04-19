@@ -77,6 +77,16 @@ body {
   display: inline-block;
   margin: 5px; }
 
+.nbsignin {
+  width: 70%;
+  margin-left: 70px;
+  padding-left: 70px;
+  text-align: left;
+  font-size: large;
+  background-color: white;
+  border: 1px #b6b6b6 solid;
+  padding: 20px; }
+
 .nbicon {
   -moz-border-bottom-colors: none;
   -moz-border-image: none;
