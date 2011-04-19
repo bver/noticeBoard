@@ -7,19 +7,19 @@ class NotesController < ApplicationController
     conditions = dry_filter params
 
     @by_board_sel = {}
-    if params.key?(:boards)
-      @by_board_sel.default = false
-      conditions[ :board_id ] = []
-      params[:boards].split('_').each do |part|
-        id = part.to_i
+    @by_board_sel.default = false
+    conditions[ :board_id ] = []
+    all_ids = if params.key?(:boards)
+       params[:boards].split('_').map {|id| id.to_i } 
+    else
+       Board.where( :active=>true ).map {|b| b.id }
+    end
+    all_ids.each do |id|
+        next unless current_user.privilege?( :view_board, id )
         @by_board_sel[id] = true
         conditions[ :board_id ] << id
-      end
-    else
-      @by_board_sel.default = true
     end
 
-    #@notes = Note.all
     conditions[:user_id] = [ current_user.id, -1 ]
     @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
     @all_size = Note.count( :conditions => {:user_id =>  [ current_user.id, -1 ] })
@@ -35,6 +35,11 @@ class NotesController < ApplicationController
   # GET /notes/1.xml
   def show
     @note = Note.find(params[:id])
+
+    unless current_user.privilege?( :view_board, @note.board_id )
+      head :forbidden
+      return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
