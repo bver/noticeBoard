@@ -183,6 +183,16 @@ body {
   float: left;
   clear: all; }
 
+th {
+  padding: 7px;
+  background-color: #bdd2ff; }
+
+tr:hover {
+  background-color: #bdd2ff; }
+
+th:hover {
+  background-color: white; }
+
 .sf-menu {
   font-weight: bolder; }
   .sf-menu a, .sf-menu a:visited {
