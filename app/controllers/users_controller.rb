@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all( :order => :name )
+    @users = dry_manage_selection
 
     respond_to do |format|
       format.html { render :action => 'index', :locals =>{:activated=>false} } # index.html.erb
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-    @users = User.all( :order => :name )
+    @users = dry_manage_selection
 
     respond_to do |format|
       format.html  { render :action => 'index', :locals =>{ :activated=>@users.index(@user) } } # show.html.erb
@@ -125,6 +125,10 @@ class UsersController < ApplicationController
          @user.revoke( p )
        end
      end
+  end
+
+  def dry_manage_selection
+      current_user.privilege?(:manage_users) ? User.all( :order => :name ) : User.all( :order => :name, :conditions => {:id => current_user.id} )
   end
   
 end

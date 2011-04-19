@@ -19,7 +19,7 @@
     <span class="ui-icon ui-icon-<%= @user.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :user_active %><br/>
     <br/>
     <% Permission.privs.each do |p|  %>
-    <span class="ui-icon ui-icon-<%= @user.privilege?( p ) ? 'check' : 'close' %> nbnoteicon"></span> <%=  t Permission.description(p) %> <%= Permission.privs_board.include?(p) ? "(#{t :board_specific})" : '' %><br/>
+    <span class="ui-icon ui-icon-<%= @user.privilege?( p ) ? 'check' : 'close' %> nbnoteicon"></span> <%=  t p %>: <%=  t Permission.description(p) %> <%= Permission.privs_board.include?(p) ? "(#{t :board_specific})" : '' %><br/>
     <% end %>
     <br/>
   </div>

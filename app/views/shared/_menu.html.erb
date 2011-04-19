@@ -20,7 +20,9 @@
 		<%= link_to  current_user.name, user_path(current_user) %>
 		<ul>
 	            <li><%= link_to t(:profile), user_path(current_user) %></li>
+                    <% if current_user.privilege?(:manage_users) %>
 		    <li><%= link_to t(:users), :controller=>'users', :action => 'index' %></li>
+                    <% end %>
                     <li><%= link_to t(:sign_out), :controller=>'devise/sessions', :action => 'destroy' %></li>
 		</ul>
 	    </li>

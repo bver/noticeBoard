@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
     before_filter :authenticate_user!
     before_filter :deactivated_account
   else
-    CUser = Struct.new( 'CUser', :id, :name )
+    class CUser < Struct.new( 'CUser', :id, :name )
+      def privilege?( name, board_id=nil )
+        true
+      end
+    end
     @@cuser = CUser.new(  42, 'name' )
     def current_user
       @@cuser

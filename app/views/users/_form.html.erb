@@ -39,7 +39,7 @@
     <%= f.check_box  :active %><%= t :user_active %><br/>
     <br/>
     <% Permission.privs.each do |p|  %>
-       <%= check_box_tag  "priv_#{p}", 1, @user.privilege?( p ) %><%=  t Permission.description(p) %><br/>
+       <%= check_box_tag  "priv_#{p}", 1, @user.privilege?( p ), :title => t( Permission.description(p) ) %><label title="<%= t Permission.description(p) %>"><%=  t p %></label><br/>
     <% end %>
     <br/>
 </div>
