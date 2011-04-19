@@ -55,6 +55,7 @@ cz:
      no_board: "Žádná nástěnka k dispozici."
 
      notes: "Lístky"
+     note: "Lístek"
      add_note: "Přidat nový lístek"
      save_note: "Uložit lístek"
      new_note: "Nový lístek"

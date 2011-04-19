@@ -55,6 +55,7 @@ en:
      no_board: "No board available."
 
      notes: "Notes"
+     note: "Note"
      add_note: "add new note"
      save_note: "save note"
      new_note: "new note"

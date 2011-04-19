@@ -40,6 +40,7 @@ class NotesController < ApplicationController
       head :forbidden
       return
     end
+    dry_options
 
     respond_to do |format|
       format.html # show.html.erb

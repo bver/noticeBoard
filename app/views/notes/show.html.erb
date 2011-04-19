@@ -1,40 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% content_for :head do %>
+  <script type="text/javascript">
+     function specificInit() {
+       bindSelects();
+     }
+  </script>
+<% end %>
+<% content_for :nbheader do %>
+       <h1><%= t :note %></h1>
+<% end %>
 
-<p>
-  <b>Board:</b>
-  <%= @note.board_id %>
-</p>
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
+     
+       <%= render :partial => 'notes/note' %>
 
-<p>
-  <b>User:</b>
-  <%= @note.user_id %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @note.title %>
-</p>
-
-<p>
-  <b>Priority:</b>
-  <%= @note.priority %>
-</p>
-
-<p>
-  <b>Outcome:</b>
-  <%= @note.outcome %>
-</p>
-
-<p>
-  <b>Working:</b>
-  <%= @note.working %>
-</p>
-
-<p>
-  <b>Problem:</b>
-  <%= @note.problem %>
-</p>
-
-
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+ </div>
