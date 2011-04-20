@@ -20,7 +20,7 @@ $(document).ready(function() {
 function bindSelects() {
    $('.nbselect').unbind('change')
    .change(function() {
-      $.post("/notes/" + $(this).attr('data-id') + '.js',
+      $.post("/notes/" + $(this).attr('data-id'),
          {
              _method: 'put',
              add: $(this).attr('data-add'),
