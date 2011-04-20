@@ -95,7 +95,7 @@ cz:
      create_comment: "Vytvořit komentář"
      add_cancel: "Lístek bude zrušen a archivován"
      label_cancel: "Napište důvod zrušení"
-     create_cancel: "OK, arcchivovat"
+     create_cancel: "OK, archivovat"
      add_stop: "Zpracovávání lístku bude přerušeno"
      label_stop: "Napište důvod přerušení"
      create_stop: "OK, přerušit"
