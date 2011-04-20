@@ -1,0 +1,7 @@
+<%= note_title @note, @parent %> <%= note_user @note %>
+
+<% @note.changes.reverse.each do |change| %>
+<%=change.created.to_formatted_s :short  %>: <%= change.user.name %>  <%= change_comment change %>
+<% end %>
+
+<%= note_url @note %>

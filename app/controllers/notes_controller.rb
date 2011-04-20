@@ -97,6 +97,8 @@ class NotesController < ApplicationController
         change.user_id = current_user.id
         change.note = @note
         change.save
+       
+        NoteMailer.note_email( @note ).deliver
 
         format.js { render :template => 'shared/create', :locals =>{:templ=>'note'} }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
@@ -174,7 +176,6 @@ class NotesController < ApplicationController
           return
       end
       user_id = params[:value].to_i
-      @note.user_id =user_id
       if user_id == -1
         change.sense = :unassigned
         change.argument = @note.user_id
@@ -182,6 +183,7 @@ class NotesController < ApplicationController
         change.sense = :assigned
         change.argument = user_id
       end
+      @note.user_id =user_id
     when 'reject'
        change.sense = :rejected
        @note.user_id = -1
@@ -203,6 +205,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
+        NoteMailer.note_email( @note ).deliver
         format.js { render :template => 'shared/update', :locals =>{:templ=>'note', :item=>@note} }
         format.xml  { head :ok }
       else
