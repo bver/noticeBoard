@@ -73,6 +73,7 @@ cz:
      ch_cancel: "Zrušit a archivovat."
      change_priority: "Změnit důležitost."
      assign_user: "Delegovat uživateli."
+     c_created: "vytvořil(a) lístek."
      c_finished: "dokončil(a) lístek."
      c_cancelled: "zrušil(a) a archivoval(a) lístek."
      c_accepted: "přijal(a) lístek na později."

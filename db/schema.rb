@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20110418063204) do
     t.integer  "board_id",                      :null => false
     t.integer  "user_id",    :default => -1,    :null => false
     t.string   "title",                         :null => false
+    t.text     "content"
     t.integer  "priority",   :default => 1,     :null => false
     t.boolean  "outcome"
     t.boolean  "working",    :default => false, :null => false

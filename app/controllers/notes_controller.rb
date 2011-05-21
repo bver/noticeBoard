@@ -81,6 +81,7 @@ class NotesController < ApplicationController
   # POST /notes.xml
   def create
     @note = Note.new(params[:note])
+    @note.content = params['comment'] if params.key? 'comment'
 
     unless current_user.privilege?( :edit_notes, @note.board_id )
       head :forbidden
@@ -92,7 +93,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.save
         change = Change.new( :created=>Time.now )
-        change.comment =params['comment'] if params.key? 'comment'
+        #change.comment =params['comment'] if params.key? 'comment'
         change.sense = :created
         change.user_id = current_user.id
         change.note = @note

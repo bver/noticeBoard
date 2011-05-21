@@ -4,6 +4,7 @@ class CreateNotes < ActiveRecord::Migration
       t.integer :board_id, :null =>false
       t.integer :user_id, :null=> false, :default => -1
       t.string :title, :null=> false
+      t.text :content, :null => true
       t.integer :priority, :null => false, :default => 1
       t.boolean :outcome, :null=> true, :default => nil
       t.boolean :working, :null => false, :default => false
