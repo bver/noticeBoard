@@ -6,6 +6,7 @@ en:
      sign_in: "Sign in"
      sign_up: "Sign up"
      sign_out: "sign out"
+     sessions: "Sign in"
      name: "Name"
      password: "Password"
      new_password: "New password"

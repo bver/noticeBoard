@@ -6,6 +6,7 @@ cz:
      sign_in: "Přihlásit se"
      sign_up: "Registrovat se"
      sign_out: "Odhlásit se"
+     sessions: "Přihlášení"
      name: "Jméno"
      password: "Heslo"
      new_password: "Nové heslo"
