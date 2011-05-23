@@ -55,7 +55,15 @@ class NotesController < ApplicationController
     if params.key? :parent
       @note.board = Board.find(params[:parent])
     else
-      @board_options = Board.all( :order => :title ).map { |t| [t.title, t.id] }
+      @board_options = []
+      Board.all( :conditions => {:active=>true},  :order => :title ).each do |b|
+         @board_options <<  [b.title, b.id]  if current_user.privilege?( :view_board, b.id )
+      end
+
+      if @board_options.empty?
+        head :forbidden
+        return
+      end
     end
 
     respond_to do |format|
@@ -88,6 +96,11 @@ class NotesController < ApplicationController
       return
     end
 
+    if @menu_boards.empty?
+      head :forbidden
+      return
+    end
+    
     dry_options
 
     respond_to do |format|

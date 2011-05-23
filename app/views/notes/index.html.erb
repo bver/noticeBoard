@@ -34,7 +34,7 @@
 <% content_for :nbheader do %>
        <h1><%= @parent.nil? ?  "#{t( :notes )} - #{current_user.name}" : "#{t( :board )} - #{@parent.title}" %></h1>
 
-       <% if  @parent.nil? or current_user.privilege?( :edit_notes, @parent.id ) %>
+       <% if  (@parent.nil? or current_user.privilege?( :edit_notes, @parent.id )) && ! @menu_boards.empty? %>
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
             id="addButton" href="<%= @parent.nil? ? new_note_path : new_note_path( :parent=>@parent ) %>" data-remote="true"><span
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_note%></span></a>
