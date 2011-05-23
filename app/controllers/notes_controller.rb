@@ -77,10 +77,11 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     return if dry_modified_by_others
     dry_edit_create params[:add].to_s
+    dialog = params[:add].to_s == 'edit' ? 'edit' : 'comment'
 
     respond_to do |format|
       format.js do
-          render :template => 'shared/dialog', :locals =>{:dialog=>'comment'}
+          render :template => 'shared/dialog', :locals =>{:dialog=>dialog}
       end
     end
   end
@@ -143,6 +144,7 @@ class NotesController < ApplicationController
     change.user_id = current_user.id
     change.note = @note
     change.comment =params['comment']
+
     case params[:add].to_s
     when 'accept'
        change.sense = :accepted
@@ -208,6 +210,26 @@ class NotesController < ApplicationController
     when 'noprob'
        change.sense = :reset_problem
        @note.problem = false
+    when 'edit'
+      unless @note.content == params[:note][:content]
+        change.sense = :edited_content
+        change.comment =@note.content
+        unless @note.title == params[:note][:title]
+          change.save
+          change = Change.new( :created=>Time.now )
+          change.user_id = current_user.id
+          change.note = @note
+          change.sense = :edited_title
+          change.comment =@note.title
+        end
+      else
+        unless @note.title == params[:note][:title]
+          change.sense = :edited_title
+          change.comment =@note.title
+        else
+          change = nil
+        end        
+      end
     else #when 'comment'
        change.sense = :commented
     end
@@ -254,6 +276,8 @@ class NotesController < ApplicationController
        [t(:add_reject), t(:label_reject), t(:create_reject)]
     when 'prob'
        [t(:add_problem), t(:label_problem), t(:create_problem)]
+    when 'edit'
+       [t(:add_edit), t(:label_edit), t(:create_edit)]
     else  # when 'comment'
        @hidden = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       

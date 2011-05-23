@@ -7,6 +7,7 @@
     <ul id="icons" class="nbiconbox">
         <li class="nbicon" title="<%= t(:ch_comment) %>"><%= link_to nsp('comment'), edit_note_path( @note, :add => 'comment', :last => @note.updated_at.to_i ), :remote=>true %></li>
     <% if @note.status == :active %>
+        <li class="nbicon" title="<%= t(:ch_edit) %>"><%= link_to nsp('pencil'), edit_note_path( @note, :add => 'edit', :last => @note.updated_at.to_i ), :remote=>true %></li>
         <% if @note.user.nil? || (current_user.id == @note.user.id && ! @note.working)  %>
         <li class="nbicon" title="<%= t(:ch_going) %>"><%= link_to nsp('play'), note_path( @note,  :add => 'start', :last => @note.updated_at.to_i ), :remote=>true, :method=>:put %></li>
         <% end

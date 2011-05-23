@@ -70,6 +70,10 @@ module NotesHelper
        "#{ t :c_problem } : #{change.comment}"
      when :reset_problem
        t( :c_noproblem )
+     when :edited_title
+       t( :c_edited_title )
+     when :edited_content
+       t( :c_edited_content )
      else
        '!!!'
      end
@@ -94,7 +98,9 @@ module NotesHelper
     :start_work => 'play',
     :stop_work => 'pause',
     :set_problem => 'help',
-    :reset_problem => 'help'
+    :reset_problem => 'help',
+    :edited_title => 'pencil',
+    :edited_content => 'pencil'
   }
   @@change_icons.default ='alert'
   def change_icon change

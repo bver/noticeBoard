@@ -34,6 +34,10 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal :reset_problem, c.sense
     c.meaning = 13
     assert_equal :unassigned, c.sense
+    c.meaning = 14
+    assert_equal :edited_title, c.sense
+    c.meaning = 15
+    assert_equal :edited_content, c.sense
   end
 
   test "sense helper bw" do
@@ -68,5 +72,9 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal 12, c.meaning
     c.sense = :unassigned
     assert_equal 13, c.meaning
+    c.sense = :edited_title
+    assert_equal 14, c.meaning
+    c.sense = :edited_content
+    assert_equal 15, c.meaning
   end
 end
