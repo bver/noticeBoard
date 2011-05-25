@@ -4,6 +4,11 @@
 <div id="d_<%= @note.id %>" class="nbnote">
 
 <div class="nbnotecont">
+
+  <p>
+    <%=raw RedCloth.new(@note.content).to_html %>
+  </p>
+
  <div>
   <% if current_user.privilege?( :process_notes, @note.board_id ) || current_user.privilege?( :edit_notes, @note.board_id ) || current_user.privilege?( :cancel_notes, @note.board_id ) %>
     <ul id="icons" class="nbiconbox">
@@ -54,10 +59,6 @@
   
   <% end %>
   </div>
-
-  <p>
-  <%=raw RedCloth.new(@note.content).to_html %>
-  </p>
 
 </div>
   <div class="nbnotehist">
