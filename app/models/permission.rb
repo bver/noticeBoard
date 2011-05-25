@@ -1,7 +1,7 @@
 class Permission < ActiveRecord::Base
 
   @@privs_user = [ :manage_users,  :add_boards,  :manage_boards,  :urgent_prio ]
-  @@privs_board = [ :view_board, :edit_notes, :cancel_notes,  :assign_notes, :change_prio ]
+  @@privs_board = [ :view_board, :edit_notes, :cancel_notes,  :assign_notes, :change_prio, :process_notes ]
   @@privs = @@privs_user + @@privs_board
 
   def reset

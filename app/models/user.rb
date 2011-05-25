@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   ####
   
   def privilege?( name, board_id = nil )
-      return [:view_board, :edit_notes].include?( name ) if self.id.nil?
+      return [:view_board, :process_notes].include?( name ) if self.id.nil?
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm = Permission.find_by_user_id_and_board_id( self.id, board_id ) if perm.nil?
       perm.privilege? name

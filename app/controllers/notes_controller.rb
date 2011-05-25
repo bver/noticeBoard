@@ -59,7 +59,7 @@ class NotesController < ApplicationController
     else
       @board_options = []
       Board.all( :conditions => {:active=>true},  :order => :title ).each do |b|
-         @board_options <<  [b.title, b.id]  if current_user.privilege?( :view_board, b.id )
+         @board_options <<  [b.title, b.id]  if current_user.privilege?( :edit_notes, b.id )
       end
 
       if @board_options.empty?
@@ -131,11 +131,6 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
 
-    unless current_user.privilege?( :edit_notes, @note.board_id )
-      head :forbidden
-      return
-    end
-
     if params[:add].to_s != 'comment'
       return if dry_modified_by_others
     end
@@ -149,10 +144,18 @@ class NotesController < ApplicationController
 
     case params[:add].to_s
     when 'accept'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :accepted
        @note.user_id = current_user.id
        @note.working = false
     when 'done'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :finished
        @note.status = :finished
     when 'cancel'
@@ -163,10 +166,18 @@ class NotesController < ApplicationController
        change.sense = :cancelled
        @note.status = :cancelled
     when 'start'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :start_work
        @note.user_id = current_user.id
        @note.working = true
     when 'stop'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :stop_work
        @note.working = false
     when 'priority'
@@ -203,16 +214,32 @@ class NotesController < ApplicationController
       end
       @note.user_id =user_id
     when 'reject'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :rejected
        @note.user_id = -1
        @note.working = false
     when 'prob'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :set_problem
        @note.problem = true
     when 'noprob'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :reset_problem
        @note.problem = false
     when 'edit'
+      unless current_user.privilege?( :edit_notes, @note.board_id )
+          head :forbidden
+          return
+      end
       unless @note.content == params[:note][:content]
         change.sense = :edited_content
         change.comment =@note.content
@@ -233,6 +260,10 @@ class NotesController < ApplicationController
         end        
       end
     else #when 'comment'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
        change.sense = :commented
     end
 

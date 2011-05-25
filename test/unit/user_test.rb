@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
     u = User.new
     Permission.privs.each do |p|
       case p
-      when :view_board, :edit_notes
+      when :view_board, :process_notes
         assert_equal true, u.privilege?(p)
       else
         assert_equal false, u.privilege?(p)

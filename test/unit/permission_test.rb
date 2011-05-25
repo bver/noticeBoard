@@ -37,7 +37,7 @@ class PermissionTest < ActiveSupport::TestCase
     assert_equal :desc_edit_notes, Permission.description( :edit_notes )
     
     assert_equal [ :manage_users,  :add_boards,  :manage_boards,  :urgent_prio ], Permission.privs_user
-    assert_equal [ :view_board, :edit_notes, :cancel_notes,  :assign_notes, :change_prio ], Permission.privs_board
+    assert_equal [ :view_board, :edit_notes, :cancel_notes,  :assign_notes, :change_prio, :process_notes ], Permission.privs_board
     assert_equal Permission.privs_user+Permission.privs_board, Permission.privs
   end
 
