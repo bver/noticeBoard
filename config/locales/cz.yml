@@ -62,6 +62,7 @@ cz:
      new_note: "Nový lístek"
      no_note: "Žádný lístek k dispozici. Vytvořte nový nebo změňte výběr."
      comment: "Komentář"
+     content: "Obsah"
      ch_going: "Jdu na to!"
      ch_later: "Udělám později"
      ch_pause: "Přerušit"

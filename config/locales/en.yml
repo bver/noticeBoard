@@ -62,6 +62,7 @@ en:
      new_note: "new note"
      no_note: "No note available. Create a new one or change your selection."
      comment: "Comment"
+     content: "Content"
      ch_going: "I am going onto that!"
      ch_later: "I'll do it later."
      ch_pause: "Pause it."
