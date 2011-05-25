@@ -157,14 +157,6 @@ body
   float: left
   margin: 4px
 
-.nbnotecont
-  width: 100%
-  float: left
-  border: 1px $border_color dotted
-  padding: 5px
-  margin:
-    bottom: 10px
-
 .nbiconbox
   list-style-type: none
   position: relative
@@ -180,29 +172,51 @@ body
 // priorities
 .nbpriosuper
   color: red
-  font-weight: bolder
+  font:
+    weight: bolder
+    size: larger
   background-color: #FFDFDF
   padding:
     left: 10px
     right: 10px     
     top: 2px     
     bottom: 2px        
-  border: 1px black dotted   
+  border: 1px black dotted
+  margin-right: 10px
 
 .nbpriohigh
   color: red
-  font-weight: bolder
+  font:
+    weight: bolder
+    size: larger
 
 .nbprionormal
-  font-weight: bolder
+  font:
+    weight: bolder
+    size: larger
 
 .nbpriolow
-  font-weight: normal
+  font:
+    weight: normal
+    size: larger
 
 // note history
-.nbnote 
+.nbnote
+  display: inline
   p
     clear: both
+
+.nbnotecont
+  width: 45%
+  float: left
+  padding: 5px
+
+.nbnotehist
+  width: 45%
+  float: right
+  border:
+    left: 1px $border_color dotted
+  padding-left: 10px
 
 .nbnoteicon 
   float: left
