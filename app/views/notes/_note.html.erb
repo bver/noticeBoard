@@ -50,7 +50,7 @@
   </div>
 
   <p>
-  <%= @note.content %>
+  <%=raw RedCloth.new(@note.content).to_html %>
   </p>
 
 </div>

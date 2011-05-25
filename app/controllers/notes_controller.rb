@@ -1,3 +1,5 @@
+require 'RedCloth'
+
 class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
