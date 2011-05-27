@@ -34,8 +34,12 @@ UjsTest::Application.configure do
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  # mailer settings
+  config.action_mailer.perform_deliveries = false    # check this
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { :host => "nastenky.zine.cz", :protocol => 'https' }
+  #config.action_mailer.delivery_method = :sendmail
+
 
   # Enable threaded mode
   # config.threadsafe!
