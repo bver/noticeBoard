@@ -114,8 +114,9 @@ class NotesController < ApplicationController
         change.user_id = current_user.id
         change.note = @note
         change.save
-       
-        NoteMailer.note_email( @note ).deliver
+
+        recipients = note_recipients(@note)
+        NoteMailer.note_email( @note, recipients ).deliver unless recipients.empty?
 
         format.js { render :template => 'shared/create', :locals =>{:templ=>'note'} }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
@@ -274,7 +275,10 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        NoteMailer.note_email( @note ).deliver
+
+        recipients = note_recipients(@note)
+        NoteMailer.note_email( @note, recipients ).deliver unless recipients.empty?
+
         format.js { render :template => 'shared/update', :locals =>{:templ=>'note', :item=>@note} }
         format.xml  { head :ok }
       else
@@ -327,6 +331,15 @@ class NotesController < ApplicationController
       end
       
       true
+  end
+
+  def note_recipients note
+      recipients = []
+      User.includes(:permissions).where( :active=>true, :send_mails=>true ).each do |user|
+        next unless user.privilege?( :view_board, note.board.id>0 ? note.board.id : nil )
+        recipients << user.email
+      end
+      recipients
   end
 
 end
