@@ -35,7 +35,7 @@ UjsTest::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # mailer settings
-  config.action_mailer.perform_deliveries = false    # check this
+  config.action_mailer.perform_deliveries = true    # check this
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => "nastenky.zine.cz", :protocol => 'https' }
   #config.action_mailer.delivery_method = :sendmail
