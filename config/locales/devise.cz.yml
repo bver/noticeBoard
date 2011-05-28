@@ -27,6 +27,7 @@ cz:
       invalid_token: 'Neplatný ověřovací symbol.'
       timeout: 'Vaše relace vypršela, přihlašte se prosím znovu, pak můžete pokračovat.'
       inactive: 'Váš účet ještě nebyl aktivován.'
+      already_authenticated: 'Přihlášení již proběhlo.'
     sessions:
       signed_in: 'Přihlášení úspěšné.'
       signed_out: 'Odhlášení úspěšné.'
