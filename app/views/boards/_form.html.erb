@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
- <div class="nbleftcol">
+ <div>
    <h2><%= t :board %></h2>
   <div class="field">
     <%= f.label :title %><br />
@@ -25,7 +25,7 @@
  </div>
 
  <% if current_user.privilege?(:manage_users) %>
- <div  class="nbrightcol">
+ <div>
    <h2><%= t :board_grants %></h2>
    <table>
      <tr>

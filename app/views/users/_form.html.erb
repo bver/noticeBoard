@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-<div  class="nbleftcol">
+<div>
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name,  t(:name) %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email,  t(:email) %><br />
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :send_mails %>  <%= f.check_box :send_mails %>
+    <%= f.label :send_mails,  t(:send_mails) %>  <%= f.check_box :send_mails %>
   </div>
   <br/>
   <div class="field">
@@ -31,13 +31,14 @@
   <div class="field">
      <%= f.label :password_confirmation, t(:confirm_password) %><br />
      <%= f.password_field :password_confirmation %>
+     <br/>
+     <%= f.check_box  :active %><%= t :user_active %>
   </div>
 </div>
 
 <%  if @user.id != current_user.id and current_user.privilege?(:manage_users) %>
-<div  class="nbrightcol">
-    <%= f.check_box  :active %><%= t :user_active %><br/>
-    <br/>
+<h3><%= t :user_grants %></h3>
+<div class="nbprivlist">
     <% Permission.privs.each do |p|  %>
        <%= check_box_tag  "priv_#{p}", 1, @user.privilege?( p ), :title => t( Permission.description(p) ) %><label title="<%= t Permission.description(p) %>"><%=  t p %></label><br/>
     <% end %>
@@ -45,10 +46,12 @@
 </div>
 <% end %>
 
+<div>
   <div class="actions">
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
         class="ui-button-text"><%= t :save_user %></span></a>
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
         class="ui-button-text"><%= t :cancel %></span></a>
   </div>
+</div>
 <% end %>

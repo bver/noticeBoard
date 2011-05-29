@@ -5,18 +5,6 @@
 
        bindSelects();
 
-         $("#selButton").button().click(function(){
-             $('#selform > div > input[name="utf8"]').remove();
-             var ausers = new Array();
-             $('#selbox').children('input').each(function() {
-                  if(this.checked)
-                      ausers.push( this.value );
-             });
-             $('#selform > #users, #selform  > #boards').attr( 'value', ausers.join('_') );
-             $('#selform').submit();
-	     return false;
-         });
-
           $('#selectall').click(function() {
               $('#selbox').children('input').each(function() {
                   this.checked = true;
@@ -27,29 +15,73 @@
                   this.checked = false;
                 });
          });
-         
+
+
+          // Filter Dialog
+          $('#dialog_filter').dialog({
+                  autoOpen: false,
+                  buttons: {
+                          "<%= t :refresh_selection %>": function() {
+                                 $('#selform > div > input[name="utf8"]').remove();
+                                 var ausers = new Array();
+                                 $('#selbox').children('input').each(function() {
+                                      if(this.checked)
+                                          ausers.push( this.value );
+                                 });
+                                 $('#selform > #users, #selform  > #boards').attr( 'value', ausers.join('_') );
+                                 $('#selform').submit();
+                                 $(this).dialog("close");
+                                 return false;
+                          },
+                          "<%= t :cancel %>": function() {
+                                  $(this).dialog("close");
+                          }
+                  },
+                  modal: true
+          });
+
+          // Dialog Link
+          $('#dialog_link').button().click(function(){
+                  $('#dialog_filter').dialog('open');
+                  return false;
+          });
+
      }
   </script>
 <% end %>
 <% content_for :nbheader do %>
-       <h1><%= @parent.nil? ?  "#{t( :notes )} - #{current_user.name}" : "#{t( :board )} - #{@parent.title}" %></h1>
 
+        <% if @parent.nil? %>
+        <h1><%= "#{t( :notes )} - #{current_user.name}" %></h1>
+        <% else %>
+        <h1 title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
+        <% end %>
+        
        <% if  (@parent.nil? or current_user.privilege?( :edit_notes, @parent.id )) && ! @menu_boards.empty? %>
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
             id="addButton" href="<%= @parent.nil? ? new_note_path : new_note_path( :parent=>@parent ) %>" data-remote="true"><span
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_note%></span></a>
-      <% end %>
-
-        <% unless @parent.nil? %>
-           <span class="nbdesc"><%= @parent.description %></span>
         <% end %>
+
+        <div id="dialog_link" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span
+            class="ui-button-text"><%= "#{ t :showing}: #{@notes.size}/#{@all_size}" %></span></div>
+        
 <% end %>
 
-<div class="nbleft">
+ <% if @notes.empty? %>
+       <p class="nbmiddle"><%=t :no_note %></p>
+ <% end %>
 
-   <div class="nbcontrols">
-      <h2><%= "#{ t :showing}: #{@notes.size}/#{@all_size}" %></h2>
-   </div>
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
+    <% @notes.each do |note| %>
+       <% @note = note %>
+       <%= render :partial => 'notes/note' %>
+    <% end %>
+ </div>
+
+<!-- ui-dialog -->
+<div id="dialog_filter" title="<%=t :filtration %>">
+
 <% if @parent.nil? %>
    <div class="nbcontrols" id="selbox">
      <h3><%= t :by_boards  %>:</h3>
@@ -74,29 +106,14 @@
 
  <%= form_tag @parent.nil? ? notes_path : board_path(@parent), :id=>'selform', :method => :get do |f| %>
    <%= hidden_field_tag @parent.nil? ? 'boards' : 'users', '' %>
-  
+
    <div class="nbcontrols">
      <h3><%= t :by_properties  %>:</h3>
      <%= select_tag  'prio', options_for_select( @by_prio_options, @by_prio_sel ), :title => t( :by_priorities ) %><br/>
      <%= select_tag  'proc', options_for_select( @by_proc_options, @by_proc_sel ), :title => t( :by_status ) %><br/>
      <%= check_box_tag  'prob', 'P', @by_prob_sel %><%= t :by_prob_only %> [?]<br/>
   </div>
-
-  <div class="nbctrlbtn"><div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span class="ui-button-text"><%= t :refresh_selection %></span></div></div>
+  
   <% end %>
-
-</div>
-<div class="nbright">
-
- <% if @notes.empty? %>
-       <p class="nbmiddle"><%=t :no_note %></p>
- <% end %>
-
- <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
-    <% @notes.each do |note| %>
-       <% @note = note %>
-       <%= render :partial => 'notes/note' %>
-    <% end %>
- </div>
 
 </div>
