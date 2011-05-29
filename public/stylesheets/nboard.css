@@ -7,10 +7,9 @@ body {
   width: 100%;
   clear: both;
   display: inline-block;
-  margin-bottom: 10px; }
+  margin-bottom: 0px; }
   .nbheader h1 {
-    text-align: center;
-    display: inline;
+    text-align: left;
     margin-left: 30px;
     margin-right: 30px; }
 
@@ -219,7 +218,9 @@ th:hover {
   background-color: white; }
 
 .sf-menu {
-  font-weight: bolder; }
+  font-weight: bolder;
+  font-size: larger;
+  margin-right: 30px; }
   .sf-menu a, .sf-menu a:visited {
     color: black; }
   .sf-menu li li {

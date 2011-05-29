@@ -51,12 +51,6 @@
 <% end %>
 <% content_for :nbheader do %>
 
-        <% if @parent.nil? %>
-        <h1><%= "#{t( :notes )} - #{current_user.name}" %></h1>
-        <% else %>
-        <h1 title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
-        <% end %>
-        
        <% if  (@parent.nil? or current_user.privilege?( :edit_notes, @parent.id )) && ! @menu_boards.empty? %>
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
             id="addButton" href="<%= @parent.nil? ? new_note_path : new_note_path( :parent=>@parent ) %>" data-remote="true"><span
@@ -66,6 +60,12 @@
         <div id="dialog_link" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span
             class="ui-button-text"><%= "#{ t :showing}: #{@notes.size}/#{@all_size}" %></span></div>
         
+       <% if @parent.nil? %>
+        <h1><%= "#{t( :notes )} - #{current_user.name}" %></h1>
+        <% else %>
+        <h1 title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
+        <% end %>      
+
 <% end %>
 
  <% if @notes.empty? %>

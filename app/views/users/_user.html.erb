@@ -1,4 +1,4 @@
-<h3 id="h_<%= @user.id %>"><%= link_to @user.name, '#' %></h3>
+<h3 id="h_<%= @user.id %>"><%= link_to raw('<span class="ui-icon ui-icon-person"></span>')+@user.name, '#' %></h3>
 <div id="d_<%= @user.id %>" class="nbnote">
 
   <div class="nbleftcol">
