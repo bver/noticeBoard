@@ -89,8 +89,8 @@
         <%= check_box_tag  "bname_#{board.title}", board.id, @by_board_sel[board.id] %><%= board.title %><br/>
      <% end %>
     <br/>
-    <a href="#" id="selectall"><%= t :sel_select %></a> |
-    <a href="#" id="deselectall"><%= t :sel_deselect %></a>
+    <%= link_to t(:sel_select), '#', :id=>'selectall' %> |
+   <%= link_to t(:sel_deselect), '#', :id=>'deselectall' %>
    </div>
 <% else %>
    <div class="nbcontrols" id="selbox">
@@ -99,8 +99,8 @@
         <%= check_box_tag  "uname_#{user.first}", user.last, @by_user_sel[user.last] %><%= user.first %><br/>
      <% end %>
     <br/>
-    <a href="#" id="selectall"><%= t :sel_select %></a> |
-    <a href="#" id="deselectall"><%= t :sel_deselect %></a>
+    <%= link_to t(:sel_select), '#', :id=>'selectall' %> |
+    <%= link_to t(:sel_deselect), '#', :id=>'deselectall' %>
    </div>
  <% end %>
 
