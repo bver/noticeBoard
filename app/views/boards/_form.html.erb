@@ -24,7 +24,7 @@
   <%= f.check_box  :active %><%= t :board_active %><br/>
  </div>
 
- <% if current_user.privilege?(:manage_boards) or current_user.id == @board.user_id %>
+ <% if current_user.privilege?(:manage_users) or current_user.id == @board.user_id %>
  <div>
    <h2><%= t :board_grants %></h2>
    <table>
@@ -38,11 +38,7 @@
      <tr>
        <th><%= user.name %></th>
        <% Permission.privs_board.each do |priv| %>
-       <% if current_user.id == @board.user_id or current_user.privilege?( :manage_boards ) %>
-      <td><%= check_box_tag  "priv_#{priv}_#{user.id}", 1, user.privilege?( priv,  @board.id ),  :title => t( Permission.description(priv) ) %></td>
-       <% else %>
-       <td><span class="ui-icon ui-icon-<%= user.privilege?( priv, @board.id ) ? 'check' : 'close' %> nbnoteicon" title="<%= t Permission.description(priv) %>"></span></td>
-       <% end %>
+       <td><%= check_box_tag  "priv_#{priv}_#{user.id}", 1, user.privilege?( priv,  @board.id ),  :title => t( Permission.description(priv) ) %></td>
        <% end %>
      </tr>
      <% end  %>

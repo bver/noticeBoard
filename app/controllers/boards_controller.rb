@@ -98,7 +98,7 @@ class BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
 
-    unless current_user.id == @board.user_id or current_user.privilege?( :manage_boards )
+    unless current_user.id == @board.user_id or current_user.privilege?( :manage_users )
       head :forbidden
       return
     end
