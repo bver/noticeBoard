@@ -4,7 +4,7 @@ class Change < ActiveRecord::Base
 
   @@sense_values = [ :created, :finished, :cancelled, :accepted, :rejected, :assigned, 
     :commented, :raise_priority, :lower_priority, :start_work, :stop_work, 
-    :set_problem, :reset_problem, :unassigned, :edited_title, :edited_content ]
+    :set_problem, :reset_problem, :unassigned, :edited_title, :edited_content, :attachement ]
 
   def sense
      self.meaning.nil? ? nil : @@sense_values[self.meaning]

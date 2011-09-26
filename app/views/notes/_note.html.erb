@@ -41,6 +41,10 @@
         <li class="nbicon" title="<%= t(:ch_prob) %>"><%= link_to nsp('help'), edit_note_path( @note,  :add => 'prob', :last => @note.updated_at.to_i ), :remote=>true %></li>
         <%   end
                end
+               if current_user.privilege?( :file_upload, @note.board_id )  %>
+        <li class="nbicon" title="<%= t(:ch_upload) %>"><%= link_to nsp('document'), edit_note_path( @note,  :add => 'upload', :last => @note.updated_at.to_i ), :remote=>true %></li>
+               <%
+               end
                if current_user.privilege?( :cancel_notes, @note.board_id )  %>
         <li class="nbicon" title="<%= t(:ch_cancel) %>"><%= link_to nsp('circle-close'), edit_note_path( @note,  :add => 'cancel', :last => @note.updated_at.to_i ), :remote=>true %></li>
         <% end %>

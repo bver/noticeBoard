@@ -78,8 +78,16 @@ class NotesController < ApplicationController
   def edit
     @note = Note.find(params[:id])
     return if dry_modified_by_others
-    dry_edit_create params[:add].to_s
-    dialog = params[:add].to_s == 'edit' ? 'edit' : 'comment'
+
+   add = params[:add].to_s
+   dry_edit_create add
+    
+    dialog = case add
+    when 'edit', 'upload'
+      add
+    else
+      'comment'
+    end
 
     respond_to do |format|
       format.js do
@@ -260,6 +268,14 @@ class NotesController < ApplicationController
           change = nil
         end        
       end
+    when 'upload'
+      unless current_user.privilege?( :file_upload, @note.board_id )
+          head :forbidden
+          return
+      end
+      change.comment = @note.save_attachement( params[:upload] )
+      change.sense = :attachement
+
     else #when 'comment'
        unless current_user.privilege?( :process_notes, @note.board_id )
          head :forbidden
@@ -280,8 +296,10 @@ class NotesController < ApplicationController
         NoteMailer.note_email( @note, recipients ).deliver unless recipients.empty?
 
         format.js { render :template => 'shared/update', :locals =>{:templ=>'note', :item=>@note} }
+        format.html { redirect_to request.referrer }
         format.xml  { head :ok }
       else
+        format.html { redirect_to request.referrer }
         format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'comment'} }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
       end
@@ -313,8 +331,6 @@ class NotesController < ApplicationController
        [t(:add_reject), t(:label_reject), t(:create_reject)]
     when 'prob'
        [t(:add_problem), t(:label_problem), t(:create_problem)]
-    when 'edit'
-       [t(:add_edit), t(:label_edit), t(:create_edit)]
     else  # when 'comment'
        @hidden = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       

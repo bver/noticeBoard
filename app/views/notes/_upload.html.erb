@@ -1,5 +1,5 @@
-<div id="dialog" title="<%=  t :add_edit %>">
-<%= form_for( @note, :remote=>true ) do |f| %>
+<div id="dialog" title="<%=  t :add_upload %>">
+<%= form_for @note,  :html => { :multipart => true } do |f| %>
   <% if @note.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@note.errors.count, "error") %> - <%= t :cannot_save %>:</h2>
@@ -12,22 +12,17 @@
     </div>
   <% end %>
 
-  <%= hidden_field_tag 'add', 'edit' %>
+  <%= hidden_field_tag 'add', 'upload' %>
   <%= hidden_field_tag 'last', @last %>
 
   <div class="field">
-    <%= f.label t( :title ) %>:<br />
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label  t( :label_edit ) %>:<br />
-    <%= f.text_area :content, :rows=>3, :cols => 35 %>
+    <%= label_tag t( :label_upload ) %>:<br />
+    <%= file_field 'upload', 'datafile' %>
   </div>
 
   <div class="actions">
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
-        class="ui-button-text"><%= t :create_edit %></span></a>
+        class="ui-button-text"><%= t :create_upload %></span></a>
     <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
         class="ui-button-text"><%= t :cancel %></span></a>
   </div>

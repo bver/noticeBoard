@@ -26,5 +26,18 @@ class Note < ActiveRecord::Base
       raise ArgumentError
     end
   end
+
+  def save_attachement(upload)
+    return nil if upload.nil?
+    #return nil unless /^image/ =~ upload['datafile'].content_type
+
+    dir = "#{Rails.root}/public/attachements/#{self.id}"
+    Dir.mkdir( dir ) unless FileTest.directory?( dir )
+
+    name = upload['datafile'].original_filename
+    File.open( File.join( dir, name ), "wb" ) { |f| f.write(upload['datafile'].read) }
+
+    name
+  end
   
 end

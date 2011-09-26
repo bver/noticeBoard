@@ -74,6 +74,8 @@ module NotesHelper
        t( :c_edited_title )
      when :edited_content
        t( :c_edited_content )
+     when :attachement
+       raw(  "#{ t :c_attachement } : " + link_to( change.comment, "/attachements/#{change.note_id}/#{change.comment}", :target => '_blank' ) )
      else
        '!!!'
      end
@@ -100,7 +102,8 @@ module NotesHelper
     :set_problem => 'help',
     :reset_problem => 'help',
     :edited_title => 'pencil',
-    :edited_content => 'pencil'
+    :edited_content => 'pencil',
+    :attachement => 'document'
   }
   @@change_icons.default ='alert'
   def change_icon change
