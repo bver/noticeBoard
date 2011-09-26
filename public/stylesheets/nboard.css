@@ -237,24 +237,24 @@ th:hover {
   margin-top: 15px; }
 
 .nb-notes-content .ui-state-default {
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#92bdd6));
-  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #92bdd6); }
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#929dc3));
+  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #929dc3); }
 
 .nb-notes-content .ui-state-active {
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b9e0f5), to(#92bdd6));
-  background-image: -moz-linear-gradient(50% 0%, #b9e0f5, #92bdd6); }
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b9e0f5), to(#92bde6));
+  background-image: -moz-linear-gradient(50% 0%, #b9e0f5, #92bde6); }
 
 .nb-boards-content .ui-state-default {
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#b9f5e0));
-  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #b9f5e0); }
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#b9d5c0));
+  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #b9d5c0); }
 
 .nb-boards-content .ui-state-active {
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#92d6bd), to(#b9f5e0));
-  background-image: -moz-linear-gradient(50% 0%, #92d6bd, #b9f5e0); }
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#92d6bd), to(#b9ffe0));
+  background-image: -moz-linear-gradient(50% 0%, #92d6bd, #b9ffe0); }
 
 .nb-users-content .ui-state-default {
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#f7e832));
-  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #f7e832); }
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#d7d842));
+  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #d7d842); }
 
 .nb-users-content .ui-state-active {
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#fde834), to(#f7e832));
