@@ -105,7 +105,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.update_attributes(params[:board])
-        dry_update_privs params if current_user.privilege?(:manage_users)
+        dry_update_privs params
         format.js { render :template => 'shared/update', :locals =>{:templ=>'board', :item=>@board} }
         format.xml  { head :ok }
       else
@@ -135,7 +135,7 @@ class BoardsController < ApplicationController
 
   def dry_update_privs params
     @users.each do |u|
-      next if u.id == current_user.id
+       #next if u.id == current_user.id
        Permission.privs_board.each do |p|
          if params.key?  "priv_#{p}_#{u.id}"
            u.grant( p, @board.id )

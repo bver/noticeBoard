@@ -140,7 +140,7 @@ cs:
      my_uncompleted: "Jen nehotové"
      my_archive: "Jen archivované"
      my_important: "Jen důležité"
-     note_modified_by_other: "Varování: Jiný uživatel patrně změnil lístek. Zkuste to znovu po občerstvení výběru."
+     note_modified_by_other: "Varování: Jiný uživatel změnil lístek. Zkuste to znovu po občerstvení výběru."
 
      manage_users: "Správa uživatelů"
      add_boards: "Přidat nástěnku"
@@ -152,6 +152,7 @@ cs:
      assign_notes: "Delegovat lístky"
      change_prio: "Změna priority"
      process_notes: "Zpracovat lístky"
+     file_upload: "Nahrávat soubory"
      desc_manage_users: "vytvářet/editovat/deaktivovat uživ. účty, přidělovat práva"
      desc_add_boards: "vytvářet nástěnky, editovat/deaktivovat vytvořené nástěnky"
      desc_manage_boards: "editovat/deaktivovat všechny nástěnky"
@@ -162,3 +163,4 @@ cs:
      desc_assign_notes: "delegovat/odebírat lístky uživatelům"
      desc_change_prio: "změna priorit, s výjimkou nejvyšší"
      desc_process_notes: "přijímat, zpracovávat, komentovat, dokončovat lístky"
+     desc_file_upload: "nahrávat soubory příloh"

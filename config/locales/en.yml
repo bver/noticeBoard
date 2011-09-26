@@ -152,6 +152,7 @@ en:
      assign_notes: "assign notes"
      change_prio: "change prio"
      process_notes: "process notes"
+     file_upload: "file upload"
      desc_manage_users: "create/edit/disable accounts, grant/revoke privileges"
      desc_add_boards: "create new boards, edit/disable created boards"
      desc_manage_boards: "edit/disable all boards"
@@ -163,3 +164,4 @@ en:
      desc_change_prio: "change priorities, except urgent level"
      desc_edit_content: "edit note title/content"
      desc_process_notes: "accept, process, comment, complete notes"
+     desc_file_upload: "upload attachement files"
