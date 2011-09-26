@@ -18,7 +18,7 @@
        <p class="nbmiddle"><%=t :no_board %></p>
  <% end %>
        
- <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons nb-boards-content" >
     <% @boards.each do |board| %>
        <% @board = board %>
        <%= render :partial => 'board' %>

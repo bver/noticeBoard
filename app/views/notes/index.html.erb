@@ -72,7 +72,7 @@
        <p class="nbmiddle"><%=t :no_note %></p>
  <% end %>
 
- <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" >
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons nb-notes-content" >
     <% @notes.each do |note| %>
        <% @note = note %>
        <%= render :partial => 'notes/note' %>
