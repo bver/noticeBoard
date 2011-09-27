@@ -25,7 +25,7 @@
   <%= f.check_box  :active %><%= t :board_active %><br/>
  </div>
 
- <% if current_user.privilege?(:manage_users) or current_user.id == @board.user_id %>
+ <% if current_user.privilege?(:manage_users) or current_user.id == @board.user_id or @board.new_record? %>
  <div>
    <h2><%= t :board_grants %></h2>
    <table>
