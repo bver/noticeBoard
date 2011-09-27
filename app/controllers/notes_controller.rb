@@ -79,14 +79,14 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     return if dry_modified_by_others
 
-   add = params[:add].to_s
-   dry_edit_create add
+   @add = params[:add].to_s
     
-    dialog = case add
+    case @add
     when 'edit', 'upload'
-      add
+      dialog = @add
     else
-      'comment'
+      dry_title_label_button
+      dialog = 'comment'
     end
 
     respond_to do |format|
@@ -140,10 +140,11 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
 
-    if params[:add].to_s != 'comment'
+    @add = params[:add].to_s
+    unless  @add == 'comment'
       return if dry_modified_by_others
     end
-    dry_edit_create params[:add]
+    dry_title_label_button
     dry_options
 
     change = Change.new( :created=>Time.now )
@@ -320,9 +321,8 @@ class NotesController < ApplicationController
 
   protected
 
-  def dry_edit_create add
-    @hidden = add.to_s
-    @title, @label, @button = case @hidden
+  def dry_title_label_button
+    @title, @label, @button = case @add
     when 'cancel'
        [t(:add_cancel), t(:label_cancel), t(:create_cancel)]
     when 'stop'
@@ -332,7 +332,7 @@ class NotesController < ApplicationController
     when 'prob'
        [t(:add_problem), t(:label_problem), t(:create_problem)]
     else  # when 'comment'
-       @hidden = 'comment'
+       @add = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       
     end
   end
