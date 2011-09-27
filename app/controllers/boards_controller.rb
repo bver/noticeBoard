@@ -53,9 +53,9 @@ class BoardsController < ApplicationController
   # GET /boards/new.xml
   def new
     @board = Board.new
-
+    @title = t :new_board
     respond_to do |format|
-      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
+      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'form'} }
       format.xml  { render :xml => @board }
     end
   end
@@ -63,9 +63,9 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
-
+    @title = t :edit_board
     respond_to do |format|
-      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'edit'} }
+      format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'form'} }
     end
   end
 

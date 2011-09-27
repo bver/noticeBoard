@@ -1,3 +1,4 @@
+<div id="dialog" title="<%= @title %>">
 <%= form_for(@board, :remote=>true) do |f| %>
   <% if @board.errors.any? %>
     <div id="error_explanation">
@@ -54,3 +55,4 @@
     </div>
 
 <% end %>
+</div>
