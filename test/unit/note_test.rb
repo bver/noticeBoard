@@ -43,4 +43,27 @@ class NoteTest < ActiveSupport::TestCase
     assert_raise( ArgumentError ) { one.status = :unknown }
   end
 
+  test "instant datetime" do
+    one =notes(:one)
+    assert_nil one.date
+    assert_nil one.time
+
+    one.time = '13:30'
+    assert_equal '13:30', one.time
+    assert_nil one.date
+
+   one.date = '22.4.1970'
+    assert_equal '13:30', one.time
+   assert_equal '22.04.1970', one.date
+
+    one.time = nil
+    assert_equal '22.04.1970', one.date
+    assert_nil one.time
+
+    one.date = nil
+    assert_nil one.date
+    assert_nil one.time
+  end
+
+
 end

@@ -40,6 +40,14 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal :edited_content, c.sense
     c.meaning = 16
     assert_equal :attachement, c.sense
+    c.meaning = 17
+    assert_equal :set_date, c.sense
+    c.meaning = 18
+    assert_equal :set_time, c.sense
+    c.meaning = 19
+    assert_equal :reset_date, c.sense
+    c.meaning = 20
+    assert_equal :reset_time, c.sense
   end
 
   test "sense helper bw" do
@@ -80,6 +88,13 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal 15, c.meaning
     c.sense = :attachement
     assert_equal 16, c.meaning
-   
+    c.sense = :set_date
+    assert_equal 17, c.meaning
+    c.sense = :set_time
+    assert_equal 18, c.meaning
+    c.sense = :reset_date
+    assert_equal 19, c.meaning
+    c.sense = :reset_time
+    assert_equal 20, c.meaning
   end
 end

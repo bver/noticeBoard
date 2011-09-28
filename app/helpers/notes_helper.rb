@@ -31,6 +31,11 @@ module NotesHelper
      end
   end
 
+  def note_instant note
+    return '' if note.date.nil? and note.time.nil?
+    raw %Q'<span class="nbnoteinstant">#{note.date} #{note.time}</span>'
+  end
+
   def nsp icon
     raw %Q'<span class="ui-icon ui-icon-#{icon}"></span>'
   end
@@ -76,6 +81,14 @@ module NotesHelper
        t( :c_edited_content )
      when :attachement
        raw(  "#{ t :c_attachement } : " + link_to( change.comment, "/attachements/#{change.note_id}/#{change.comment}", :target => '_blank' ) )
+     when :set_time
+       "#{t( :c_set_time )} : #{DateTime.parse('00:00').since(change.argument).to_s.gsub(/^.*T/,'').gsub(/\+.*$/,'').gsub(/\:\d\d$/,'')}"
+     when :reset_time
+       t( :c_reset_time )
+     when :set_date
+       "#{t( :c_set_date )} : #{Date.parse('1.1.1970').since(change.argument).to_s(:db).split(' ').first.split('-').reverse.join('.')}"
+     when :reset_date
+       t( :c_reset_date )
      else
        '!!!'
      end
@@ -103,7 +116,11 @@ module NotesHelper
     :reset_problem => 'help',
     :edited_title => 'pencil',
     :edited_content => 'pencil',
-    :attachement => 'document'
+    :attachement => 'document',
+    :set_time => 'clock',
+    :reset_time => 'clock',
+    :set_date => 'calendar',
+    :reset_date => 'calendar'
   }
   @@change_icons.default ='alert'
   def change_icon change

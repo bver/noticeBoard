@@ -39,5 +39,23 @@ class Note < ActiveRecord::Base
 
     name
   end
-  
+
+  def time
+    return nil if self.instant_time.nil?
+    self.instant_time.to_s.split(' ')[1].gsub(/\:\d\d$/,'')
+  end
+
+  def time= value
+    self.instant_time = value.nil? ? nil : Time.parse(value)
+  end
+
+  def date
+    return nil if self.instant_date.nil?
+    self.instant_date.to_s(:db).split(' ').first.split('-').reverse.join('.')
+  end
+
+  def date= value
+    self.instant_date = value.nil? ? nil : Date.parse(value)
+  end
+
 end

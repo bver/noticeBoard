@@ -82,7 +82,7 @@ class NotesController < ApplicationController
    @add = params[:add].to_s
     
     case @add
-    when 'edit', 'upload'
+    when 'edit', 'upload', 'instant'
       dialog = @add
     else
       dry_title_label_button
@@ -152,7 +152,10 @@ class NotesController < ApplicationController
     change.note = @note
     change.comment =params['comment']
 
-    case params[:add].to_s
+    is_time = nil # UGLY scope
+    is_date = nil # UGLY scope
+
+    case @add
     when 'accept'
        unless current_user.privilege?( :process_notes, @note.board_id )
          head :forbidden
@@ -276,6 +279,41 @@ class NotesController < ApplicationController
       end
       change.comment = @note.save_attachement( params[:upload] )
       change.sense = :attachement
+    when 'instant'
+       unless current_user.privilege?( :process_notes, @note.board_id )
+         head :forbidden
+         return
+       end
+       new_values = Note.new
+       new_values.date = params[:note][:date] unless params[:note][:date].empty?
+       new_values.time = "#{params[:note]['instant_time(4i)']}:#{params[:note]['instant_time(5i)']}"
+       is_date = (params[:is_date] == '1') && ! new_values.date.nil?
+       is_time = (params[:is_time] == '1')
+       time_changed = ( is_time && @note.time.nil? ) ||  ( !is_time && !@note.time.nil? ) ||  ( new_values.time != @note.time )
+       date_changed = ( is_date && @note.date.nil? ) ||  ( !is_date && !@note.date.nil? ) ||  ( new_values.date != @note.date )
+       logger.debug " !is_date : #{!is_date} !@note.date.nil? : #{!@note.date.nil?} !!#{ !is_date and !@note.date.nil?}!! is_time : #{is_time.inspect} time_changed = #{time_changed}  date_changed = #{date_changed}  // #{new_values.date} != #{@note.date} //"
+       if time_changed
+         change.sense = ( is_time ? :set_time : :reset_time )
+         change.argument = new_values.instant_time.to_time.seconds_since_midnight.round  if is_time
+         @note.instant_time = is_time ? new_values.instant_time : nil
+         if date_changed
+           change.save
+           change = Change.new( :created=>Time.now )
+           change.user_id = current_user.id
+           change.note = @note
+           change.sense = ( is_date ? :set_date : :reset_date )
+           change.argument =new_values.instant_date.to_datetime.to_i  if is_date
+           @note.instant_date = is_date ? new_values.instant_date : nil
+         end
+       else
+         if date_changed
+           change.sense = ( is_date ? :set_date : :reset_date )
+           change.argument =new_values.instant_date.to_datetime.to_i  if is_date
+           @note.instant_date = is_date ? new_values.instant_date : nil
+         else
+          change = nil
+         end             
+       end
 
     else #when 'comment'
        unless current_user.privilege?( :process_notes, @note.board_id )
@@ -291,8 +329,12 @@ class NotesController < ApplicationController
     end
 
     respond_to do |format|
-      if @note.update_attributes(params[:note])
-
+      res = if @add == 'instant'
+          @note.save
+      else
+          @note.update_attributes(params[:note])
+      end
+      if  res
         recipients = note_recipients(@note)
         NoteMailer.note_email( @note, recipients ).deliver unless recipients.empty?
 
@@ -332,7 +374,6 @@ class NotesController < ApplicationController
     when 'prob'
        [t(:add_problem), t(:label_problem), t(:create_problem)]
     else  # when 'comment'
-       @add = 'comment'
        [t(:add_comment), t(:label_comment), t(:create_comment)]       
     end
   end

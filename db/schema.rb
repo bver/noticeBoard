@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110418063204) do
+ActiveRecord::Schema.define(:version => 20110927125311) do
 
   create_table "boards", :force => true do |t|
     t.integer  "user_id"
@@ -36,19 +36,23 @@ ActiveRecord::Schema.define(:version => 20110418063204) do
   add_index "changes", ["note_id"], :name => "index_changes_on_note_id"
 
   create_table "notes", :force => true do |t|
-    t.integer  "board_id",                      :null => false
-    t.integer  "user_id",    :default => -1,    :null => false
-    t.string   "title",                         :null => false
+    t.integer  "board_id",                        :null => false
+    t.integer  "user_id",      :default => -1,    :null => false
+    t.string   "title",                           :null => false
     t.text     "content"
-    t.integer  "priority",   :default => 1,     :null => false
+    t.integer  "priority",     :default => 1,     :null => false
     t.boolean  "outcome"
-    t.boolean  "working",    :default => false, :null => false
-    t.boolean  "problem",    :default => false, :null => false
+    t.boolean  "working",      :default => false, :null => false
+    t.boolean  "problem",      :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "instant_date"
+    t.time     "instant_time"
   end
 
   add_index "notes", ["board_id"], :name => "index_notes_on_board_id"
+  add_index "notes", ["instant_date"], :name => "index_notes_on_instant_date"
+  add_index "notes", ["instant_time"], :name => "index_notes_on_instant_time"
   add_index "notes", ["outcome"], :name => "index_notes_on_outcome"
   add_index "notes", ["priority"], :name => "index_notes_on_priority"
   add_index "notes", ["problem"], :name => "index_notes_on_problem"

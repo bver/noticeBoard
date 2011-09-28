@@ -1,0 +1,80 @@
+<%= javascript_include_tag 'jquery.ui.datepicker-cs' %>
+<script type="text/javascript">
+  
+   $( "#note_date" ).datepicker( $.datepicker.regional['cs'] );
+
+   if( <%= @note.date.nil? %> ) {
+       $("#field_date").hide();
+  }
+  if( <%= @note.time.nil? %> ) {
+       $("#field_time").hide();
+  }
+
+  $("#is_date").change( function() {
+     if( $(this).is(':checked') ) {
+        if( $("#note_date").val() == '' )
+           $("#note_date").val( $('#today').val() );
+      
+        $("#field_date").show();
+     } else {
+        $("#field_date").hide();
+    }
+  });
+ 
+  $("#is_time").change( function() {
+      if( $(this).is(':checked') ) {
+        $("#field_time").show();
+      } else {
+        $("#field_time").hide();
+      }
+   });
+   
+</script>
+<div id="dialog" title="<%=  t :add_instant %>">
+<%= form_for( @note, :remote=>true ) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> - <%= t :cannot_save %>:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag 'add', 'instant' %>
+  <%= hidden_field_tag 'last', @last %>
+  <%= hidden_field_tag 'today', Time.now.to_s(:db).split(' ').first.split('-').reverse.join('.') %>
+
+<p>
+  <div class="field">
+    <%= check_box_tag 'is_date', '1', ! @note.date.nil? %>
+    <%= f.label t( :label_is_date ) %>
+  </div>
+  <div class="field" id="field_date">
+    <%= f.label t( :label_date ) %>:
+     <%= f.text_field :date %>
+  </div>
+</p>
+<p>
+  <div class="field">
+    <%= check_box_tag 'is_time', '1', ! @note.time.nil? %>
+    <%= f.label t( :label_is_time ) %>
+  </div>
+  <div class="field" id="field_time">
+    <%= f.label t( :label_time ) %>:
+    <%= f.time_select :instant_time %>
+  </div>
+</p>
+
+  <div class="actions">
+    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
+        class="ui-button-text"><%= t :create_instant %></span></a>
+    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
+        class="ui-button-text"><%= t :cancel %></span></a>
+  </div>
+<% end %>
+
+</div>
