@@ -22,7 +22,7 @@ en:
      are_you_sure: "Are you sure?"
      cannot_save: "cannot save"
 
-     users: "Users"
+     users: "users"
      profile: "profile"
      add_user: "new user"
      save_user: "save user"
@@ -41,7 +41,7 @@ en:
      deactivated_account: "This account was deactivated. Contact your admin."
      board_specific: "board-specific default"
 
-     boards: "Boards"
+     boards: "boards"
      board: "board"
      boards_management: "boards management"
      board_grants: "board privileges"
@@ -55,8 +55,8 @@ en:
      owner: "Board owner"
      no_board: "No board available."
 
-     notes: "Notes"
-     note: "Note"
+     notes: "notes"
+     note: "note"
      add_note: "new note"
      save_note: "save note"
      new_note: "new note"
@@ -159,7 +159,7 @@ en:
      sel_select: "select all"
      sel_deselect: "deselect all"
      my_notes: "my notes"
-     my_uncompleted: "only uncompleted"
+     my_uncompleted: "all uncomplete"
      my_archive: "only archived"
      my_important: "only important"
      my_with_date: "only with date"
