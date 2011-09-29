@@ -3,6 +3,33 @@ $menu_background: #BDD2FF
 $menu_color: black
 $content_background: white
 $outside_background: #f1ede9
+$board_col1: #92D6BD
+$board_col2: #B9FFE0
+$note_col1: #B9E0F5
+$note_col2: #92BDE6
+$user_col1: #ddc814
+$user_col2: #f7e832
+
+@mixin notes-background
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from($note_col1), to($note_col2))
+  background-image: -moz-linear-gradient(50% 0%, $note_col1, $note_col2)
+
+@mixin boards-background
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from($board_col1), to($board_col2))
+  background-image: -moz-linear-gradient(50% 0%, $board_col1, $board_col2)
+
+@mixin users-background
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from($user_col1), to($user_col2))
+  background-image: -moz-linear-gradient(50% 0%, $user_col1, $user_col2)
+
+@mixin main-h1
+  text-align: left
+  clear: both
+  margin:
+    left: 30px
+    right: 30px
+  padding:
+    left: 30px
 
 // document
 body
@@ -18,10 +45,16 @@ body
   display: inline-block
   margin-bottom: 0px
   h1
-    text-align: left
-    margin:
-      left: 30px
-      right: 30px
+    @include main-h1
+    background-color: $content_background
+
+h1.nbhboard
+  @include main-h1
+  @include boards-background
+
+h1.nbhuser
+  @include main-h1
+  @include users-background
 
 .nbdesc
   display: inline-block
@@ -288,27 +321,25 @@ th:hover
     left: 10px
     top: 15px
 
+
 // distinct
 .nb-notes-content .ui-state-default
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#929DC3))
   background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #929DC3)
 
 .nb-notes-content .ui-state-active
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#B9E0F5), to(#92BDE6))
-  background-image: -moz-linear-gradient(50% 0%, #B9E0F5, #92BDE6)
+  @include notes-background
 
 .nb-boards-content .ui-state-default
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#B9D5C0))
   background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #B9D5C0)
 
 .nb-boards-content .ui-state-active
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#92D6BD), to(#B9FFE0))
-  background-image: -moz-linear-gradient(50% 0%, #92D6BD, #B9FFE0)
+  @include boards-background
 
 .nb-users-content .ui-state-default
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#d7d842))
   background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #d7d842)
 
 .nb-users-content .ui-state-active
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#fde834), to(#f7e832))
-  background-image: -moz-linear-gradient(50% 0%, #fde834, #f7e832)
+  @include users-background

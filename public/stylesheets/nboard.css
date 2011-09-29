@@ -10,8 +10,29 @@ body {
   margin-bottom: 0px; }
   .nbheader h1 {
     text-align: left;
+    clear: both;
     margin-left: 30px;
-    margin-right: 30px; }
+    margin-right: 30px;
+    padding-left: 30px;
+    background-color: white; }
+
+h1.nbhboard {
+  text-align: left;
+  clear: both;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-left: 30px;
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#92d6bd), to(#b9ffe0));
+  background-image: -moz-linear-gradient(50% 0%, #92d6bd, #b9ffe0); }
+
+h1.nbhuser {
+  text-align: left;
+  clear: both;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-left: 30px;
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#ddc814), to(#f7e832));
+  background-image: -moz-linear-gradient(50% 0%, #ddc814, #f7e832); }
 
 .nbdesc {
   display: inline-block;
@@ -265,5 +286,5 @@ th:hover {
   background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #d7d842); }
 
 .nb-users-content .ui-state-active {
-  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#fde834), to(#f7e832));
-  background-image: -moz-linear-gradient(50% 0%, #fde834, #f7e832); }
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#ddc814), to(#f7e832));
+  background-image: -moz-linear-gradient(50% 0%, #ddc814, #f7e832); }

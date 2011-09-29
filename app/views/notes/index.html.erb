@@ -61,9 +61,9 @@
             class="ui-button-text"><%= "#{ t :showing}: #{@notes.size}/#{@all_size}" %></span></div>
         
        <% if @parent.nil? %>
-        <h1><%= "#{t( :notes )} - #{current_user.name}" %></h1>
+        <h1 class="nbhuser"><%= "#{t( :notes )} - #{current_user.name}" %></h1>
         <% else %>
-        <h1 title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
+        <h1 class="nbhboard" title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
         <% end %>      
 
 <% end %>
