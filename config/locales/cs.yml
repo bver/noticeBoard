@@ -147,6 +147,10 @@ cs:
      by_boards: "Dle nástěnek"
      by_users: "Dle uživatelů"
      by_properties: "Dle vlastností"
+     by_instant_all: "čas nerozhoduje"
+     by_instant_date: "s datem"
+     by_instant_time: "s časem"
+     by_instant_date_time: "s datem i časem"
      refresh_selection: "Občerstvit výběr"
      showing: "Zobrazeno"
      filtration: "Výběr lístků"
@@ -157,6 +161,7 @@ cs:
      my_uncompleted: "Jen nehotové"
      my_archive: "Jen archivované"
      my_important: "Jen důležité"
+     my_with_date: "Jen datované"
      note_modified_by_other: "Varování: Jiný uživatel změnil lístek. Zkuste to znovu po občerstvení výběru."
 
      manage_users: "Správa uživatelů"

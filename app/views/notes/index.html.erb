@@ -111,6 +111,7 @@
      <h3><%= t :by_properties  %>:</h3>
      <%= select_tag  'prio', options_for_select( @by_prio_options, @by_prio_sel ), :title => t( :by_priorities ) %><br/>
      <%= select_tag  'proc', options_for_select( @by_proc_options, @by_proc_sel ), :title => t( :by_status ) %><br/>
+     <%= select_tag  'inst', options_for_select( @by_instant_options, @by_instant_sel ), :title => t( :by_status ) %><br/>
      <%= check_box_tag  'prob', 'P', @by_prob_sel %><%= t :by_prob_only %> [?]<br/>
   </div>
   

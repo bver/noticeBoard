@@ -148,6 +148,10 @@ en:
      by_boards: "by boards"
      by_users: "by users"
      by_properties: "by properties"
+     by_instant_all: "time irrelevant"
+     by_instant_date: "with date"
+     by_instant_time: "with time"
+     by_instant_date_time: "with date/time"
      refresh_selection: "refresh selection"
      showing: "showing"
      filtration: "note selection"
@@ -158,6 +162,7 @@ en:
      my_uncompleted: "only uncompleted"
      my_archive: "only archived"
      my_important: "only important"
+     my_with_date: "only with date"
      note_modified_by_other: "Warning: This note was probably modified by another user. Refresh and try again."
 
      manage_users: "manage users"

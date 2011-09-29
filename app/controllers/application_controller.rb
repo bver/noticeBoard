@@ -64,6 +64,13 @@ class ApplicationController < ActionController::Base
       [ t( :by_proc_archived_cancelled ), 'C']
     ]
 
+    @by_instant_options = [
+      [ t( :by_instant_all ), '0'],
+      [ t( :by_instant_date ), 'D'],
+      [ t( :by_instant_time ), 'T'],
+      [ t( :by_instant_date_time ), 'D_T']
+    ]
+
   end
 
   def dry_filter params
@@ -96,6 +103,20 @@ class ApplicationController < ActionController::Base
     when 'D_C'
       conditions[ :outcome ] = [ true, false ]
     else # '0_1_D_C'
+    end
+
+    if params.key? :inst
+      @by_instant_sel = params[:inst]
+      case @by_instant_sel
+      when 'D'
+        conditions[:instant_date] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+      when 'T'
+        conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+      when 'D_T'
+        conditions[:instant_date] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+        conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+      else # 0
+      end
     end
 
     conditions
