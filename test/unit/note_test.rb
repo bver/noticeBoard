@@ -52,12 +52,12 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal '13:30', one.time
     assert_nil one.date
 
-   one.date = '22.4.1970'
+    one.date = '22.4.1970'
     assert_equal '13:30', one.time
-   assert_equal '22.04.1970', one.date
+    assert_equal '22. 04. 1970', one.date
 
     one.time = nil
-    assert_equal '22.04.1970', one.date
+    assert_equal '22. 04. 1970', one.date
     assert_nil one.time
 
     one.date = nil

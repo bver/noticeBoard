@@ -291,7 +291,6 @@ class NotesController < ApplicationController
        is_time = (params[:is_time] == '1')
        time_changed = ( is_time && @note.time.nil? ) ||  ( !is_time && !@note.time.nil? ) ||  ( new_values.time != @note.time )
        date_changed = ( is_date && @note.date.nil? ) ||  ( !is_date && !@note.date.nil? ) ||  ( new_values.date != @note.date )
-       logger.debug " !is_date : #{!is_date} !@note.date.nil? : #{!@note.date.nil?} !!#{ !is_date and !@note.date.nil?}!! is_time : #{is_time.inspect} time_changed = #{time_changed}  date_changed = #{date_changed}  // #{new_values.date} != #{@note.date} //"
        if time_changed
          change.sense = ( is_time ? :set_time : :reset_time )
          change.argument = new_values.instant_time.to_time.seconds_since_midnight.round  if is_time

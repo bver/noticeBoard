@@ -1,19 +1,20 @@
-<%= javascript_include_tag 'jquery.ui.datepicker-cs' %>
+<%= javascript_include_tag 'jquery.ui.datepicker-' + I18n.locale.to_s unless I18n.locale == :en %>
 <script type="text/javascript">
-  
-   $( "#note_date" ).datepicker( $.datepicker.regional['cs'] );
+// see http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/ for jquery.ui.datepicker-XY.js files
 
-   if( <%= @note.date.nil? %> ) {
-       $("#field_date").hide();
-  }
-  if( <%= @note.time.nil? %> ) {
-       $("#field_time").hide();
-  }
+   $( "#note_date" ).datepicker( $.datepicker.regional['<%= I18n.locale.to_s %>'] );
+
+  <% if @note.date.nil? %>
+   $("#field_date").hide();
+  <% end %>
+  <% if  @note.time.nil? %>
+   $("#field_time").hide();
+  <% end %>
 
   $("#is_date").change( function() {
      if( $(this).is(':checked') ) {
         if( $("#note_date").val() == '' )
-           $("#note_date").val( $('#today').val() );
+           $("#note_date").val( '<%=l Time.now.to_date,  :format => :default %>' );
       
         $("#field_date").show();
      } else {
@@ -46,7 +47,6 @@
 
   <%= hidden_field_tag 'add', 'instant' %>
   <%= hidden_field_tag 'last', @last %>
-  <%= hidden_field_tag 'today', Time.now.to_s(:db).split(' ').first.split('-').reverse.join('.') %>
 
 <p>
   <div class="field">

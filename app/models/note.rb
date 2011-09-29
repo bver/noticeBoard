@@ -42,7 +42,7 @@ class Note < ActiveRecord::Base
 
   def time
     return nil if self.instant_time.nil?
-    self.instant_time.to_s.split(' ')[1].gsub(/\:\d\d$/,'')
+    self.instant_time.to_formatted_s(:hour_minute)
   end
 
   def time= value
@@ -51,7 +51,7 @@ class Note < ActiveRecord::Base
 
   def date
     return nil if self.instant_date.nil?
-    self.instant_date.to_s(:db).split(' ').first.split('-').reverse.join('.')
+    I18n.localize( self.instant_date,  :format => :default )
   end
 
   def date= value

@@ -82,11 +82,11 @@ module NotesHelper
      when :attachement
        raw(  "#{ t :c_attachement } : " + link_to( change.comment, "/attachements/#{change.note_id}/#{change.comment}", :target => '_blank' ) )
      when :set_time
-       "#{t( :c_set_time )} : #{DateTime.parse('00:00').since(change.argument).to_s.gsub(/^.*T/,'').gsub(/\+.*$/,'').gsub(/\:\d\d$/,'')}"
+       "#{t( :c_set_time )} : #{DateTime.parse('00:00').since(change.argument).to_formatted_s(:hour_minute) }"
      when :reset_time
        t( :c_reset_time )
      when :set_date
-       "#{t( :c_set_date )} : #{Date.parse('1.1.1970').since(change.argument).to_s(:db).split(' ').first.split('-').reverse.join('.')}"
+       "#{t( :c_set_date )} : #{l Date.parse('1.1.1970').since(change.argument).to_date, :format => :default}"
      when :reset_date
        t( :c_reset_date )
      else
