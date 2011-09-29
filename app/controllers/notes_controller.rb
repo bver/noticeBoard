@@ -6,7 +6,7 @@ class NotesController < ApplicationController
   def index
     @parent = nil
 
-    conditions = dry_filter params
+    conditions, order = dry_filter params
 
     @by_board_sel = {}
     @by_board_sel.default = false
@@ -23,7 +23,7 @@ class NotesController < ApplicationController
     end
 
     conditions[:user_id] = [ current_user.id, -1 ]
-    @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
+    @notes = Note.all( :conditions => conditions, :order =>order )
     @all_size = Note.count( :conditions => {:user_id =>  [ current_user.id, -1 ] })
     dry_options
 

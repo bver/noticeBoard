@@ -110,16 +110,20 @@ class ApplicationController < ActionController::Base
       case @by_instant_sel
       when 'D'
         conditions[:instant_date] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+        order = 'instant_date ASC'
       when 'T'
         conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+        order = 'instant_time ASC'
       when 'D_T'
         conditions[:instant_date] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
         conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
+        order = 'instant_date ASC, instant_time ASC'
       else # 0
+        order = 'priority DESC, problem DESC'
       end
     end
 
-    conditions
+    [conditions, order]
   end
 
 end

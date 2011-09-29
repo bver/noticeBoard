@@ -22,7 +22,7 @@ class BoardsController < ApplicationController
       return
     end
 
-    conditions = dry_filter params
+    conditions, order = dry_filter params
 
     @by_user_sel = {}
     if params.key?(:users)
@@ -39,7 +39,7 @@ class BoardsController < ApplicationController
     
     #@notes = @parent.notes
     conditions[:board_id] = @parent.id
-    @notes = Note.all( :conditions => conditions, :order => 'priority DESC, problem DESC' )
+    @notes = Note.all( :conditions => conditions, :order => order )
     @all_size = Note.count( :conditions => {:board_id => @parent.id })
     dry_options
     
