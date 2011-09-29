@@ -7,7 +7,7 @@ class AddInstantToNotes < ActiveRecord::Migration
   end
 
   def self.down
-     remove_column :notes, :instant
-     remove_column :notes, :instant_type
+     remove_column :notes, :instant_date
+     remove_column :notes, :instant_time
   end
 end
