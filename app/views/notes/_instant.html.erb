@@ -2,10 +2,14 @@
 <script type="text/javascript">
 // see http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/ for jquery.ui.datepicker-XY.js files
 
-   $( "#note_date" ).datepicker( $.datepicker.regional['<%= I18n.locale.to_s %>'] );
+   $( "#note_date" ).datepicker( $.datepicker.regional['<%= I18n.locale.to_s %>'] )
+                               .datepicker( "option", "dateFormat", 'yy-mm-dd' )
+                            .datepicker( "option", "changeYear", true  );
 
   <% if @note.date.nil? %>
    $("#field_date").hide();
+  <% else %>
+   $( "#note_date" ).val( '<%= @note.date  %>' );
   <% end %>
   <% if  @note.time.nil? %>
    $("#field_time").hide();
