@@ -63,4 +63,5 @@ class Note < ActiveRecord::Base
   def  contexts_for user
      self.contexts.find_all { |c| c.user.id == user.id }
   end
+
 end

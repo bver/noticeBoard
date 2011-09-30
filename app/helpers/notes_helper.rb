@@ -31,6 +31,13 @@ module NotesHelper
      end
   end
 
+  def note_context( note, parent )
+    return '' if not parent.nil? and parent.kind_of? Context
+    sel = note.contexts_for( current_user ).map { |c| c.name}
+    return '' if sel.empty?
+    "{#{sel.join(', ')}}"
+  end
+
   def note_instant note
     return '' if note.date.nil? and note.time.nil?
     raw %Q'<span class="nbnoteinstant">#{note.date} #{note.time}</span>'
@@ -129,7 +136,7 @@ module NotesHelper
 
   def context_options note
      first = note.contexts_for( current_user ).map { |ctx| [ctx.name, ctx.id] }
-     first.push [ "{#{t :without_context }}", -1 ]
+     first.unshift [ "{#{t :without_context }}", -1 ]
      (first + @ctx_options).uniq
   end
 

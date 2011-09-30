@@ -1,6 +1,6 @@
 <h3 id="h_<%= @note.id %>"><a href="#"><span 
       class="ui-icon ui-icon-<%= note_icon @note %>"></span><%=  note_problem @note %><%= note_instant @note %><span
-      class="<%= note_prio @note  %>"><%= note_title @note, @parent %><%= note_user @note %></span></a></h3>
+      class="<%= note_prio @note  %>"><%= note_title @note, @parent %><%= note_user @note %> <%= note_context @note, @parent %></span></a></h3>
 <div id="d_<%= @note.id %>" class="nbnote">
 
 <div class="nbnotecont">
@@ -64,9 +64,11 @@
     <% end %>
 
     <% if @note.status == :active %>
-    <%= select_tag  "c_#{@note.id}", options_for_select( context_options(@note), @note.context_id ),
-              :title => t(:select_ctx), :class => 'nbselect',  'data-add' => 'ctx', 'data-id' =>@note.id, 'data-last' => upd  %>
-   <% end %>
+    <% opts = context_options(@note)
+           sel = @note.contexts_for current_user %>
+    <%= select_tag(  "c_#{@note.id}", options_for_select( opts, sel.empty? ? nil : sel.first.id ),
+              :title => t(:select_ctx), :class => 'nbselect',  'data-add' => 'ctx', 'data-id' =>@note.id, 'data-last' => upd )   if opts.size > 1 %>
+    <% end %>
 
   <% end %>
   </div>

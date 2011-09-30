@@ -66,7 +66,7 @@ cs:
      context_name: "název"
      context_owner: "autor"
      contexts_management: "Správa míst"
-     select_ctx: "zvolit místo"
+     select_ctx: "Zvolit místo"
      without_context: "neurčeno"
 
      notes: "Lístky"
