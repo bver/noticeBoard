@@ -9,6 +9,8 @@ $note_col1: #B9E0F5
 $note_col2: #92BDE6
 $user_col1: #ddc814
 $user_col2: #f7e832
+$context_col1: #8e5151
+$context_col2: #dc7a7a
 
 @mixin notes-background
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from($note_col1), to($note_col2))
@@ -21,6 +23,10 @@ $user_col2: #f7e832
 @mixin users-background
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from($user_col1), to($user_col2))
   background-image: -moz-linear-gradient(50% 0%, $user_col1, $user_col2)
+
+@mixin contexts-background
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from($context_col1), to($context_col2))
+  background-image: -moz-linear-gradient(50% 0%, $context_col1, $context_col2)
 
 @mixin main-h1
   text-align: left
@@ -55,6 +61,10 @@ h1.nbhboard
 h1.nbhuser
   @include main-h1
   @include users-background
+
+h1.nbhcontext
+  @include main-h1
+  @include contexts-background
 
 .nbdesc
   display: inline-block
@@ -343,3 +353,10 @@ th:hover
 
 .nb-users-content .ui-state-active
   @include users-background
+
+.nb-contexts-content .ui-state-default
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#dc8a8a))
+  background-image: -moz-linear-gradient(50% 0%, #b2b2b2, #dc8a8a)
+
+.nb-contexts-content .ui-state-active
+  @include contexts-background

@@ -1,0 +1,33 @@
+<div id="dialog" title="<%= @title %>">
+<%= form_for(@context, :remote=>true) do |f| %>
+  <% if @context.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@context.errors.count, "error") %> - <%= t :cannot_save %>:</h2>
+
+      <ul>
+      <% @context.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div>
+  <h2><%= t :context %></h2>
+  <div class="field">
+    <%= f.label t(:context_name) %><br />
+    <%= f.text_field :name %>
+  </div>
+  <p><%= f.check_box  :active %><%= t :context_active %></p>
+  <p><%= f.check_box  :shared %><%= t :context_shared %></p>
+ </div>
+
+    <div class="actions">
+      <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
+          class="ui-button-text"><%= t :save_context %></span></a>
+      <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
+          class="ui-button-text"><%= t :cancel %></span></a>
+    </div>
+
+<% end %>
+</div>

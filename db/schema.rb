@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110927125311) do
+ActiveRecord::Schema.define(:version => 20110929133542) do
 
   create_table "boards", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,26 @@ ActiveRecord::Schema.define(:version => 20110927125311) do
   add_index "changes", ["created"], :name => "index_changes_on_created"
   add_index "changes", ["note_id"], :name => "index_changes_on_note_id"
 
+  create_table "contexts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.boolean  "active",     :default => true
+    t.boolean  "shared",     :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contexts", ["active"], :name => "index_contexts_on_active"
+  add_index "contexts", ["user_id"], :name => "index_contexts_on_user_id"
+
+  create_table "contexts_notes", :id => false, :force => true do |t|
+    t.integer "note_id"
+    t.integer "context_id"
+  end
+
+  add_index "contexts_notes", ["context_id"], :name => "index_contexts_notes_on_context_id"
+  add_index "contexts_notes", ["note_id"], :name => "index_contexts_notes_on_note_id"
+
   create_table "notes", :force => true do |t|
     t.integer  "board_id",                        :null => false
     t.integer  "user_id",      :default => -1,    :null => false
@@ -46,11 +66,13 @@ ActiveRecord::Schema.define(:version => 20110927125311) do
     t.boolean  "problem",      :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "context_id"
     t.date     "instant_date"
     t.time     "instant_time"
   end
 
   add_index "notes", ["board_id"], :name => "index_notes_on_board_id"
+  add_index "notes", ["context_id"], :name => "index_notes_on_context_id"
   add_index "notes", ["instant_date"], :name => "index_notes_on_instant_date"
   add_index "notes", ["instant_time"], :name => "index_notes_on_instant_time"
   add_index "notes", ["outcome"], :name => "index_notes_on_outcome"

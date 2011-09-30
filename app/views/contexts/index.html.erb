@@ -1,0 +1,24 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+     function specificInit() {
+         $( '#accordion' ).accordion( "activate" , false );
+     }
+  </script>
+<% end %>
+<% content_for :nbheader do %>
+       <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+            id="addButton" href="<%= new_context_path %>" data-remote="true"><span
+           class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_context %></span></a>
+       <h1><%=t :contexts %></h1>
+<% end %>
+
+ <% if @contexts.empty? %>
+       <p class="nbmiddle"><%=t :no_context %></p>
+ <% end %>
+
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons nb-contexts-content" >
+    <% @contexts.each do |context| %>
+       <% @context = context %>
+       <%= render :partial => 'context' %>
+    <% end %>
+ </div>

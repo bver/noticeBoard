@@ -226,6 +226,15 @@ class NotesController < ApplicationController
         change.argument = user_id
       end
       @note.user_id =user_id
+    when 'ctx'
+      change = nil # this is private action
+      ctx_id =  params[:value].to_i
+      mine = @note.contexts_for( current_user ).map {|c| c.id}
+      all = @note.context_ids
+      newids = all - mine
+      newids << ctx_id unless ctx_id == -1
+      logger.debug "mine:#{mine} all#{all} newids:#{newids}"
+      @note.context_ids = newids
     when 'reject'
        unless current_user.privilege?( :process_notes, @note.board_id )
          head :forbidden
@@ -313,13 +322,16 @@ class NotesController < ApplicationController
           change = nil
          end             
        end
-
-    else #when 'comment'
+    when 'comment'
        unless current_user.privilege?( :process_notes, @note.board_id )
          head :forbidden
          return
        end
        change.sense = :commented
+       
+    else
+       head :forbidden
+       return
     end
 
     unless change.nil?
@@ -328,7 +340,7 @@ class NotesController < ApplicationController
     end
 
     respond_to do |format|
-      res = if @add == 'instant'
+      res = if @add == 'instant' || @add == 'ctx'
           @note.save
       else
           @note.update_attributes(params[:note])

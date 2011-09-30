@@ -45,7 +45,7 @@ class BoardsController < ApplicationController
     
     respond_to do |format|
       format.html { render :template => 'notes/index' } # show.html.erb
-      format.xml  { render :xml => @board }
+      format.xml  { render :xml => @parent }
     end
   end
 

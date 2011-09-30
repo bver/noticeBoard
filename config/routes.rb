@@ -1,4 +1,6 @@
 UjsTest::Application.routes.draw do
+  resources :contexts
+
   resources :notes
 
   resources :boards

@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :boards
+  before_filter :my_contexts
 
   protect_from_forgery
 
@@ -47,6 +48,8 @@ class ApplicationController < ActionController::Base
 
     @user_options = User.where( :active => true ).map { |u| [ u.name, u.id ] }
     @user_options.unshift [ "[#{ t :unassigned }]", -1 ]
+
+    @ctx_options = @my_contexts.map { |c| [c.name, c.id] }
 
     @by_prio_options = [
       [ t( :by_prio_all ), '0_1_2_3'],
@@ -124,6 +127,17 @@ class ApplicationController < ActionController::Base
     end
 
     [conditions, order]
+  end
+
+  def my_contexts
+    @my_contexts = current_user.contexts.where( :shared => false, :active => true ).order( :name )
+    @my_contexts.concat Context.where( :shared => true, :active => true ).order( :name )
+    @my_contexts.uniq!
+#    Context.where( :shared => true, :active => true ).order( :name ).each do |ctx|
+#      next if @my_contexts.detect {|c| c.id == ctx.id }
+#      @my_contexts << ctx
+#    end
+#    @my_contexts
   end
 
 end

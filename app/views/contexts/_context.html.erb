@@ -1,0 +1,20 @@
+<h3 id="h_<%= @context.id %>"><%= link_to raw('<span class="ui-icon ui-icon-' + ( @context.active ? 'flag' : 'grip-dotted-vertical' ) + '"></span>')+@context.name, '#' %></h3>
+<div id="d_<%= @context.id %>" class="nbcontext">
+
+<div class="nbleftcol">
+  <h2><%= t :context %></h2>
+    <%= t :title %>: <%= link_to( @context.name, @context ) if  @context.active %><br/>
+    <% unless @context.user.nil? %>
+    <%= t :context_owner %>: <%= @context.user.name %><br/>
+    <% end %>
+    <span class="ui-icon ui-icon-<%= @context.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :context_active %><br/>
+    <span class="ui-icon ui-icon-<%= @context.shared ? 'check' : 'close' %> nbnoteicon"></span> <%= t :context_shared %><br/>
+    <br/>
+    <br/>
+    <%= link_to( raw('<div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span  class="ui-button-text">' +
+                               t( :edit_context) + '</span></div>'), edit_context_path( @context ), :remote=> true ) if current_user.id == @context.user_id %>
+    <br/>
+</div>
+
+
+</div>

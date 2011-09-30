@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :permissions, :dependent => :destroy
   has_many :notes
+  has_many :contexts
 
   validates_length_of :name, :minimum=> 3,  :maximum=>20
   validates_uniqueness_of :name

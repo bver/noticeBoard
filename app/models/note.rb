@@ -1,7 +1,9 @@
 class Note < ActiveRecord::Base
   belongs_to :board
   belongs_to :user
+  belongs_to :context
   has_many :changes, :dependent => :destroy
+  has_and_belongs_to_many :contexts
 
   validates_length_of :title, :minimum=> 3,  :maximum=>40
   
@@ -58,4 +60,7 @@ class Note < ActiveRecord::Base
     self.instant_date = value.nil? ? nil : Date.parse(value)
   end
 
+  def  contexts_for user
+     self.contexts.find_all { |c| c.user.id == user.id }
+  end
 end

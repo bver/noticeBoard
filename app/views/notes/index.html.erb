@@ -51,20 +51,24 @@
 <% end %>
 <% content_for :nbheader do %>
 
-       <% if  (@parent.nil? or current_user.privilege?( :edit_notes, @parent.id )) && ! @menu_boards.empty? %>
+       <% if  (@parent.nil? || @parent.class.to_s == 'Board' && current_user.privilege?( :edit_notes, @parent.id )) && ! @menu_boards.empty? %>
        <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
             id="addButton" href="<%= @parent.nil? ? new_note_path : new_note_path( :parent=>@parent ) %>" data-remote="true"><span
            class="ui-button-icon-primary ui-icon ui-icon-star"></span><span class="ui-button-text"><%=t :add_note%></span></a>
-        <% end %>
+       <% end %>
 
+       <% if @parent.nil? || @parent.class.to_s == 'Board' %>
         <div id="dialog_link" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span
             class="ui-button-text"><%= "#{ t :showing}: #{@notes.size}/#{@all_size}" %></span></div>
-        
+       <% end %>
+
        <% if @parent.nil? %>
-        <h1 class="nbhuser"><%= "#{t( :notes )} - #{current_user.name}" %></h1>
-        <% else %>
-        <h1 class="nbhboard" title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
-        <% end %>      
+                    <h1 class="nbhuser"><%= "#{t( :notes )} - #{current_user.name}" %></h1>
+       <% elsif @parent.class.to_s == 'Context' %>
+                    <h1 class="nbhcontext"><%= "#{t( :context )} - #{@parent.name}" %></h1>
+       <% else %>
+                    <h1 class="nbhboard" title="<%= @parent.description %>"><%= "#{t( :board )} - #{@parent.title}" %></h1>
+       <% end %>      
 
 <% end %>
 
@@ -80,6 +84,7 @@
  </div>
 
 <!-- ui-dialog -->
+<% if @parent.nil? or @parent.class.to_s == 'Board' %>
 <div id="dialog_filter" title="<%=t :filtration %>">
 
 <% if @parent.nil? %>
@@ -116,5 +121,5 @@
   </div>
   
   <% end %>
-
 </div>
+<% end %>

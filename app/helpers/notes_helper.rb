@@ -127,4 +127,10 @@ module NotesHelper
      @@change_icons[ change.sense ]
   end
 
+  def context_options note
+     first = note.contexts_for( current_user ).map { |ctx| [ctx.name, ctx.id] }
+     first.push [ "{#{t :without_context }}", -1 ] if first.empty?
+     (first + @ctx_options).uniq
+  end
+
 end

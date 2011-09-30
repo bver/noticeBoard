@@ -62,7 +62,12 @@
     <%= select_tag  "u_#{@note.id}", options_for_select( @user_options, @note.user_id ), 
               :title => t(:assign_user), :class => 'nbselect',  'data-add' => 'user', 'data-id' =>@note.id, 'data-last' => upd  %>
     <% end %>
-  
+
+    <% if @note.status == :active %>
+    <%= select_tag  "c_#{@note.id}", options_for_select( context_options(@note), @note.context_id ),
+              :title => t(:select_ctx), :class => 'nbselect',  'data-add' => 'ctx', 'data-id' =>@note.id, 'data-last' => upd  %>
+   <% end %>
+
   <% end %>
   </div>
 
