@@ -24,7 +24,7 @@ module NotesHelper
 
   def note_title( note, parent )
      return '' if note.board.nil?
-     if parent.nil?
+     if parent.nil? or parent.kind_of? Context
        note.board.title + ' : ' + note.title
      else
        note.title
@@ -129,7 +129,7 @@ module NotesHelper
 
   def context_options note
      first = note.contexts_for( current_user ).map { |ctx| [ctx.name, ctx.id] }
-     first.push [ "{#{t :without_context }}", -1 ] if first.empty?
+     first.push [ "{#{t :without_context }}", -1 ]
      (first + @ctx_options).uniq
   end
 
