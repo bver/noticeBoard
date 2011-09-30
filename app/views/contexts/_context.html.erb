@@ -8,7 +8,6 @@
     <%= t :context_owner %>: <%= @context.user.name %><br/>
     <% end %>
     <span class="ui-icon ui-icon-<%= @context.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :context_active %><br/>
-    <span class="ui-icon ui-icon-<%= @context.shared ? 'check' : 'close' %> nbnoteicon"></span> <%= t :context_shared %><br/>
     <br/>
     <br/>
     <%= link_to( raw('<div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span  class="ui-button-text">' +

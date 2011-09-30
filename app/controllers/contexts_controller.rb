@@ -2,14 +2,14 @@ class ContextsController < ApplicationController
 
   # GET /contexts
   def index
-    @contexts = @my_contexts + current_user.contexts.where( :shared => false, :active => false ).order( :name )
+    @contexts = @my_contexts + current_user.contexts.where( :active => false ).order( :name )
   end
 
   # GET /contexts/1
   def show
     @parent = Context.find(params[:id])
 
-    unless @parent.active && (current_user.id == @parent.user_id || @parent.shared )
+    unless @parent.active && (current_user.id == @parent.user_id )
       head :forbidden
       return
     end

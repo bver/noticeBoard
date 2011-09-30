@@ -60,7 +60,6 @@ cs:
      add_context: "nové místo"
      no_context: "Žádné místo k dispozici."
      context_active: "Místo je aktivní"
-     context_shared: "Místo je sdílené"
      new_context: "nové místo"
      edit_context: "editovat místo"
      save_context: "uložit místo"

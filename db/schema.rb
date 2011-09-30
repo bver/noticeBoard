@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20110929133542) do
     t.integer  "user_id"
     t.string   "name"
     t.boolean  "active",     :default => true
-    t.boolean  "shared",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

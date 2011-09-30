@@ -60,7 +60,6 @@ en:
      add_context: "new context"
      no_context: "No context available."
      context_active: "Context active"
-     context_shared: "Context shared"
      new_context: "new context"
      edit_context: "edit context"
      save_context: "save context"

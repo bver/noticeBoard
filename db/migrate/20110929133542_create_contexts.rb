@@ -5,7 +5,6 @@ class CreateContexts < ActiveRecord::Migration
       t.integer :user_id
       t.string :name
       t.boolean :active, :default => true, :nil => false
-      t.boolean :shared, :default => false, :nil => false
 
       t.timestamps
     end
