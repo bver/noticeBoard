@@ -173,6 +173,7 @@ cs:
      sel_select: "vyber vše"
      sel_deselect: "nevyber nic"
      my_notes: "Mé lístky"
+     my_all: "Všechny mé"
      my_uncompleted: "Jen nehotové"
      my_archive: "Jen archivované"
      my_important: "Jen důležité"

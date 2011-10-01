@@ -267,6 +267,10 @@ th:hover {
     .sf-menu li li li {
       background-color: #bdd2ff; }
 
+.nbmenumgmt {
+  font-size: smaller;
+  font-style: italic; }
+
 .ui-dialog-titlebar a.ui-dialog-titlebar-close {
   display: none; }
 
