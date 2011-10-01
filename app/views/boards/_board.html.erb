@@ -1,4 +1,4 @@
-<h3 id="h_<%= @board.id %>"><%= link_to raw('<span class="ui-icon ui-icon-clipboard"></span>')+@board.title, '#' %></h3>
+<h3 id="h_<%= @board.id %>"><%= link_to raw( board_title(@board)), '#' %></h3>
 <div id="d_<%= @board.id %>" class="nbnote">
 
 <div class="nbleftcol">
