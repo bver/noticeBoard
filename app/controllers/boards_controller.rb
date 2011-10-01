@@ -4,8 +4,17 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    @boards = Board.all( :order => :title)
 
+    if params[:show].to_s == 'all'
+      unless current_user.privilege?( :manage_boards )
+        head :forbidden
+        return
+      end
+      @boards = Board.all( :order => :title )
+    else
+      @boards =  Board.all( :order => :title ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+    end
+    
     respond_to do |format|
       format.html { render :action => 'index' } # index.html.erb
       format.xml  { render :xml => @boards }

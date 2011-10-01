@@ -44,6 +44,7 @@ cs:
      boards: "Nástěnky"
      board: "Nástěnka"
      boards_management: "Správa nástěnek"
+     all_boards: "Všechny nástěnky"
      board_grants: "Práva k nástěnkám"
      add_board: "Nová nástěnka"
      save_board: "Uložit nástěnku"
