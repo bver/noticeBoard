@@ -14,7 +14,8 @@ class ContextsController < ApplicationController
       return
     end
 
-    @notes = @parent.notes.find_all {|n| n.board.active and current_user.privilege?( :view_board, n.board.id ) }
+    @notes = @parent.notes.find_all {|n| n.board.active and n.outcome.nil? and current_user.privilege?( :view_board, n.board.id ) }
+    @notes.sort! { |b,a| a.priority <=> b.priority }
     @all_size = @notes.size
     dry_options
 

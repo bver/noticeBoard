@@ -108,6 +108,8 @@ class ApplicationController < ActionController::Base
     else # '0_1_D_C'
     end
 
+    order = 'priority DESC, problem DESC'
+    
     if params.key? :inst
       @by_instant_sel = params[:inst]
       case @by_instant_sel
@@ -122,10 +124,10 @@ class ApplicationController < ActionController::Base
         conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
         order = 'instant_date ASC, instant_time ASC'
       else # 0
-        order = 'priority DESC, problem DESC'
       end
     end
 
+    logger.debug "conditions=#{conditions} order=#{order}"
     [conditions, order]
   end
 
