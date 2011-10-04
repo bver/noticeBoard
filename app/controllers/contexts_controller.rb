@@ -14,7 +14,7 @@ class ContextsController < ApplicationController
       return
     end
 
-    @notes = @parent.notes
+    @notes = @parent.notes.find_all {|n| n.board.active }
     @all_size = @notes.size
     dry_options
 
