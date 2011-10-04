@@ -51,6 +51,8 @@ class ApplicationController < ActionController::Base
 
     @ctx_options = @my_contexts.map { |c| [c.name, c.id] }
 
+    @board_options = @menu_boards.map { |b| [ b.title,  b.id ] }
+
     @by_prio_options = [
       [ t( :by_prio_all ), '0_1_2_3'],
       [ t( :by_prio_important_normal ), '1_2_3'],

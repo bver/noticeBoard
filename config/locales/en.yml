@@ -55,6 +55,7 @@ en:
      description: "Description"
      owner: "Board owner"
      no_board: "No board available."
+     assign_board: "Move to another board."
 
      contexts: "contexts"
      context: "context"
@@ -113,6 +114,7 @@ en:
      c_set_date: "set the note date"
      c_reset_date: "reset the note date"
      c_instant: "has set an instant (date/time)"
+     c_board_changed: "moved this note from board"
      priority: "priority"
      prio_low: "low"
      prio_normal: "normal"

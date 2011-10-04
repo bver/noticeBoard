@@ -96,6 +96,8 @@ module NotesHelper
        "#{t( :c_set_date )} : #{l Date.parse('1.1.1970').since(change.argument).to_date, :format => :default}"
      when :reset_date
        t( :c_reset_date )
+     when :board_changed
+       "#{t(:c_board_changed)} '#{Board.find(change.argument).title}'"
      else
        '!!!'
      end
@@ -127,7 +129,8 @@ module NotesHelper
     :set_time => 'clock',
     :reset_time => 'clock',
     :set_date => 'calendar',
-    :reset_date => 'calendar'
+    :reset_date => 'calendar',
+    :board_changed => 'clipboard'
   }
   @@change_icons.default ='alert'
   def change_icon change

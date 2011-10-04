@@ -55,6 +55,7 @@ cs:
      description: "Popis"
      owner: "Zakladatel nástěnky"
      no_board: "Žádná nástěnka k dispozici."
+     assign_board: "Přesunout na jinou nástěnku."
 
      contexts: "Místa"
      context: "Místo"
@@ -112,6 +113,7 @@ cs:
      c_reset_time: "odstranil(a) čas lístku"
      c_set_date: "nastavil(a) datum lístku"
      c_reset_date: "odstranil(a) datum lístku"
+     c_board_changed: "přesunul lístek z nástěnky"
      priority: "důležitost"
      prio_low: "někdy, snad"
      prio_normal: "normální"

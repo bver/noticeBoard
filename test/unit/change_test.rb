@@ -48,6 +48,8 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal :reset_date, c.sense
     c.meaning = 20
     assert_equal :reset_time, c.sense
+    c.meaning = 21
+    assert_equal :board_changed, c.sense
   end
 
   test "sense helper bw" do
@@ -96,5 +98,7 @@ class ChangeTest < ActiveSupport::TestCase
     assert_equal 19, c.meaning
     c.sense = :reset_time
     assert_equal 20, c.meaning
+    c.sense = :board_changed
+    assert_equal 21, c.meaning
   end
 end

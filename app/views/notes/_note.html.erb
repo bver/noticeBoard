@@ -53,6 +53,9 @@
     <% end %>        
     </ul>
 
+   </div>
+   <p>
+     
     <% if @note.status == :active and current_user.privilege?( :change_prio, @note.board_id )  and ( @note.priority != 3  or current_user.privilege?( :urgent_prio, @note.board_id ) ) %>
     <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ), 
               :title => t(:change_priority), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id, 'data-last' => upd  %>
@@ -70,8 +73,13 @@
               :title => t(:select_ctx), :class => 'nbselect',  'data-add' => 'ctx', 'data-id' =>@note.id, 'data-last' => upd )   if opts.size > 1 %>
     <% end %>
 
+    <% if current_user.privilege?( :manage_boards ) %>
+    <%= select_tag  "b_#{@note.id}", options_for_select( @board_options, @note.board_id ),
+              :title => t(:assign_board), :class => 'nbselect',  'data-add' => 'board', 'data-id' =>@note.id, 'data-last' => upd  %>
+    <% end %>
+
   <% end %>
-  </div>
+  </p>
 
 </div>
   <div class="nbnotehist">

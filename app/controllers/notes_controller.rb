@@ -212,6 +212,14 @@ class NotesController < ApplicationController
        end
        change.argument = prio
        @note.priority = prio
+    when 'board'
+       unless current_user.privilege?( :manage_boards )
+          head :forbidden
+          return
+       end
+       change.sense = :board_changed
+       change.argument = @note.board_id
+       @note.board_id = params[:value].to_i
     when 'user'
       unless current_user.privilege?( :assign_notes, @note.board_id )
           head :forbidden
@@ -340,7 +348,7 @@ class NotesController < ApplicationController
     end
 
     respond_to do |format|
-      res = if @add == 'instant' || @add == 'ctx'
+      res = if ['board', 'instant', 'ctx'].include? @add
           @note.save
       else
           @note.update_attributes(params[:note])
