@@ -6,10 +6,6 @@ class UserTest < ActiveSupport::TestCase
     super
      @user = users(:one)
      Permission.destroy_all # (  @user.permissions.map {|p| p.id} )
-     @user.ensure_permissions
-     @user.ensure_permissions(42)
-     @user.ensure_permissions(4)
-     @user.ensure_permissions(2)
   end
 
   test "new user defaults" do
@@ -24,12 +20,16 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "copy board defaults" do
+  test "cannot copy board defaults" do
     @user.grant(:assign_notes)
     assert_equal true, @user.privilege?(:assign_notes)
 
-    @user.ensure_permissions 200
+    #@user.ensure_permissions 200
+    assert_equal false, @user.privilege?(:assign_notes, 200)
+
+    @user.grant(:assign_notes, 200)
     assert_equal true, @user.privilege?(:assign_notes, 200)
+    assert_equal true, @user.privilege?(:assign_notes)
 
     @user.revoke(:assign_notes)
     assert_equal true, @user.privilege?(:assign_notes, 200)

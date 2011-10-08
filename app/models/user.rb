@@ -23,20 +23,25 @@ class User < ActiveRecord::Base
       return [:view_board, :process_notes].include?( name ) if self.id.nil?
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm = Permission.find_by_user_id_and_board_id( self.id, board_id ) if perm.nil?
+      perm = Permission.new if perm.nil?
       perm.privilege? name
   end
 
   def grant( name, board_id = nil )
+      ensure_permissions board_id
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm.grant name
       perm.save
   end
 
   def revoke( name, board_id = nil )
+      ensure_permissions board_id
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm.revoke name
       perm.save
   end
+
+  protected
 
   def ensure_permissions board_id=nil
      perm = self.permissions.detect { |p| p.board_id == board_id }
@@ -44,14 +49,9 @@ class User < ActiveRecord::Base
      return unless perm.nil?
 
      perm = Permission.new :user_id => self.id, :board_id => board_id
-     if board_id.nil?
-          perm.reset # user default - zeroes
-     else 
-          src = self.permissions.detect { |p| p.board_id.nil? }
-          src = Permission.find_by_user_id_and_board_id( self.id, nil ) if src.nil?
-          perm.values = src.values.clone  # board-specific default
-     end
+     perm.reset # user default - zeroes
      perm.save
+     
      self.permissions << perm
   end
 

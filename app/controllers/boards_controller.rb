@@ -91,12 +91,11 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
-        User.includes(:permissions).each { |u| u.ensure_permissions( @board.id ) }
         dry_update_privs params
         format.js { render :template => 'shared/create', :locals =>{:templ=>'board'} }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
-        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'new'} }
+        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'form'} }
         format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
     end
@@ -118,7 +117,7 @@ class BoardsController < ApplicationController
         format.js { render :template => 'shared/update', :locals =>{:templ=>'board', :item=>@board} }
         format.xml  { head :ok }
       else
-        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'edit'} }
+        format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'form'} }
         format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
     end
