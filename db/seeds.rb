@@ -11,5 +11,4 @@ admin =User.find_or_create_by_email(
     :password_confirmation => 'password')
 admin.save
 
-admin.ensure_permissions
 Permission.privs.each { |p| admin.grant p }
