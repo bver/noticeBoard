@@ -261,14 +261,18 @@ th:hover {
   font-size: larger;
   margin-right: 30px; }
   .sf-menu a, .sf-menu a:visited {
-    color: black; }
+    color: black;
+    padding: 3px; }
   .sf-menu li li {
     background-color: #bdd2ff; }
     .sf-menu li li li {
       background-color: #bdd2ff; }
+  .sf-menu li.sfHover ul {
+    top: 25px; }
+  .sf-menu ul.nbwider {
+    width: 20em; }
 
 .nbmenumgmt {
-  font-size: smaller;
   font-style: italic; }
 
 .ui-dialog-titlebar a.ui-dialog-titlebar-close {
