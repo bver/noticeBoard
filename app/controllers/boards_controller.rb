@@ -10,9 +10,9 @@ class BoardsController < ApplicationController
         head :forbidden
         return
       end
-      @boards = Board.all( :order => :title, :order => "active DESC" )
+      @boards = Board.all( :order => "active DESC, title ASC" )
     else
-      @boards =  Board.all( :order => :title, :order => "active DESC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+      @boards =  Board.all( :order => "active DESC, title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
     end
     
     respond_to do |format|
