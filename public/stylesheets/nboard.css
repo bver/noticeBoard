@@ -262,13 +262,13 @@ th:hover {
   margin-right: 30px; }
   .sf-menu a, .sf-menu a:visited {
     color: black;
-    padding: 3px; }
+    padding: 8px; }
   .sf-menu li li {
     background-color: #bdd2ff; }
     .sf-menu li li li {
       background-color: #bdd2ff; }
   .sf-menu li.sfHover ul {
-    top: 25px; }
+    top: 34px; }
   .sf-menu ul.nbwider {
     width: 20em; }
 
