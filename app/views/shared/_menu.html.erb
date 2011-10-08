@@ -15,6 +15,7 @@
 		      <li><%= link_to board.title, board, :title=>board.description %></li>
                     <% end %>
                     <li class="nbmenumgmt"><%= link_to t(:all_boards), boards_path( :show => 'all' ) if current_user.privilege?( :manage_boards ) %></li>
+                    <li class="nbmenumgmt"><%= link_to t(:archived_boards), boards_path( :show => 'archived' ) %></li>
 		</ul>
 	    </li>
             <li>

@@ -14,7 +14,7 @@ class NotesController < ApplicationController
     all_ids = if params.key?(:boards)
        params[:boards].split('_').map {|id| id.to_i } 
     else
-       Board.where( :active=>true ).map {|b| b.id }
+       Board.where( :visibility => Board::Active ).map {|b| b.id }
     end
     all_ids.each do |id|
         next unless current_user.privilege?( :view_board, id )
@@ -73,7 +73,7 @@ class NotesController < ApplicationController
       @note.board = Board.find(params[:parent])
     else
       @board_options = []
-      Board.all( :conditions => {:active=>true},  :order => :title ).each do |b|
+      Board.all( :conditions => { :visibility => Board::Active },  :order => :title ).each do |b|
          @board_options <<  [b.title, b.id]  if current_user.privilege?( :edit_notes, b.id )
       end
 

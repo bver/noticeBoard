@@ -10,18 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929133542) do
+ActiveRecord::Schema.define(:version => 20111008151819) do
 
   create_table "boards", :force => true do |t|
     t.integer  "user_id"
-    t.string   "title",                         :null => false
+    t.string   "title",                      :null => false
     t.text     "description"
-    t.boolean  "active",      :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "visibility",  :default => 1, :null => false
   end
-
-  add_index "boards", ["active"], :name => "index_boards_on_active"
 
   create_table "changes", :force => true do |t|
     t.integer  "note_id",  :null => false

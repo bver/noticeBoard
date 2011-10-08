@@ -5,14 +5,27 @@ class BoardsController < ApplicationController
   # GET /boards.xml
   def index
 
-    if params[:show].to_s == 'all'
+    case params[:show].to_s
+    when 'all'
       unless current_user.privilege?( :manage_boards )
         head :forbidden
         return
       end
-      @boards = Board.all( :order => "active DESC, title ASC" )
+      @boards = Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).order( "visibility DESC, title ASC" )
+
+    when 'all_archived'
+      unless current_user.privilege?( :manage_boards )
+        head :forbidden
+        return
+      end
+      @boards = Board.where( :visibility => Board::Archived ).order( "title ASC" )
+
+    when 'archived'
+      @boards = Board.where( :visibility => Board::Archived ).order( "title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+
     else
-      @boards =  Board.all( :order => "active DESC, title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+      @boards = Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).order( "visibility DESC,title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+
     end
     
     respond_to do |format|

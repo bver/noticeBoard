@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   def boards
      @menu_boards = []
      return if current_user.nil?
-     Board.all( :conditions => {:active=>true},  :order => :title ).each do |b|
+     Board.all( :conditions => { :visibility => Board::Active },  :order => :title ).each do |b|
        @menu_boards << b if current_user.privilege?( :view_board, b.id )
      end
   end
