@@ -2,5 +2,5 @@
       class="ui-icon ui-icon-<%= note_icon @note %>"></span><%=  note_problem @note %><%= note_instant @note %><span
       class="<%= note_prio @note  %>"><%= note_title @note, @parent %><%= note_user @note %> <%= note_context @note, @parent %></span></a></h3>
 <div id="d_<%= @note.id %>" class="nbnote" data-loaded="1">
-<%=  render :partial => 'notes/note_content'  %>
+<%=  render :partial => 'notes/content'  %>
 </div>

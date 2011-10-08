@@ -61,7 +61,7 @@ class NotesController < ApplicationController
     dry_options
     
     respond_to do |format|
-        format.js { render :template => 'shared/lazy', :locals =>{:templ=>'note_content', :item=>@note} }
+        format.js { render :template => 'shared/lazy', :locals =>{:templ=>'content', :item=>@note} }
     end
   end
 
