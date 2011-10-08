@@ -1,0 +1,4 @@
+
+$('#d_<%= item.id %>').html("<%=escape_javascript( render( :partial => templ ) )%>").attr( 'data-loaded', '1' );
+
+bindSelects();

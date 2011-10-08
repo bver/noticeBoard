@@ -21,6 +21,7 @@ cs:
      delete: "Smazat"
      are_you_sure: "Určitě?"
      cannot_save: "Nelze uložit"
+     loading: "moment..."
 
      users: "Uživatelé"
      profile: "Nastavení"

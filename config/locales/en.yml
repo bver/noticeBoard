@@ -21,6 +21,7 @@ en:
      delete: "delete"
      are_you_sure: "Are you sure?"
      cannot_save: "cannot save"
+     loading: "loading..."
 
      users: "users"
      profile: "profile"

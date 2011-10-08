@@ -1,7 +1,9 @@
 UjsTest::Application.routes.draw do
   resources :contexts
 
-  resources :notes
+  resources :notes do
+       get :content, :on =>:member
+  end
 
   resources :boards
 

@@ -50,6 +50,21 @@ class NotesController < ApplicationController
     end
   end
 
+  #get /notes/1/content
+  def content
+    @note = Note.find(params[:id])
+
+    unless current_user.privilege?( :view_board, @note.board_id )
+      head :forbidden
+      return
+    end
+    dry_options
+    
+    respond_to do |format|
+        format.js { render :template => 'shared/lazy', :locals =>{:templ=>'note_content', :item=>@note} }
+    end
+  end
+
   # GET /notes/new
   # GET /notes/new.xml
   def new

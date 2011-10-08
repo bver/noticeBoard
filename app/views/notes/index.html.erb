@@ -46,6 +46,11 @@
                   return false;
           });
 
+           // Lazy load note contents
+          $('#accordion').bind('accordionchangestart', function(event, ui) {
+                 if( ui.newContent.attr('data-loaded') == '0' )
+                    $.get("/notes/" + ui.newContent.attr('id').replace('d_','') + '/content' );
+          });
      }
   </script>
 <% end %>
@@ -79,7 +84,11 @@
  <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons nb-notes-content" >
     <% @notes.each do |note| %>
        <% @note = note %>
-       <%= render :partial => 'notes/note' %>
+          <h3 id="h_<%= @note.id %>"><a href="#"><span class="ui-icon ui-icon-<%= note_icon @note %>"></span><%=  note_problem @note %><%= note_instant @note %><span
+      class="<%= note_prio @note  %>"><%= note_title @note, @parent %><%= note_user @note %> <%= note_context @note, @parent %></span></a></h3>
+        <div id="d_<%= @note.id %>" class="nbnote" data-loaded="0">
+          <%= image_tag 'throbber.gif', :alt => t(:loading) %>
+        </div>
     <% end %>
  </div>
 
