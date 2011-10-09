@@ -10,9 +10,10 @@ LowPrioContext = 'nekdy'
 
 SqlContexts = "select id, name, hide from contexts;"
 sqlProjects = "select id, state, concat( '[', concat( name , ']' ) ), description from projects where state<>'completed' and user_id = #{TracksUserID};"
-sqlActions = "select id, context_id, project_id, state, date(due), concat( '[', concat( description, ']' ) ), notes from todos where state<>'completed' and user_id = #{TracksUserID};"
+sqlActions = "select id, context_id, project_id, state, adddate(date(due),1), date(created_at), concat( '[', concat( description, ']' ) ), notes from todos where state<>'completed' and user_id = #{TracksUserID};"
 sqlStarred = "select count(*) from taggings where taggable_type='Todo' and tag_id=#{StarredTagId} and taggable_id="
-sqlNotes = "select body from notes where project_id="
+SqlNotes = "select body from notes where project_id="
+SqlTags = "select t.name from tags t, taggings g where t.id=g.tag_id and g.taggable_type='Todo' and g.taggable_id="
 
 puts "\n# encoding: utf-8" #required!
 puts "c = {}"
@@ -39,7 +40,7 @@ end
    name = name[0...40]
 
    desc = '' if desc == 'NULL'
-   desc += %x{ echo "#{sqlNotes}#{id}" | #{tracks_db} }.gsub(/\n/,'\n')
+   desc += %x{ echo "#{SqlNotes}#{id}" | #{tracks_db} }.gsub(/\n/,'\n')
    desc = %Q[, :description => "#{desc.gsub('"',"'")}"] unless desc.empty? 
 
    puts %Q[b[#{id}] = Board.create( :user_id => #{UserID}, :title => "#{name.gsub('"',"'")}", :visibility => #{ state == 'active' ? 1 : 0 }#{desc}).id]
@@ -54,7 +55,7 @@ puts "u.save"
 b['NULL'] = 1
 
 %x{ echo "#{sqlActions}" | #{tracks_db} }.each_line do |line|
-   all,  id, context_id, project_id, state, due, title, content = /^(\d+)\s+(\d+)\s+(\S+)\s+(\S+)\s+(\S+)\s+\[([^\]]+)\]\s*(.+)?$/.match(line.strip).to_a
+   all,  id, context_id, project_id, state, due, created, title, content = /^(\d+)\s+(\d+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+\[([^\]]+)\]\s*(.+)?$/.match(line.strip).to_a
    abort line if all.nil?
    next unless b.has_key? project_id
 
@@ -69,11 +70,14 @@ b['NULL'] = 1
    prio = ( %x{ echo "#{sqlStarred}#{id}" | #{tracks_db} }.strip == '1' ) ? 2 : 1
    prio = 0 if low.include? context_id
 
-   puts %Q[n = Note.create :board_id => b[#{project_id}], :user_id => #{UserID}, :title => "#{title.gsub('"',"'")}", :content => %Q{#{content}}, :priority => #{prio}, :working => false, :problem => false, :instant_date => #{due}]
+   puts %Q[\nn = Note.create :board_id => b[#{project_id}], :user_id => #{UserID}, :title => "#{title.gsub('"',"'")}", :content => %Q{#{content}}, :priority => #{prio}, :working => false, :problem => false, :instant_date => #{due}]
    puts "n.contexts << c[#{context_id}]\nn.save"
 #  puts %Q{ActiveRecord::Base.connection.execute("insert into contexts_notes( note_id, context_id ) values ( " + n.id.to_s + ", " + c[#{context_id}].id.to_s + " );")} 
 #  puts %Q{puts "insert into contexts_notes( note_id, context_id ) values ( " + n.id.to_s + ", " + c[#{context_id}].id.to_s + " );"}   
    
+   tags =  %x{ echo "#{SqlTags}#{id}" | #{tracks_db} }.split(/\n/).join(', ')
+   puts %Q[Change.create :note => n, :user_id => #{UserID},  :meaning => 6, :comment => 'tracks: #{tags}', :created => '#{created}']
+
    c[context_id] = true 
 end
 
