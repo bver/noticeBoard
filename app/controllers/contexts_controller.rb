@@ -24,6 +24,20 @@ class ContextsController < ApplicationController
     end
   end
 
+  # GET /contexts/1/overview
+  def overview
+    @context = Context.find(params[:id])
+
+    unless  current_user.id == @context.user_id
+      head :forbidden
+      return
+    end
+
+    respond_to do |format|
+      format.html { render :template => 'contexts/show' }
+    end
+  end
+
   # GET /contexts/new
   def new
     @context = Context.new

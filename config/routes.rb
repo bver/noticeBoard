@@ -1,11 +1,15 @@
 UjsTest::Application.routes.draw do
-  resources :contexts
-
-  resources :notes do
-       get :content, :on =>:member
+  resources :contexts do
+      get :overview, :on =>:member
   end
 
-  resources :boards
+  resources :notes do
+      get :content, :on =>:member
+  end
+
+  resources :boards do
+      get :overview, :on =>:member
+  end
 
   devise_for :users
 

@@ -70,6 +70,20 @@ class BoardsController < ApplicationController
     end
   end
 
+  # GET /boards/1/overview
+  def overview
+    @board = Board.find(params[:id])
+
+    unless current_user.privilege?( :view_board, @board.id )
+      head :forbidden
+      return
+    end
+
+    respond_to do |format|
+      format.html { render :template => 'boards/show' }
+    end
+  end
+
   # GET /boards/new
   # GET /boards/new.xml
   def new
