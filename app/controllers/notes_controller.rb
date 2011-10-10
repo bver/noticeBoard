@@ -50,7 +50,7 @@ class NotesController < ApplicationController
     dry_options
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :template => 'shared/show', :locals =>{:res=>:note} }
       format.xml  { render :xml => @note }
     end
   end

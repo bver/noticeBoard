@@ -34,7 +34,7 @@ class ContextsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render :template => 'contexts/show' }
+      format.html { render :template => 'shared/show', :locals =>{:res=>:context} }
     end
   end
 

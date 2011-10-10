@@ -6,11 +6,11 @@
   </script>
 <% end %>
 <% content_for :nbheader do %>
-       <h1><%= t :board %></h1>
+       <h1><%= t res %></h1>
 <% end %>
 
- <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons nb-boards-content" >
+ <div id="accordion"  class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons nb-<%= res %>s-content" >
      
-       <%= render :partial => 'boards/board' %>
+       <%= render :partial => "#{res}s/#{res}" %>
 
  </div>

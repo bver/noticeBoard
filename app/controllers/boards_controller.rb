@@ -80,7 +80,7 @@ class BoardsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render :template => 'boards/show' }
+      format.html { render :template => 'shared/show', :locals =>{:res=>:board} }
     end
   end
 
