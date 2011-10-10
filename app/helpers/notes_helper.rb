@@ -24,11 +24,12 @@ module NotesHelper
 
   def note_title( note, parent )
      return '' if note.board.nil?
-     if parent.nil? or parent.kind_of? Context
+     title = if parent.nil? or parent.kind_of? Context
        note.board.title + ' : ' + note.title
      else
        note.title
      end
+     raw %Q[<span class="#{ note.outcome.nil? ? 'nbtitleactive' : 'nbtitlearchived' }">#{title}</span>]
   end
 
   def note_context( note, parent )

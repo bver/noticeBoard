@@ -110,21 +110,21 @@ class ApplicationController < ActionController::Base
     else # '0_1_D_C'
     end
 
-    order = 'priority DESC, problem DESC'
+    order = 'outcome ASC, priority DESC, problem DESC'
     
     if params.key? :inst
       @by_instant_sel = params[:inst]
       case @by_instant_sel
       when 'D'
         conditions[:instant_date] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
-        order = 'instant_date ASC'
+        order = 'outcome ASC, instant_date ASC'
       when 'T'
         conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
-        order = 'instant_time ASC'
+        order = 'outcome ASC, instant_time ASC'
       when 'D_T'
         conditions[:instant_date] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
         conditions[:instant_time] = Time.now.years_ago(30)..Time.now.years_since(50) # TODO better like "is not null" for hash options
-        order = 'instant_date ASC, instant_time ASC'
+        order = 'outcome ASC, instant_date ASC, instant_time ASC'
       else # 0
       end
     end
