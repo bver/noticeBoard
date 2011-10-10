@@ -62,7 +62,6 @@ class BoardsController < ApplicationController
     #@notes = @parent.notes
     conditions[:board_id] = @parent.id
     @notes = Note.all( :conditions => conditions, :order => order )
-    @all_size = Note.count( :conditions => {:board_id => @parent.id })
     dry_options
     
     respond_to do |format|
