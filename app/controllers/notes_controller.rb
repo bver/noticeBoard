@@ -11,11 +11,17 @@ class NotesController < ApplicationController
     @by_board_sel = {}
     @by_board_sel.default = false
     conditions[ :board_id ] = []
-    all_ids = if params.key?(:boards)
-       params[:boards].split('_').map {|id| id.to_i } 
+
+    if params.key?(:boards)
+       all_ids = params[:boards].split('_').map {|id| id.to_i }
     else
-       Board.where( :visibility => Board::Active ).map {|b| b.id }
+       all_ids =if conditions.key?(:instant_date) || conditions.key?(:instant_time)
+         Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).map {|b| b.id }
+       else
+         Board.where(  :visibility => Board::Active ).map {|b| b.id }
+       end
     end
+
     all_ids.each do |id|
         next unless current_user.privilege?( :view_board, id )
         @by_board_sel[id] = true
