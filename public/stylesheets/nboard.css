@@ -15,6 +15,8 @@ body {
     margin-right: 30px;
     padding-left: 30px;
     background-color: white; }
+    .nbheader h1 a, .nbheader h1 a:visited {
+      color: black; }
 
 h1.nbhboard {
   text-align: left;
@@ -24,6 +26,8 @@ h1.nbhboard {
   padding-left: 30px;
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#92d6bd), to(#b9ffe0));
   background-image: -moz-linear-gradient(50% 0%, #92d6bd, #b9ffe0); }
+  h1.nbhboard a, h1.nbhboard a:visited {
+    color: black; }
 
 h1.nbhuser {
   text-align: left;
@@ -33,6 +37,8 @@ h1.nbhuser {
   padding-left: 30px;
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#ddc814), to(#f7e832));
   background-image: -moz-linear-gradient(50% 0%, #ddc814, #f7e832); }
+  h1.nbhuser a, h1.nbhuser a:visited {
+    color: black; }
 
 h1.nbhcontext {
   text-align: left;
@@ -42,6 +48,8 @@ h1.nbhcontext {
   padding-left: 30px;
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#8e5151), to(#dc7a7a));
   background-image: -moz-linear-gradient(50% 0%, #8e5151, #dc7a7a); }
+  h1.nbhcontext a, h1.nbhcontext a:visited {
+    color: black; }
 
 .nbdesc {
   display: inline-block;
