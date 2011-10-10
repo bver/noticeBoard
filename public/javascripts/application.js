@@ -15,6 +15,11 @@ $(document).ready(function() {
 
     if( typeof specificInit == 'function'  )
        specificInit();
+
+   $('body').ajaxError( function(event, jqXHR, ajaxSettings, thrownError){
+       alert( thrownError );
+   });
+   
 });
 
 function bindSelects() {
