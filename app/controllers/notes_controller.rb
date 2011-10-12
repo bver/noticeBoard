@@ -338,7 +338,7 @@ class NotesController < ApplicationController
            change.user_id = current_user.id
            change.note = @note
            change.sense = ( is_date ? :set_date : :reset_date )
-           change.argument =new_values.instant_date.to_datetime.to_i  if is_date
+           change.argument =new_values.instant_date.to_date.to_datetime.to_i  if is_date
            @note.instant_date = is_date ? new_values.instant_date : nil
          end
        else
