@@ -10,14 +10,17 @@ $(document).ready(function() {
     });
 
     $( '#addButton' ).button({
-	    icons: { primary: 'ui-icon-star'}
+	    icons: {primary: 'ui-icon-star'}
     });
 
     if( typeof specificInit == 'function'  )
        specificInit();
 
    $('body').ajaxError( function(event, jqXHR, ajaxSettings, thrownError){
-       alert( thrownError );
+       if( jqXHR.status == 0 )
+          alert( "Error: Cannot connect to the server." );
+       else
+          alert( 'Error: ' + jqXHR.status + ': ' + thrownError + "\n" + jqXHR.responseText.substr(0,300) );
    });
    
 });
