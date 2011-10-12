@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111008151819) do
+ActiveRecord::Schema.define(:version => 20111012102807) do
 
   create_table "boards", :force => true do |t|
     t.integer  "user_id"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(:version => 20111008151819) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "context_id"
-    t.date     "instant_date"
-    t.time     "instant_time"
+    t.datetime "instant_date"
+    t.datetime "instant_time"
   end
 
   add_index "notes", ["board_id"], :name => "index_notes_on_board_id"

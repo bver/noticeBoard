@@ -53,7 +53,7 @@ class Note < ActiveRecord::Base
 
   def date
     return nil if self.instant_date.nil?
-    I18n.localize( self.instant_date,  :format => :default )
+    I18n.localize( self.instant_date.to_date,  :format => :default )
   end
 
   def date= value
