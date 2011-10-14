@@ -5,6 +5,7 @@ UjsTest::Application.routes.draw do
 
   resources :notes do
       get :content, :on =>:member
+      post :post_update, :on =>:member
   end
 
   resources :boards do

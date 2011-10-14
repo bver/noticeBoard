@@ -155,6 +155,11 @@ class NotesController < ApplicationController
     end
   end
 
+  # POST  /notes/1/post_update
+  def post_update
+    update
+  end
+
   # PUT /notes/1
   # PUT /notes/1.xml
   def update

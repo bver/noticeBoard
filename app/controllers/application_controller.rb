@@ -76,6 +76,8 @@ class ApplicationController < ActionController::Base
       [ t( :by_instant_date_time ), 'D_T']
     ]
 
+    @no_put_method = ( /Kindle/ =~ request.env["HTTP_USER_AGENT"] )
+
   end
 
   def dry_filter params

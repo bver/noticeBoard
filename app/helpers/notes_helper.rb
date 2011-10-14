@@ -144,4 +144,11 @@ module NotesHelper
      (first + @ctx_options).uniq
   end
 
+  def workaround_method
+    @no_put_method ? :post : :put
+  end
+
+  def workaround_path( note, opts )
+    @no_put_method ? post_update_note_path(note, opts) : note_path(note, opts)
+  end
 end
