@@ -39,7 +39,7 @@ class BoardsController < ApplicationController
   def show
     @parent = Board.find(params[:id])
 
-    unless @parent.active and current_user.privilege?( :view_board, @parent.id )
+    unless current_user.privilege?( :view_board, @parent.id )
       head :forbidden
       return
     end

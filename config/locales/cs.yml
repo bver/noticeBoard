@@ -44,6 +44,7 @@ cs:
 
      boards: "Nástěnky"
      board: "Nástěnka"
+     hidden_board: "Skrytá nástěnka"
      boards_management: "Správa nástěnek"
      all_boards: "Všechny aktivní a skryté"
      archived_boards: "Jen archivované"

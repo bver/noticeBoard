@@ -72,7 +72,7 @@
        <% elsif @parent.class.to_s == 'Context' %>
                     <h1 class="nbhcontext"><%= t :context %> - <%= link_to @parent.name, overview_context_path(@parent) %></h1>
        <% else %>
-                    <h1 class="nbhboard" title="<%= @parent.description %>"><%= t :board %> - <%= link_to @parent.title, overview_board_path(@parent) %></h1>
+                    <h1 class="nbhboard" title="<%= @parent.description %>"><%= t( @parent.active ? :board : :hidden_board ) %> - <%= link_to @parent.title, overview_board_path(@parent) %></h1>
        <% end %>      
 
 <% end %>

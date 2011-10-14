@@ -44,6 +44,7 @@ en:
 
      boards: "boards"
      board: "board"
+     hidden_board: "hidden board"
      boards_management: "boards management"
      all_boards: "all active and hidden"
      archived_boards: "only archived"

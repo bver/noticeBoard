@@ -4,7 +4,7 @@
 <div class="nbleftcol">
   <h2><%= t :board %></h2>
    <div>
-    <%= t :title %>: <%= current_user.privilege?( :view_board, @board.id ) && @board.active ? link_to( @board.title, @board ) : @board.title %><br/>
+    <%= t :title %>: <%= current_user.privilege?( :view_board, @board.id ) ? link_to( @board.title, @board ) : @board.title %><br/>
     <%= t :board_state %>: <%= board_state @board %><br/>
     <% unless @board.user.nil? %>
     <%= t :owner %>: <%= @board.user.name %><br/>
