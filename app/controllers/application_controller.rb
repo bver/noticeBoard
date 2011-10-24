@@ -51,7 +51,12 @@ class ApplicationController < ActionController::Base
 
     @ctx_options = @my_contexts.map { |c| [c.name, c.id] }
 
-    @board_options = @menu_boards.map { |b| [ b.title,  b.id ] }
+    #@board_options = @menu_boards.map { |b| [ b.title,  b.id ] }
+    @board_options = []
+    Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).order( "visibility DESC, title ASC" ).each do |b|
+       @board_options << b if current_user.privilege?( :view_board, b.id )
+    end
+    @board_options.map! { |b| [ b.title,  b.id ] }
 
     @by_prio_options = [
       [ t( :by_prio_all ), '0_1_2_3'],
