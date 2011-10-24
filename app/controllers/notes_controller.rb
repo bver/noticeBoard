@@ -29,7 +29,7 @@ class NotesController < ApplicationController
     end
 
     conditions[:user_id] = [ current_user.id, -1 ]
-    @notes = Note.all( :conditions => conditions, :order =>order )
+    @notes = Note.includes(:user).includes(:contexts).includes(:board).all( :conditions => conditions, :order =>order )
     dry_options
 
     respond_to do |format|

@@ -11,20 +11,21 @@ class BoardsController < ApplicationController
         head :forbidden
         return
       end
-      @boards = Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).order( "visibility DESC, title ASC" )
+      @boards = Board.includes(:user).where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).order( "visibility DESC, title ASC" )
 
     when 'all_archived'
       unless current_user.privilege?( :manage_boards )
         head :forbidden
         return
       end
-      @boards = Board.where( :visibility => Board::Archived ).order( "title ASC" )
+      @boards = Board.includes(:user).where( :visibility => Board::Archived ).order( "title ASC" )
 
     when 'archived'
-      @boards = Board.where( :visibility => Board::Archived ).order( "title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+      @boards = Board.includes(:user).where( :visibility => Board::Archived ).order( "title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
 
     else
-      @boards = Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).order( "visibility DESC,title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
+      @boards = Board.includes(:user).where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden )
+                                   .order( "visibility DESC,title ASC" ).find_all { |b| current_user.privilege?( :view_board, b.id ) }
 
     end
     
@@ -61,7 +62,7 @@ class BoardsController < ApplicationController
     
     #@notes = @parent.notes
     conditions[:board_id] = @parent.id
-    @notes = Note.all( :conditions => conditions, :order => order )
+    @notes = Note.includes(:user).includes(:board).includes(:contexts).all( :conditions => conditions, :order => order )
     dry_options
     
     respond_to do |format|

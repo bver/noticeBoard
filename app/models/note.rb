@@ -1,7 +1,6 @@
 class Note < ActiveRecord::Base
   belongs_to :board
   belongs_to :user
-  belongs_to :context
   has_many :changes, :dependent => :destroy
   has_and_belongs_to_many :contexts
 
