@@ -7,14 +7,25 @@ class ContextsController < ApplicationController
 
   # GET /contexts/1
   def show
-    @parent = Context.find(params[:id])
 
-    unless @parent.active && (current_user.id == @parent.user_id )
-      head :forbidden
-      return
+    if params[:id].to_i == -1
+      #my_ctx_ids = Context.where( :user_id => current_user.id ).map { |c| c.id }
+      notes = Note.includes(:user).includes(:board)
+                   .joins('LEFT OUTER JOIN contexts_notes ON contexts_notes.note_id = notes.id')
+                   .where( "contexts_notes.context_id IS NULL" ).order( :priority )
+      @parent = Context.new
+    else
+      @parent = Context.find(params[:id])
+
+      unless @parent.active && (current_user.id == @parent.user_id )
+        head :forbidden
+        return
+      end
+
+      notes = @parent.notes
     end
 
-    @notes = @parent.notes.find_all {|n| n.board.active and n.outcome.nil? and current_user.privilege?( :view_board, n.board.id ) }
+    @notes = notes.find_all {|n| n.board.active and n.outcome.nil? and current_user.privilege?( :view_board, n.board.id ) }
     @notes.sort! { |b,a| a.priority <=> b.priority }
     dry_options
 

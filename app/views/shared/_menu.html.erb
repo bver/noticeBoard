@@ -21,9 +21,10 @@
             <li>
 		<%= link_to t(:contexts), contexts_path %>
 	        <ul>
+                    <li class="nbmenumgmt"><%= link_to t(:without_context), :controller => 'contexts', :action => 'show', :id => -1 %></li>
                     <% @my_contexts.each do |ctx|  %>
 		      <li><%= link_to ctx.name, ctx %></li>
-                    <% end %>
+                    <% end %> 
 		</ul>
             </li>
 	    <li>

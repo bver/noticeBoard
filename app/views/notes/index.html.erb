@@ -70,7 +70,11 @@
        <% if @parent.nil? %>
                     <h1 class="nbhuser"><%= t :notes %> - <%= link_to current_user.name, current_user %></h1>
        <% elsif @parent.class.to_s == 'Context' %>
-                    <h1 class="nbhcontext"><%= t :context %> - <%= link_to @parent.name, overview_context_path(@parent) %></h1>
+                    <% if @parent.id.nil? %>
+                       <h1 class="nbhcontext"><%= t :context %> - <%= t :without_context %></h1>
+                    <% else %>
+                       <h1 class="nbhcontext"><%= t :context %> - <%= link_to @parent.name, overview_context_path(@parent) %></h1>
+                    <% end %>
        <% else %>
                     <h1 class="nbhboard" title="<%= @parent.description %>"><%= t( @parent.active ? :board : :hidden_board ) %> - <%= link_to @parent.title, overview_board_path(@parent) %></h1>
        <% end %>      
