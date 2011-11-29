@@ -224,7 +224,7 @@ class NotesController < ApplicationController
           return
        end
        prio = params[:value].to_i
-       if (prio == 3 or @note.priority == 3) and ! current_user.privilege?( :urgent_prio, @note.board_id )
+       if (prio == 3 or @note.priority == 3) and ! current_user.privilege?( :urgent_prio )
           head :forbidden
           return
        end

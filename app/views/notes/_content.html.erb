@@ -51,7 +51,7 @@
    </div>
    <p>
 
-    <% if @note.status == :active and current_user.privilege?( :change_prio, @note.board_id )  and ( @note.priority != 3  or current_user.privilege?( :urgent_prio, @note.board_id ) ) %>
+    <% if @note.status == :active and current_user.privilege?( :change_prio, @note.board_id )  and ( @note.priority != 3  or current_user.privilege?( :urgent_prio ) ) %>
     <%= select_tag  "p_#{@note.id}", options_for_select( @prio_options, @note.priority ),
               :title => t(:change_priority), :class => 'nbselect',  'data-add' => 'priority', 'data-id' =>@note.id, 'data-last' => upd  %>
     <% end %>
