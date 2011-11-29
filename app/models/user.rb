@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   
   def privilege?( name, board_id = nil )
       return [:view_board, :process_notes].include?( name ) if self.id.nil?
+      check_user_board( name, board_id )
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm = Permission.find_by_user_id_and_board_id( self.id, board_id ) if perm.nil?
       perm = Permission.new if perm.nil?
@@ -28,6 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def grant( name, board_id = nil )
+      check_user_board( name, board_id )
       ensure_permissions board_id
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm.grant name
@@ -35,6 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def revoke( name, board_id = nil )
+      check_user_board( name, board_id )
       ensure_permissions board_id
       perm = self.permissions.detect { |p| board_id == p.board_id }
       perm.revoke name
@@ -42,6 +45,11 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def check_user_board( name, board_id )
+     return if board_id.nil?
+     raise ArgumentError if Permission.privs_user.include? name
+  end
 
   def ensure_permissions board_id=nil
      perm = self.permissions.detect { |p| p.board_id == board_id }

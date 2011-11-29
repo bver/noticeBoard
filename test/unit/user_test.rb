@@ -79,7 +79,13 @@ class UserTest < ActiveSupport::TestCase
     assert_raise( ArgumentError  ) { @user.revoke(:unknown_right,4) }
   end
 
-  test "can mix basic rights with board ones" do
+  test "cannot use user right with board_id!=nil" do
+    assert_raise( ArgumentError ) { @user.privilege?(:manage_users, 3) }
+    assert_raise( ArgumentError ) { @user.grant(:manage_users, 3) }
+    assert_raise( ArgumentError ) { @user.revoke(:manage_users, 3) }
+  end
+
+  test "can use board rights with board_id==nil" do
     assert_equal false, @user.privilege?(:view_board,42)
     assert_equal false, @user.privilege?(:view_board,4)
     assert_equal false, @user.privilege?(:view_board)
