@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-<div>
+<div class="nbleftcol">
   <div class="field">
     <%= f.label :name,  t(:name) %><br />
     <%= f.text_field :name %>
@@ -38,7 +38,7 @@
 
 <%  if @user.id != current_user.id and current_user.privilege?(:manage_users) %>
 <h3><%= t :user_grants %></h3>
-<div class="nbprivlist">
+<div class="nbprivlist nbrightcol">
     <% Permission.privs.each do |p|  %>
        <%= check_box_tag  "priv_#{p}", 1, @user.privilege?( p ), :title => t( Permission.description(p) ) %><label title="<%= t Permission.description(p) %>"><%=  t p %></label><br/>
     <% end %>
@@ -46,12 +46,11 @@
 </div>
 <% end %>
 
-<div>
-  <div class="actions">
-    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
-        class="ui-button-text"><%= t :save_user %></span></a>
-    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
-        class="ui-button-text"><%= t :cancel %></span></a>
-  </div>
+<div class="actions">
+  <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
+    class="ui-button-text"><%= t :save_user %></span></a>
+  <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
+    class="ui-button-text"><%= t :cancel %></span></a>
 </div>
+
 <% end %>

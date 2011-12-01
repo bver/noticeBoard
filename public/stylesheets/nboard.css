@@ -263,7 +263,7 @@ h1.nbhcontext {
 th {
   padding: 7px;
   background-color: #bdd2ff;
-  font-size: 7px; }
+  font-size: 9px; }
 
 tr:hover {
   background-color: #bdd2ff; }
@@ -296,6 +296,15 @@ th:hover {
 #submitButton, #cancelButton {
   margin-left: 10px;
   margin-top: 15px; }
+
+textarea {
+  min-width: 95%;
+  min-height: 90%;
+  padding: 3px;
+  border: none; }
+
+div.actions {
+  clear: both; }
 
 .nb-notes-content .ui-state-default {
   background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#b2b2b2), to(#929dc3));

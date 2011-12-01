@@ -5,8 +5,8 @@ $("body").append("<%= escape_javascript(render(dialog)) %>");
 
 $('#dialog').dialog({
 		autoOpen: true,
-                minWidth: 415,
-                closeOnEscape: false,              
+                minWidth: Math.floor( $(window).width() * 0.80 ),
+                closeOnEscape: false,
 		modal: true
 });
 

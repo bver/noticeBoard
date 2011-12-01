@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
- <div>
+ <div class="nbleftcol">
    <h2><%= t :board %></h2>
   <div class="field">
     <%= f.label t :title %>:<br />
@@ -33,7 +33,7 @@
  </div>
 
  <% if current_user.privilege?(:manage_users) or current_user.id == @board.user_id or @board.new_record? %>
- <div>
+ <div class="nbrightcol">
    <h2><%= t :board_grants %></h2>
    <table>
      <tr>
@@ -54,12 +54,12 @@
   </div>
   <% end %>
 
-    <div class="actions">
-      <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
-          class="ui-button-text"><%= t :save_board %></span></a>
-      <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
-          class="ui-button-text"><%= t :cancel %></span></a>
-    </div>
+<div class="actions">
+    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="submitButton" href="#"><span
+    class="ui-button-text"><%= t :save_board %></span></a>
+    <a role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="cancelButton" href="#"><span
+    class="ui-button-text"><%= t :cancel %></span></a>
+</div>
 
 <% end %>
 </div>
