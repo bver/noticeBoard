@@ -119,7 +119,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       if @board.save
         dry_update_privs params
-        format.js { render :template => 'shared/create', :locals =>{:templ=>'board'} }
+        format.js { render :text => "window.location.href = '#{board_path(@board)}';" }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
       else
         format.js { render :template => 'shared/dialog', :locals =>{:dialog=>'form'} }
