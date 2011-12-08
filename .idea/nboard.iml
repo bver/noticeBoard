@@ -27,12 +27,12 @@
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.9, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.1, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.0.5, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.3, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.6.6, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activeresource (v3.0.5, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.3, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v3.0.5, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bcrypt-ruby (v2.1.4, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="test-unit (v2.3.0, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt-ruby (v2.1.4, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v2.1.2, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v2.0.10, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v3.0.5, RVM: ruby-1.9.2-p180 [rails3]) [gem]" level="application" />
