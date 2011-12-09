@@ -98,8 +98,8 @@
   <div class="nbnotehist">
     <% @note.changes.reverse.each do |change| %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span
-            class="nbchangeauto"><%=l change.created.to_datetime, :format => :long  %>: <%= change.user.name %> </span>
-        <%= change_comment change %>
+            class="nbchangeauto"><%=l change.created.to_datetime, :format => :long  %> (<%= "#{t :ago} #{time_ago_in_words change.created.to_datetime}" %>) : <%= change.user.name %> </span>
+        <span class="nbfineprint"><%= change_comment change %></span>
       </p>
     <% end %>
   </div>

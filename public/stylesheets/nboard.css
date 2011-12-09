@@ -176,10 +176,16 @@ h1.nbhcontext {
   float: left; }
 
 .nbchange {
-  font-style: normal; }
+  font-style: normal;
+  font-size: smaller; }
 
 .nbchangeauto {
-  font-style: italic; }
+  font-style: italic;
+  font-size: smaller; }
+
+.nbchangecomment {
+  font-style: normal;
+  font-weight: bolder; }
 
 .nbnoteinstant {
   background-color: #ffdfdf;
@@ -302,6 +308,9 @@ textarea {
   min-height: 95%;
   padding: 3px;
   border: none; }
+
+.nbfineprint {
+  font-size: 11px; }
 
 div.actions {
   clear: both; }

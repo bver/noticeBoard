@@ -5,21 +5,27 @@
     <h2><%= t :user_account %></h2>
     <%= t :user_name %>: <%= @user.name %><br/>
     <%= t :email %>: <%= @user.email %><br/>
-    <span class="ui-icon ui-icon-<%= @user.send_mails ? 'check' : 'close' %> nbnoteicon"></span> <%= t :send_mails %><br/>
     <br/>
+
+    <span class="ui-icon ui-icon-<%= @user.send_mails ? 'check' : 'close' %> nbnoteicon"></span> <%= t :send_mails %><br/>
+    <span class="ui-icon ui-icon-<%= @user.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :user_active %><br/>
+    <br/>
+
     <%= t :current_sign_in %>: <%= @user.current_sign_in_at.nil? ? t(:never) : @user.current_sign_in_at.to_formatted_s(:long) %><br/>
     <%= t :last_sign_in %>: <%= @user.last_sign_in_at.nil? ? t(:never) : @user.last_sign_in_at.to_formatted_s(:long) %><br/>
     <br/><br/>
+
+
     <%= link_to( raw('<div role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="selButton"><span  class="ui-button-text">' +
                                t( :edit_user ) + '</span></div>'), edit_user_path( @user ), :remote=> true ) if @user.id == current_user.id or current_user.privilege?(:manage_users) %>
   </div>
   
   <div  class="nbrightcol">
     <h2><%= t :user_grants %></h2>
-    <span class="ui-icon ui-icon-<%= @user.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :user_active %><br/>
-    <br/>
     <% Permission.privs.each do |p|  %>
-    <span class="ui-icon ui-icon-<%= @user.privilege?( p ) ? 'check' : 'close' %> nbnoteicon"></span> <%=  t p %>: <%=  t Permission.description(p) %> <%= Permission.privs_board.include?(p) ? "(#{t :board_specific})" : '' %><br/>
+    <span class="ui-icon ui-icon-<%= @user.privilege?( p ) ? 'check' : 'close' %> nbnoteicon"></span>
+    <span class="nbfineprint"><%=  t p %>: <%=  t Permission.description(p) %> <%= Permission.privs_board.include?(p) ? "(#{t :board_specific})" : '' %></span>
+    <br/>
     <% end %>
     <br/>
   </div>
