@@ -331,8 +331,8 @@ class NotesController < ApplicationController
        new_values.time = "#{params[:note]['instant_time(4i)']}:#{params[:note]['instant_time(5i)']}"
        is_date = (params[:is_date] == '1') && ! new_values.date.nil?
        is_time = (params[:is_time] == '1')
-       time_changed = ( is_time && @note.time.nil? ) ||  ( !is_time && !@note.time.nil? ) ||  ( new_values.time != @note.time )
-       date_changed = ( is_date && @note.date.nil? ) ||  ( !is_date && !@note.date.nil? ) ||  ( new_values.date != @note.date )
+       time_changed = ( is_time && @note.time.nil? ) ||  ( !is_time && !@note.time.nil? ) ||  ( is_time && !@note.time.nil? && new_values.time != @note.time )
+       date_changed = ( is_date && @note.date.nil? ) ||  ( !is_date && !@note.date.nil? ) ||  ( is_date && !@note.date.nil? && new_values.date != @note.date )
        if time_changed
          change.sense = ( is_time ? :set_time : :reset_time )
          change.argument = new_values.instant_time.to_time.seconds_since_midnight.round  if is_time
