@@ -85,6 +85,7 @@ cs:
      no_note: "Žádný lístek k dispozici. Vytvořte nový nebo změňte výběr."
      comment: "Komentář"
      content: "Obsah"
+     permalink: "Trvalý odkaz"
      ch_going: "Jdu na to!"
      ch_later: "Udělám později."
      ch_pause: "Přerušit."

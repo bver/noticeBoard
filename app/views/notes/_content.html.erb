@@ -89,7 +89,8 @@
   <% if @note.board.active && current_user.privilege?( :view_board, @note.board_id ) %>
   <p>
     <br/>
-    <%= t :board %>: <%= link_to  @note.board.title, @note.board %>
+    <%= t :board %>: <%= link_to  @note.board.title, @note.board %>&nbsp;&nbsp;&nbsp;
+    <%= t :permalink %>: <%= link_to @note.title, @note %>
   </p>
   <% end %>
   </p>
