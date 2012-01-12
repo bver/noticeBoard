@@ -1,0 +1,44 @@
+h1. noticeBoard
+
+noticeBoard is the Cooperatively Things Done tool, applying GTD techniques to the teamwork.
+
+h2. Features
+
+* "the board of notes" -- a simple metaphor acceptable even outside the IT world; with the configurable terminology,
+* teamwork-oriented; the note on the board can (but not required to) be the task (action) to be performed,
+* suitable for single-user "GTD":http://en.wikipedia.org/wiki/Getting_Things_Done needs as well; private boards (projects) can be created,
+* mobile access; works from Kindle, should work from smartphones; the single layout for both a desktop and a small screen,
+* detailed control of the note status; notes-tasks can be delegated, paused, etc.
+* fine-grained setting of user permissions; only certain privileges can be granted to certain users on a given board,
+* log of operations (a note history); who/when/what did with the note,
+* attachments to the note can be saved; documents, pictures, etc.
+* priorities, dates and times of a note; notes can be sorted or filtered by their properties,
+* "Textile":http://en.wikipedia.org/wiki/Textile_%28markup_language%29 note formatting supported.
+
+h2. Installation
+
+noticeBoard is a pretty normal Ruby on Rails 3.0 web application.
+
+h3. Terminology selection
+
+The only choice you need to do (with no default value provided) is the selection of the application terminology.
+
+All variants can be found in the config/locales/options directory.
+If you like If you like boards instead of projects and notes instead of actions, please use cs-nb.yml or en-nb.yml file. If you want to use strict GTD terms instead, use cs-gtd.yml or en-gtd.yml.
+
+The selected terminology has to be linked (or copied) to the localization file with the correct name (config/locales/XY.yml), for instance:
+
+<pre>
+cd config/locales
+ln -s options/cs-nb.yml cs.yml
+</pre>
+
+Do not forget to set your default locale in config/application.rb
+
+h3. Admin user
+
+After seeding your database you can log in as the 'admin' user with the 'password' password.
+Please go to /users/1 and change your password and email then. You can also change the user name (not required).
+
+Copyright (c) Pavel Suchmann 2010-2011, bver at geret.org
+

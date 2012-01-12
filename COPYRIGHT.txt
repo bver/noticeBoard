@@ -1,0 +1,7 @@
+noticeBoard is copyright Pavel Suchmann, 2010, and files herein are licensed
+under the Affero General Public License version 3, the text of which can
+be found in AGPL-LICENSE.txt, or any later version of the AGPL, unless otherwise
+noted.  Components of noticeBoard, including Rails, JQuery, and Devise, are
+licensed under the MIT/X11 license. All unmodified files from these
+and other sources retain their original copyright and license notices: see
+the relevant individual files.
