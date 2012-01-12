@@ -1,6 +1,6 @@
 h1. noticeBoard
 
-noticeBoard is the Cooperatively Things Done tool, applying GTD techniques to the teamwork.
+noticeBoard is the CTD (Cooperatively Things Done) tool, applying GTD techniques to the teamwork.
 
 h2. Features
 
