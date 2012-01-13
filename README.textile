@@ -24,7 +24,7 @@ h3. Terminology selection
 The only choice you need to do (with no default value provided) is the selection of the application terminology.
 
 All variants can be found in the config/locales/options directory.
-If you like If you like boards instead of projects and notes instead of actions, please use cs-nb.yml or en-nb.yml file. If you want to use strict GTD terms instead, use cs-gtd.yml or en-gtd.yml.
+If you like boards instead of projects and notes instead of actions, please use cs-nb.yml or en-nb.yml file. If you want to use strict GTD terms instead, use cs-gtd.yml or en-gtd.yml.
 
 The selected terminology has to be linked (or copied) to the localization file with the correct name (config/locales/XY.yml), for instance:
 
