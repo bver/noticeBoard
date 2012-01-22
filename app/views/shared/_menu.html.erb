@@ -10,13 +10,26 @@
             </li>
             <li>
 		<%= link_to t(:boards), boards_path %>
-	        <ul class="nbwider">
-                    <% @menu_boards.each do |board|  %>
-		      <li><%= link_to board.title, board, :title=>board.description %></li>
-                    <% end %>
-                    <li class="nbmenumgmt"><%= link_to t(:all_boards), boards_path( :show => 'all' ) if current_user.privilege?( :manage_boards ) %></li>
-                    <li class="nbmenumgmt"><%= link_to t(:archived_boards), boards_path( :show => 'archived' ) %></li>
-		</ul>
+	        <ul>
+                <% keys = @grouped_boards.keys.sort  %>
+                <% keys.each do |group|  %>
+                   <% value = @grouped_boards[group] %>
+                   <% if value.size == 1 && value.first.kind_of?(Board) %>
+                     <li><%= link_to group, value.first, :title=>value.first.description %></li>
+                   <% else %>
+                     <li>
+                       <%= link_to group, '#' %>
+                       <ul>
+                       <% value.each do |pair| %>
+                          <li><%= link_to pair.last, pair.first, :title=>pair.first.description %></li>
+                       <% end %>
+                       </ul>
+                     </li>
+                   <% end %>
+                <% end %>
+                <li class="nbmenumgmt"><%= link_to t(:all_boards), boards_path( :show => 'all' ) if current_user.privilege?( :manage_boards ) %></li>
+                <li class="nbmenumgmt"><%= link_to t(:archived_boards), boards_path( :show => 'archived' ) %></li>
+		    </ul>
 	    </li>
             <li>
 		<%= link_to t(:contexts), contexts_path %>
@@ -25,7 +38,7 @@
                     <% @my_contexts.each do |ctx|  %>
 		      <li><%= link_to ctx.name, ctx %></li>
                     <% end %> 
-		</ul>
+		    </ul>
             </li>
 	    <li>
 		<%= link_to  current_user.name, user_path(current_user) %>

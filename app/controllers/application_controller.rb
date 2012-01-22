@@ -30,12 +30,23 @@ class ApplicationController < ActionController::Base
     redirect_to new_user_session_path, :alert => t( :deactivated_account )
   end
 
+  GroupSeparator = ' - '
+
   def boards
-     @menu_boards = []
-     return if current_user.nil?
-     Board.all( :conditions => { :visibility => Board::Active },  :order => :title ).each do |b|
-       @menu_boards << b if current_user.privilege?( :view_board, b.id )
-     end
+    @menu_boards = []
+    return if current_user.nil?
+    Board.all( :conditions => { :visibility => Board::Active },  :order => :title ).each do |b|
+      @menu_boards << b if current_user.privilege?( :view_board, b.id )
+    end
+
+    @grouped_boards = {}
+    @menu_boards.each do |b|
+      parts = b.title.split GroupSeparator
+      group = parts.shift
+      chain = @grouped_boards.fetch( group, [] )
+      chain << ( parts.empty? ? b : [b, parts.join(GroupSeparator)] )
+      @grouped_boards[group] = chain
+    end
   end
 
   def dry_options
