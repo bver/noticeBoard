@@ -21,7 +21,13 @@
                        <%= link_to group, '#' %>
                        <ul>
                        <% value.each do |pair| %>
-                          <li><%= link_to pair.last, pair.first, :title=>pair.first.description %></li>
+                          <li>
+                          <% if pair.kind_of? Array %>
+                          <%= link_to pair.last, pair.first, :title=>pair.first.description %></li>
+                          <% else %>
+                          <li><%= link_to pair.title, pair, :title=>pair.description %>
+                          </li>
+                          <% end %>
                        <% end %>
                        </ul>
                      </li>
