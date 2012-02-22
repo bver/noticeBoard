@@ -15,7 +15,7 @@
                 <% keys.each do |group|  %>
                    <% value = @grouped_boards[group] %>
                    <% if value.size == 1 && value.first.kind_of?(Board) %>
-                     <li><%= link_to group, value.first, :title=>value.first.description %></li>
+                     <li><%= link_to board_name(value.first, group), value.first, :title=>value.first.description %></li>
                    <% else %>
                      <li>
                        <%= link_to group, '#' %>
@@ -23,10 +23,9 @@
                        <% value.each do |pair| %>
                           <li>
                           <% if pair.kind_of? Array %>
-                          <%= link_to pair.last, pair.first, :title=>pair.first.description %></li>
+                          <%= link_to board_name(pair.first, pair.last), pair.first, :title=>pair.first.description %></li>
                           <% else %>
-                          <li><%= link_to pair.title, pair, :title=>pair.description %>
-                          </li>
+                          <li><%= link_to board_name(pair), pair, :title=>pair.description %></li>
                           <% end %>
                        <% end %>
                        </ul>

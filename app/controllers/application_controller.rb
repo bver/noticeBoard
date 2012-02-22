@@ -40,7 +40,8 @@ class ApplicationController < ActionController::Base
     end
 
     @grouped_boards = {}
-    @menu_boards.each do |b|
+    Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).each do |b|
+      next unless current_user.privilege?( :view_board, b.id )
       parts = b.title.split GroupSeparator
       group = parts.shift
       chain = @grouped_boards.fetch( group, [] )

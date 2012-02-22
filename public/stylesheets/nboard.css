@@ -296,6 +296,12 @@ th:hover {
 .nbmenumgmt {
   font-style: italic; }
 
+.nbmenuactive {
+  color: black; }
+
+.nbmenuhidden {
+  color: gray; }
+
 .ui-dialog-titlebar a.ui-dialog-titlebar-close {
   display: none; }
 
