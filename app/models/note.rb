@@ -5,7 +5,9 @@ class Note < ActiveRecord::Base
   has_and_belongs_to_many :contexts
 
   validates_length_of :title, :minimum=> 3,  :maximum=>40
-  
+
+  attr_accessible :title, :content, :priority
+
   def status
     return :active if self.outcome.nil?
     self.outcome ? :finished : :cancelled

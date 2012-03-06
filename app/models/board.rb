@@ -6,6 +6,8 @@ class Board < ActiveRecord::Base
   validates_length_of :title, :minimum=> 3,  :maximum=>40
   validates_uniqueness_of :title
 
+  attr_accessible :title, :description, :visibility
+
   # visibility values:
   Active = 1
   Hidden = 0
