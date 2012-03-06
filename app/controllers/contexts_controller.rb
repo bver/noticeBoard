@@ -86,7 +86,7 @@ class ContextsController < ApplicationController
     end
   end
 
-  # DELETE /boards/1
+  # DELETE /contexts/1
   def destroy
     @context = Context.find(params[:id])
     @context.destroy
@@ -97,8 +97,8 @@ class ContextsController < ApplicationController
     end
   end
 
-  # PUT /boards/1
-  # PUT /boards/1.xml
+  # PUT /contexts/1
+  # PUT /contexts/1.xml
   def update
     @context = Context.find(params[:id])
 
