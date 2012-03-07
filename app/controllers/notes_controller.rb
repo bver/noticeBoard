@@ -15,12 +15,18 @@ class NotesController < ApplicationController
     if params.key?(:boards)
        all_ids = params[:boards].split('_').map {|id| id.to_i }
     else
-       all_ids =if conditions.key?(:instant_date) || conditions.key?(:instant_time)
-         Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).map {|b| b.id }
+       if conditions.key?(:instant_date) || conditions.key?(:instant_time)
+         all_ids = Board.where( "visibility = ? or visibility = ?", Board::Active, Board::Hidden ).map {|b| b.id }
        else
-         Board.where(  :visibility => Board::Active ).map {|b| b.id }
+         all_ids = Board.where(  :visibility => Board::Active ).map {|b| b.id }
        end
     end
+
+    conditions[:user_id] = if params.has_key?(:unassigned) && params[:unassigned].to_i == 1
+                             [ current_user.id, -1 ]
+                           else
+                             current_user.id
+                           end
 
     all_ids.each do |id|
         next unless current_user.privilege?( :view_board, id )
@@ -28,7 +34,6 @@ class NotesController < ApplicationController
         conditions[ :board_id ] << id
     end
 
-    conditions[:user_id] = [ current_user.id, -1 ]
     @notes = Note.includes(:user).includes(:contexts).includes(:board).all( :conditions => conditions, :order =>order )
     dry_options
 

@@ -2,8 +2,8 @@
             <li>
                 <%= link_to t(:my_notes), notes_path( :proc => '0_1', :prio => '1_2_3' ) %>
                 <ul>
-                    <li><%= link_to t(:my_important), notes_path( :prio => '2_3', :proc => '0_1' ) %></li>
-                    <li><%= link_to t(:my_with_date), notes_path( :proc => '0_1', :inst => 'D' ) %></li>
+                    <li><%= link_to t(:my_important), notes_path( :prio => '2_3', :proc => '0_1', :unassigned => 1 ) %></li>
+                    <li><%= link_to t(:my_with_date), notes_path( :proc => '0_1', :inst => 'D', :unassigned => 1 ) %></li>
                     <li><%= link_to t(:my_archive), notes_path( :proc => 'D_C' ) %></li>
                     <li><%= link_to t(:my_all), notes_path %></li>
                 </ul>
