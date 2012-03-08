@@ -133,7 +133,7 @@ cs:
      label_comment: "Napište komentář"
      create_comment: "Vytvořit komentář"
      add_cancel: "Akce bude zrušena a archivována"
-     label_cancel: "Napište důvod zrušení"
+     label_cancel: "Napište důvod archivace"
      create_cancel: "OK, archivovat"
      add_stop: "Zpracovávání akce bude přerušeno"
      label_stop: "Napište důvod přerušení"
