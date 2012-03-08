@@ -74,6 +74,11 @@ class ContextsController < ApplicationController
     @context = Context.new(params[:context])
     @context.user_id = current_user.id
 
+    unless current_user.id == @context.user_id
+      head :forbidden
+      return
+    end
+
     respond_to do |format|
       if @context.save
         format.js { render :template => 'shared/create', :locals =>{:templ=>'context'} }

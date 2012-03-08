@@ -104,7 +104,7 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     return if dry_modified_by_others
 
-   @add = params[:add].to_s
+    @add = params[:add].to_s
     
     case @add
     when 'edit', 'upload', 'instant'
@@ -246,6 +246,10 @@ class NotesController < ApplicationController
        unless current_user.privilege?( :manage_boards )
           head :forbidden
           return
+       end
+       unless current_user.privilege?( :edit_notes, params[:value].to_i )
+             head :forbidden
+             return
        end
        change.sense = :board_changed
        change.argument = @note.board_id

@@ -6,7 +6,7 @@ class Note < ActiveRecord::Base
 
   validates_length_of :title, :minimum=> 3,  :maximum=>40
 
-  attr_accessible :title, :content, :priority
+  attr_accessible :title, :content, :priority, :board_id
 
   def status
     return :active if self.outcome.nil?
