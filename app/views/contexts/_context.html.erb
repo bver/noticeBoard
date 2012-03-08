@@ -3,7 +3,7 @@
 
 <div class="nbleftcol">
   <h2><%= t :context %></h2>
-    <%= t :title %>: <%= link_to( @context.name, @context ) if  @context.active %><br/>
+    <%= t :title %>: <%= @context.active ? link_to( @context.name, @context ) : @context.name %><br/>
     <span class="ui-icon ui-icon-<%= @context.active ? 'check' : 'close' %> nbnoteicon"></span> <%= t :context_active %><br/>
     <br/>
     <br/>
