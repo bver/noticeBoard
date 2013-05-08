@@ -11,7 +11,7 @@
             <li>
 		<%= link_to t(:boards), boards_path %>
 	        <ul>
-                <% keys = @grouped_boards.keys.sort  %>
+                <% keys = @grouped_boards.keys.sort {|a,b| a.downcase <=> b.downcase }  %>
                 <% keys.each do |group|  %>
                    <% value = @grouped_boards[group] %>
                    <% if value.size == 1 && value.first.kind_of?(Board) %>
@@ -20,7 +20,13 @@
                      <li>
                        <%= link_to group, '#' %>
                        <ul>
-                       <% value.each do |pair| %>
+                       <%
+                         values = value.sort do |a,b|
+                           a_name = a.kind_of?(Array) ? a.last : a.title
+                           b_name = b.kind_of?(Array) ? b.last : b.title
+                           a_name.downcase <=> b_name.downcase
+                         end
+                         values.each do |pair| %>
                           <li>
                           <% if pair.kind_of? Array %>
                           <%= link_to board_name(pair.first, pair.last), pair.first, :title=>pair.first.description %></li>
