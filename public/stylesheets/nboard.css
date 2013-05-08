@@ -185,7 +185,8 @@ h1.nbhcontext {
 
 .nbchangecomment {
   font-style: normal;
-  font-weight: bolder; }
+  font-weight: bolder;
+  font-size: medium; }
 
 .nbnoteinstant {
   background-color: #ffdfdf;

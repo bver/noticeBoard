@@ -57,7 +57,7 @@ module NotesHelper
      when :created
        t( :c_created )
      when :commented
-       raw(t( :c_commented ) + ' : <span class="nbchangecomment">') + change.comment + raw('</span>')
+       raw(t( :c_commented ) + ':<br/> <span class="nbchangecomment">') + change.comment + raw('</span>')
      when :finished
        t( :c_finished )
      when :cancelled

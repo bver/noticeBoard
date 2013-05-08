@@ -1,8 +1,18 @@
   <div class="nbnotecont">
 
-  <p>
-    <%=raw RedCloth.new(@note.content).to_html %>
-  </p>
+    <p>
+      <%=raw RedCloth.new(@note.content).to_html %>
+    </p>
+
+    <p>
+        <% @note.changes.reverse.each do |change| %>
+           <% next if change.sense != :commented %>
+           <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span
+                class="nbchangeauto"><%=l change.created.to_datetime, :format => :long  %> (<%= "#{t :ago} #{time_ago_in_words change.created.to_datetime}" %>) : <%= change.user.name %> </span>
+            <span class="nbfineprint"><%= change_comment change %></span>
+          </p>
+        <% end %>
+    </p>
 
  <div>
 
@@ -98,6 +108,7 @@
   </div>
   <div class="nbnotehist">
     <% @note.changes.reverse.each do |change| %>
+       <% next if change.sense == :commented %>
        <p class="nbchange"><span class="ui-icon ui-icon-<%= change_icon change %> nbnoteicon" ></span><span
             class="nbchangeauto"><%=l change.created.to_datetime, :format => :long  %> (<%= "#{t :ago} #{time_ago_in_words change.created.to_datetime}" %>) : <%= change.user.name %> </span>
         <span class="nbfineprint"><%= change_comment change %></span>
