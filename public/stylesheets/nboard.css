@@ -278,12 +278,10 @@ th:hover {
   background-color: white; }
 
 .sf-menu {
-  font-weight: bolder;
-  font-size: larger;
-  margin-right: 30px; }
+  margin-right: 20px; }
   .sf-menu a, .sf-menu a:visited {
     color: black;
-    padding: 8px; }
+    padding: 6px; }
   .sf-menu li li {
     background-color: #bdd2ff; }
     .sf-menu li li li {
@@ -291,7 +289,7 @@ th:hover {
   .sf-menu li.sfHover ul {
     top: 34px; }
   .sf-menu ul.nbwider {
-    width: 20em; }
+    width: 30em; }
 
 .nbmenumgmt {
   font-style: italic; }
