@@ -153,7 +153,7 @@ class ApplicationController < ActionController::Base
   end
 
   def my_contexts
-    @my_contexts = current_user.nil? ? [] : current_user.contexts.where( :active => true ).order( :name )
+    @my_contexts = (current_user.nil? || Rails.env.test?) ? [] : current_user.contexts.where( :active => true ).order( :name )
   end
 
 end

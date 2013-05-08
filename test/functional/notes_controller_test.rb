@@ -6,29 +6,9 @@ class NotesControllerTest < ActionController::TestCase
     @note = notes(:done)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:notes)
-  end
-
   test "should get new" do
     get :new
     assert_response 406 # :success
-  end
-
-  test "should create note" do
-    assert_difference('Note.count') do
-      post :create, :note => @note.attributes
-    end
-
-    #assert_redirected_to note_path(assigns(:note))
-    assert_response 406
-  end
-
-  test "should show note" do
-    get :show, :id => @note.to_param
-    assert_response :success
   end
 
   test "should get edit" do

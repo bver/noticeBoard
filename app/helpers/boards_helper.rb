@@ -12,7 +12,7 @@ module BoardsHelper
   end
 
   def board_title board
-    %Q[#{board_icon board}#{board.user.name} : #{board.title}]
+    %Q[#{board_icon board}#{board.user.nil? ? '' : board.user.name} : #{board.title}]
   end
 
 end
